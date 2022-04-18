@@ -1,0 +1,9 @@
+{% block title %}
+    <h1>Home</h1>
+{% endblock %}
+
+{% block content %}
+    <p><a href = "{% url 'Movies' %}">Movies</a></p>
+    <p><a href = "{% url 'Directors' %}">Directors</a></p>
+    <p><a href = "{% url 'Actors' %}">Actors</a></p>
+{% endblock %}

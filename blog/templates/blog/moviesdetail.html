@@ -1,0 +1,284 @@
+{% load static %}
+{% block head %}
+<head>
+    <style>
+        
+        #parent{
+            display: grid;
+            grid-template-columns: auto;
+            row-gap: 50px;
+            margin: 50px 200px 50px 200px;
+            border-radius: 1%;
+            /* border: 3px solid red; */
+          
+        }
+        #container1{
+            text-align: center;
+            
+            /* background-color: rgb(16, 205, 205); */
+        }
+        #container2{
+            display: grid;
+            grid-template-columns: 34% 33% 33%;
+            column-gap: 2px;
+          
+            align-items: center;
+        }
+        #casting{
+            display: grid;
+            grid-template-columns: 20% 20% 20% 20% 20%;
+            column-gap: 15px;
+           
+        
+        }
+
+        .section_separator{
+            background:linear-gradient(to right, green 0% 40% , white 40% 60% ,green 60% 100%);
+            height: 27px;
+            text-align: center;
+            font-size: x-large;
+            font-weight: 900;
+        }
+
+        #review{
+            text-align: center;
+            
+        
+        }
+        .parts{
+            font-weight: 900;
+            text-decoration: underline;
+        }
+        #grades{
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-gap: 2px;
+           
+        }
+        #photo{
+            display: flex;
+            justify-content: center;
+        }
+
+        img {
+            height:400px;
+            width: 320px;
+            margin-bottom: 10px;
+            }
+
+
+        .score{
+            width: 300px;
+        }
+
+        .feature{
+            width: 200px;
+            text-align: left;
+        }
+
+        #section_quotes{
+            display: grid;
+            grid-template-columns: 33% 33% 33%;
+            grid-gap: 2px;
+           
+        }
+
+        .quotes{
+            text-align: center;
+            font-family: "Times New Roman", Times, serif;
+            font-size:x-large;
+            font-weight: 550;
+            font-style: oblique
+        }
+
+        .scenes{
+            display: grid;
+            grid-template-columns: 20% 20% 20%;
+            column-gap: 15px;
+          
+        }
+
+    </style>
+</head>
+{% endblock %}
+
+{% block content %}
+
+<div id = "parent">
+
+    <div id = "container1">
+         <h1>{{ movie.name }}</h1>
+    </div>
+
+    <div class = "section_separator">
+        INFORMATION
+    </div>
+   
+    <div id = "container2">
+        <div id = "photo">
+            <img src="{{ movie.image.url }}">
+        </div>
+
+        <div id = "sinopsis">
+            <p>The movie is about the rivalry between two young magicians Robert Angier (Hugh Jackman) and Alfred Borden ( Christian Bale) 
+        and it is based on the novel written by Christopher Priest in 1995.Two friends and fellow magicians turn into bitter enemies after a 
+        sudden tragedy. As they devote themselves to this rivalry, they make sacrifices that bring them fame but with terrible consequences.
+            </p>
+        </div>
+
+    </div>
+
+    <div class = "section_separator">
+        REVIEW
+    </div>
+
+    <div id = "review">
+        <p>If u ask whether this movie worth a watch, I would say not once but twice or even thrice. 
+            This story is too complicated so u need to watch it twice to understand it clearly. 
+            This is a awesome movie with a fabulous screenplay and I can assure that this film will surprise 
+            you with various twists.
+        </p>
+    </div>
+
+    <div class = "section_separator">
+        SCORES
+    </div>
+
+    <div id = "grades">
+
+        <div>
+            <table height = 200>
+                <thead>
+                    <th>Features</th>
+                    <th>Score</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class = "feature">Cinematography</td>
+                        <td class = "score"></td>
+                    </tr>
+                    <tr>
+                        <td class = "feature">Acting</td>
+                        <td class = "score"></td>
+                    </tr>
+                    <tr>
+                        <td class = "feature">Editing</td>
+                        <td class = "score"></td>
+                    </tr>
+                    <tr>
+                        <td class = "feature">Custom</td>
+                        <td class = "score"></td>
+                    </tr>
+                    <tr>
+                        <td class = "feature">Music</td>
+                        <td class = "score"></td>
+                    </tr>
+                    <tr>
+                        <td class = "feature">Screenplay</td>
+                        <td class = "score"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div>
+            <ul>
+                <li>Our Score: {{ movie.final_score }}</li>
+                <li>Rotten Tomatoes: {{ movie.rotten_tomatoes }}</li>
+                <li>IMDb: {{ movie.imdb }}</li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class = "section_separator">
+        CASTING
+    </div>
+
+    <div id = "casting">
+        {% for actor in movie.actors.all %}
+        <div>
+            <img src="{{ actor.image.url }}" style="border-radius: 50%;width: 170px;height: 175px;" >
+            <figcaption style = "text-align: left;"> {{ actor.name }} </figcaption>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class = "section_separator">
+        SCEMES
+    </div>
+
+    <div class = "scenes">
+        <div>
+            <img src="{{ movie.scene1.url }}" style="width: 230px; height: 200px;" >
+            <figcaption style = "text-align: left;">  </figcaption>
+        </div>
+        <div>
+            <img src="{{ movie.scene2.url }}" style="width: 230px; height: 200px;">
+            <figcaption style = "text-align: left;">  </figcaption>
+        </div>
+        <div>
+            <img src="{{ movie.scene3.url }}" style="width: 230px; height: 200px;" >
+            <figcaption style = "text-align: left;">  </figcaption>
+        </div>
+    </div>
+    
+    <div class = "section_separator">
+        QUOTES
+    </div>
+
+    <div id = "section_quotes">
+       <div class = "quotes">{{ movie.quote1 }}</div>
+       <div class = "quotes">{{ movie.quote2 }}</div>
+       <div class = "quotes">{{ movie.quote3 }}</div>
+    </div>
+
+    <div class = "section_separator">
+        RELATED FILMS
+    </div>
+
+    <div id = "related">
+            <p>If u ask whether this movie worth a watch, I would say not once but twice or even thrice. 
+                This story is too complicated so u need to watch it twice to understand it clearly. 
+                This is a awesome movie with a fabulous screenplay and I can assure that this film will surprise 
+                you with various twists.
+            </p>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src = "{% static 'blog/jquery.js' %}"></script>
+
+{{ movie.scores_json|json_script:'scores_json' }}
+
+<script>
+
+    var scores = $("#scores_json").text();
+    scores = jQuery.parseJSON(scores);
+    
+    var features = Object.keys(scores)
+    var score_column = $(".score") 
+
+    for (let cell = 0; cell < score_column.length; cell++ )
+    {
+        let score = scores[features[cell]]
+        $(score_column[cell]).append($('<div>'+score+'%</div>')
+                             .css({
+                                "border":"1px solid black",
+                                "height":"20px",
+                                "width":"90%",
+                                "margin-left":"5px",
+                                "text-align":"center",
+                                "background":"linear-gradient(to right, green 0" + score + "%,white " + score + "% 100%)"
+                             })
+                             )
+    }
+  
+</script>
+    
+
+
+{% endblock %}

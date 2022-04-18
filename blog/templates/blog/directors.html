@@ -1,0 +1,8 @@
+{% block content %}
+    <h2>Directors</h2>
+    <ul>
+        {% for director in directors_list %}
+            <li><a href = "{% url 'DirectorsDetail' director.id %}">{{ director.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

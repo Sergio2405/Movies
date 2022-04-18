@@ -1,0 +1,8 @@
+{% block content %}
+    <h2>Actors</h2>
+    <ul>
+        {% for actor in actors_list %}
+            <li><a href = "{% url 'ActorsDetail' actor.id %}">{{ actor.name }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

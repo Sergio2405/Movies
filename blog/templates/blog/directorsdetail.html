@@ -1,0 +1,12 @@
+{% block title %}
+    <h1>{{ director.name }}</h1>
+{% endblock %}
+
+{% block content %}
+
+<h4>Movies || Release Year</h4>
+{% for movie in director.movie_set.all %}
+    <p>{{ movie.name }} || {{ movie.only_year }}</p>
+{% endfor %}
+
+{% endblock %}
