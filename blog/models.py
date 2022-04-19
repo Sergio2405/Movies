@@ -26,6 +26,8 @@ class Movie(models.Model):
     actors = models.ManyToManyField(Actor, related_name="movies")
     duration = models.IntegerField(default=0)
     image = models.ImageField(upload_to="movie_image",blank=True)
+    rating_dummy = models.IntegerField(default=0)
+    genre = models.IntegerField(default=0)
     
     #score fields 
     cinematography = models.FloatField(default=0)
@@ -48,6 +50,20 @@ class Movie(models.Model):
     #other pages score
     rotten_tomatoes = models.FloatField(default=0)
     imdb = models.FloatField(default=0)
+
+    @property
+    def rating(self):
+
+        ratings = [
+            "NR: Not Rated",
+            "G: All Ages Admiteed",
+            "PG: Parental Guidance Suggested",
+            "PG-13: Parents Strongly Cautioned (+13)",
+            "R: Restricted (+17)",
+            "NC-17: Adults Only"
+        ]
+
+        return ratings[self.rating_dummy]
 
     def scores_json(self):
         return dict(
