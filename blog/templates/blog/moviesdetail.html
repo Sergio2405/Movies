@@ -76,18 +76,23 @@
         /* CASTING */
         #section_casting
         {
-            display: grid;
-            grid-template-columns: 20% 20% 20% 20% 20%;
-            column-gap: 1%;
+            display:flex;
+            justify-content: space-evenly;
         }
 
         /* SCENES */
         #section_scenes
         {
-            display: grid;
-            grid-template-columns: 20% 20% 20%;
-            column-gap: 4%;
-          
+            display:flex;
+            justify-content: space-evenly;
+            column-gap: 5%;
+            flex-basis: 50%
+        }
+
+        .scenes
+        {
+            display: flex;
+            flex-direction: column;
         }
 
         /* QUOTES */
@@ -105,7 +110,12 @@
             font-family: "Times New Roman", Times, serif;
             font-size:x-large;
             font-weight: 550;
-            font-style: oblique
+            font-style: oblique;
+        }
+
+        .quotes_caption
+        {
+            text-align: center;
         }
 
         .icons
@@ -191,11 +201,10 @@
     </div>
 
     <div id = "section_review">
-        <p>If u ask whether this movie worth a watch, I would say not once but twice or even thrice. 
+        If u ask whether this movie worth a watch, I would say not once but twice or even thrice. 
             This story is too complicated so u need to watch it twice to understand it clearly. 
             This is a awesome movie with a fabulous screenplay and I can assure that this film will surprise 
             you with various twists.
-        </p>
     </div>
 
     <div class = "section_separator">
@@ -262,8 +271,8 @@
     <div id = "section_casting">
         {% for actor in movie.actors.all %}
         <div>
-            <img src="{{ actor.image.url }}" style="border-radius: 50%;width: 70%;height: 130px;" >
-            <figcaption style = "text-align: left;"> {{ actor.name }} </figcaption>
+            <img src="{{ actor.image.url }}" style="border-radius: 50%;height: 100px;width: 70%;" >
+            <figcaption style = "text-align: center;"> {{ actor.name }} </figcaption>
         </div>
         {% endfor %}
     </div>
@@ -273,17 +282,17 @@
     </div>
 
     <div id = "section_scenes">
-        <div>
-            <img src="{{ movie.scene1.url }}" style="width: 110%; height: 200px;" >
-            <figcaption style = "text-align: left;">  </figcaption>
+        <div class = "scenes">
+            <img src="{{ movie.scene1.url }}" style="width: 90%; height: 200px;" >
+            <figcaption style = "text-align: center;"> {{ movie.scene1_caption }} </figcaption>
         </div>
-        <div>
-            <img src="{{ movie.scene2.url }}" style="width: 110%; height: 200px;">
-            <figcaption style = "text-align: left;">  </figcaption>
+        <div class = "scenes">
+            <img src="{{ movie.scene2.url }}" style="width: 90%;  height: 200px;">
+            <figcaption style = "text-align: center;"> {{ movie.scene2_caption }} </figcaption>
         </div>
-        <div>
-            <img src="{{ movie.scene3.url }}" style="width: 110%; height: 200px;" >
-            <figcaption style = "text-align: left;">  </figcaption>
+        <div class = "scenes">
+            <img src="{{ movie.scene3.url }}" style="width: 90%;  height: 200px;" >
+            <figcaption style = "text-align: center;"> {{ movie.scene3_caption }} </figcaption>
         </div>
     </div>
     
@@ -292,9 +301,15 @@
     </div>
 
     <div id = "section_quotes">
-       <div class = "quotes">{{ movie.quote1 }}</div>
-       <div class = "quotes">{{ movie.quote2 }}</div>
-       <div class = "quotes">{{ movie.quote3 }}</div>
+
+        <div class = "quotes">{{ movie.quote1 }}</div>
+        <div class = "quotes">{{ movie.quote2 }}</div>
+        <div class = "quotes">{{ movie.quote3 }}</div>
+
+        <div class = "quotes_caption"> - {{ movie.quote1_character }}</div>
+        <div class = "quotes_caption"> - {{ movie.quote2_character }}</div>
+        <div class = "quotes_caption"> - {{ movie.quote3_character }}</div>
+       
     </div>
 
     <div class = "section_separator">

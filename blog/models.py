@@ -18,17 +18,49 @@ class Director(models.Model):
     def __str__(self):
         return self.name
 
+class Genre(models.Model):
+    
+    name = models.CharField(default="Non Genre",max_length=100)
+    
+    def __str__(self):
+        return self.name
+
+def get_default_rating_result():
+    """ get a default value for result status; create new result if not available """
+    return Rating.objects.get_or_create(name="not_rated",rating_dummy=1)[0].id
+
+class Rating(models.Model):
+    
+    name = models.CharField(default=0,max_length=100)
+    rating_dummy = models.IntegerField(default=0)
+
+    @property
+    def rating(self):
+        return [
+            "NR: Not Rated",
+            "G: All Ages Admiteed",
+            "PG: Parental Guidance Suggested",
+            "PG-13: Parents Strongly Cautioned (+13)",
+            "R: Restricted (+17)",
+            "NC-17: Adults Only"
+        ][self.rating_dummy]
+
+    def __str__(self):
+        return self.name
+
 class Movie(models.Model): 
 
     name = models.CharField(max_length=50)
     release_date = models.DateField()
-    director = models.ForeignKey(Director,on_delete=models.CASCADE)
-    actors = models.ManyToManyField(Actor, related_name="movies")
     duration = models.IntegerField(default=0)
     image = models.ImageField(upload_to="movie_image",blank=True)
-    rating_dummy = models.IntegerField(default=0)
-    genre = models.IntegerField(default=0)
-    
+
+    director = models.ForeignKey(Director,on_delete=models.CASCADE)
+    rating = models.ForeignKey(Rating,on_delete=models.CASCADE,default=get_default_rating_result)
+
+    genres = models.ManyToManyField(Genre)
+    actors = models.ManyToManyField(Actor, related_name="movies")
+
     #score fields 
     cinematography = models.FloatField(default=0)
     acting = models.FloatField(default=0)
@@ -37,33 +69,29 @@ class Movie(models.Model):
     music = models.FloatField(default=0)
     screenplay = models.FloatField(default=0)
 
+    #fav scenes images and caption
+    scene1 = models.ImageField(upload_to="scene_image",blank=True)
+    scene1_caption = models.CharField(default="",max_length=100)
+
+    scene2 = models.ImageField(upload_to="scene_image",blank=True)
+    scene2_caption = models.CharField(default="",max_length=100)
+
+    scene3 = models.ImageField(upload_to="scene_image",blank=True)
+    scene3_caption = models.CharField(default="",max_length=100)
+
     #fav 3 quotes 
     quote1 = models.CharField(default="",max_length=100)
-    quote2 = models.CharField(default="",max_length=100)
-    quote3 = models.CharField(default="",max_length=100)
+    quote1_character = models.CharField(default="",max_length=100)
 
-    #fav scenes images and description
-    scene1 = models.ImageField(upload_to="scene_image",blank=True)
-    scene2 = models.ImageField(upload_to="scene_image",blank=True)
-    scene3 = models.ImageField(upload_to="scene_image",blank=True)
+    quote2 = models.CharField(default="",max_length=100)
+    quote2_character = models.CharField(default="",max_length=100)
+
+    quote3 = models.CharField(default="",max_length=100)
+    quote3_character = models.CharField(default="",max_length=100)
 
     #other pages score
     rotten_tomatoes = models.FloatField(default=0)
     imdb = models.FloatField(default=0)
-
-    @property
-    def rating(self):
-
-        ratings = [
-            "NR: Not Rated",
-            "G: All Ages Admiteed",
-            "PG: Parental Guidance Suggested",
-            "PG-13: Parents Strongly Cautioned (+13)",
-            "R: Restricted (+17)",
-            "NC-17: Adults Only"
-        ]
-
-        return ratings[self.rating_dummy]
 
     def scores_json(self):
         return dict(
