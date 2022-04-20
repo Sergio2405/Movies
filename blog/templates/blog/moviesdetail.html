@@ -2,6 +2,10 @@
 {% block head %}
 <head>
     <style>
+
+        :root {
+            --page-color: rgb(40, 40, 110);
+        }
         
         /* CONTAINER */
         #parent
@@ -18,7 +22,7 @@
         /* SEPARATOR */
         .section_separator
         {
-            background:linear-gradient(to right, green 0% 40% , white 40% 60% ,green 60% 100%);
+            background:linear-gradient(to right, var(--page-color) 0% 40% , white 40% 60% , var(--page-color) 60% 100%);
             height: 85%;
             text-align: center;
             font-size: 150%;
@@ -82,7 +86,7 @@
         {
             display: grid;
             grid-template-columns: 20% 20% 20%;
-            column-gap: 15px;
+            column-gap: 4%;
           
         }
 
@@ -104,6 +108,17 @@
             font-style: oblique
         }
 
+        .icons
+        {
+            height: 55%;
+            width: 20%;
+        }
+
+        .general
+        {
+            width: 50%;
+            text-align: center;
+        }
     </style>
 </head>
 {% endblock %}
@@ -111,6 +126,12 @@
 {% block content %}
 
 <div id = "parent">
+
+    <nav class="menu">
+          <a href="{% url 'Movies' %}">Movies</a>
+          <a href="{% url 'Directors' %}">Directors</a>
+          <a href="{% url 'Actors' %}">Actors</a>
+      </nav>
 
     <div id = "section_name">
          <h1>{{ movie.name }}</h1>
@@ -185,10 +206,6 @@
 
         <div>
             <table height = 200>
-                <thead>
-                    <th>Features</th>
-                    <th>Score</th>
-                </thead>
                 <tbody>
                     <tr>
                         <td class = "feature">Cinematography</td>
@@ -217,15 +234,43 @@
                 </tbody>
             </table>
         </div>
-        
-        <div>
-            <ul>
-                <li>Our Score: {{ movie.final_score }}</li>
-                <li>Rotten Tomatoes: {{ movie.rotten_tomatoes }}</li>
-                <li>IMDb: {{ movie.imdb }}</li>
-            </ul>
-        </div>
 
+        <div>
+            <table height = 200>
+                <tbody>
+                    <tr>
+                        <td class = "general">Our Score</td>
+                        <td><div style = "
+                            background:linear-gradient(to right, green 0% {{ movie.final_score }}% , white {{ movie.final_score }}% 100%);
+                            border:1px solid black;
+                            height:20px;
+                            width:90%;
+                            margin-left:5px;
+                            text-align:center">{{ movie.final_score }}%</div></td>
+                    </tr>
+                    <tr>
+                        <td class = "general"><img class = "icons" src = "/media/icons/RottenTomatoesIcon.png"></td>
+                        <td > <div style = "
+                            background:linear-gradient(to right, green 0% {{ movie.rotten_tomatoes }}% , white {{ movie.rotten_tomatoes }}% 100%);
+                            border:1px solid black;
+                            height:20px;
+                            width:90%;
+                            margin-left:5px;
+                            text-align:center">{{ movie.rotten_tomatoes }}%</div></td>
+                    </tr>
+                    <tr>
+                        <td class = "general"><img class = "icons" src = "/media/icons/ImdbIcon.png"></td>
+                        <td><div style = "
+                            background:linear-gradient(to right, green 0% {{ movie.imdb }}% , white {{ movie.imdb }}% 100%);
+                            border:1px solid black;
+                            height:20px;
+                            width:90%;
+                            margin-left:5px;
+                            text-align:center">{{ movie.imdb }}%</div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class = "section_separator">
@@ -247,15 +292,15 @@
 
     <div id = "section_scenes">
         <div>
-            <img src="{{ movie.scene1.url }}" style="width: 230px; height: 200px;" >
+            <img src="{{ movie.scene1.url }}" style="width: 110%; height: 200px;" >
             <figcaption style = "text-align: left;">  </figcaption>
         </div>
         <div>
-            <img src="{{ movie.scene2.url }}" style="width: 230px; height: 200px;">
+            <img src="{{ movie.scene2.url }}" style="width: 110%; height: 200px;">
             <figcaption style = "text-align: left;">  </figcaption>
         </div>
         <div>
-            <img src="{{ movie.scene3.url }}" style="width: 230px; height: 200px;" >
+            <img src="{{ movie.scene3.url }}" style="width: 110%; height: 200px;" >
             <figcaption style = "text-align: left;">  </figcaption>
         </div>
     </div>
@@ -275,11 +320,6 @@
     </div>
 
     <div id = "section_related">
-            <p>If u ask whether this movie worth a watch, I would say not once but twice or even thrice. 
-                This story is too complicated so u need to watch it twice to understand it clearly. 
-                This is a awesome movie with a fabulous screenplay and I can assure that this film will surprise 
-                you with various twists.
-            </p>
     </div>
 </div>
 

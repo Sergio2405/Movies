@@ -83,7 +83,7 @@ class Movie(models.Model):
         for field , score in scores_dict.items():
             sum += score
         average = sum/total_fields
-        return average
+        return round(average,2)
 
     @property
     def only_year(self):
