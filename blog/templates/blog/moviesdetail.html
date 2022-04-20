@@ -4,7 +4,7 @@
     <style>
 
         :root {
-            --page-color: rgb(40, 40, 110);
+            --page-color: rgb(61, 61, 145);
         }
         
         /* CONTAINER */
@@ -240,33 +240,15 @@
                 <tbody>
                     <tr>
                         <td class = "general">Our Score</td>
-                        <td><div style = "
-                            background:linear-gradient(to right, green 0% {{ movie.final_score }}% , white {{ movie.final_score }}% 100%);
-                            border:1px solid black;
-                            height:20px;
-                            width:90%;
-                            margin-left:5px;
-                            text-align:center">{{ movie.final_score }}%</div></td>
+                        <td class = "icon_score"></td>
                     </tr>
                     <tr>
                         <td class = "general"><img class = "icons" src = "/media/icons/RottenTomatoesIcon.png"></td>
-                        <td > <div style = "
-                            background:linear-gradient(to right, green 0% {{ movie.rotten_tomatoes }}% , white {{ movie.rotten_tomatoes }}% 100%);
-                            border:1px solid black;
-                            height:20px;
-                            width:90%;
-                            margin-left:5px;
-                            text-align:center">{{ movie.rotten_tomatoes }}%</div></td>
+                        <td class = "icon_score"></td>
                     </tr>
                     <tr>
                         <td class = "general"><img class = "icons" src = "/media/icons/ImdbIcon.png"></td>
-                        <td><div style = "
-                            background:linear-gradient(to right, green 0% {{ movie.imdb }}% , white {{ movie.imdb }}% 100%);
-                            border:1px solid black;
-                            height:20px;
-                            width:90%;
-                            margin-left:5px;
-                            text-align:center">{{ movie.imdb }}%</div></td>
+                        <td class = "icon_score"></td>
                     </tr>
                 </tbody>
             </table>
@@ -330,30 +312,42 @@
 <script src = "{% static 'blog/jquery.js' %}"></script>
 
 {{ movie.scores_json|json_script:'scores_json' }}
+{{ movie.icons_scores_json|json_script:'icons_scores_json' }}
 
 <script>
 
-    var scores = $("#scores_json").text();
-    scores = jQuery.parseJSON(scores);
-    
-    var features = Object.keys(scores)
-    var score_column = $(".score") 
+    var score_bar = function(bar_color,column,json_data){
 
-    for (let cell = 0; cell < score_column.length; cell++ )
-    {
-        let score = scores[features[cell]]
-        $(score_column[cell]).append($('<div>'+score+'%</div>')
-                             .css({
-                                "border":"1px solid black",
-                                "height":"20px",
-                                "width":"90%",
-                                "margin-left":"5px",
-                                "text-align":"center",
-                                "background":"linear-gradient(to right, green 0" + score + "%,white " + score + "% 100%)"
-                             })
-                             )
+        let features = Object.keys(json_data)
+
+        for (let cell = 0; cell < column.length; cell++ )
+        {
+            let score = json_data[features[cell]]
+            $(column[cell]).append($('<div>'+score+'%</div>')
+                                .css({
+                                    "border":"1px solid black",
+                                    "height":"20px",
+                                    "width":"90%",
+                                    "margin-left":"5px",
+                                    "text-align":"center",
+                                    "background":"linear-gradient(to right, "+ bar_color +" 0" + score + "%,white " + score + "% 100%)"
+                                })
+                                )
+        }
     }
-  
+
+    // accesing color of the page
+    const page_color = getComputedStyle(document.documentElement).getPropertyValue('--page-color')
+
+    var scores =jQuery.parseJSON($("#scores_json").text());
+    var score_column = $(".score")
+    
+    var icon_scores =jQuery.parseJSON($("#icons_scores_json").text());
+    var icon_score_column = $(".icon_score")
+
+    score_bar(page_color,score_column,scores)
+    score_bar(page_color,icon_score_column,icon_scores)
+
 </script>
     
 

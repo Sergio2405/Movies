@@ -75,6 +75,13 @@ class Movie(models.Model):
             Screenplay = self.screenplay
         )
 
+    def icons_scores_json(self):
+        return dict(
+            Our = self.final_score,
+            RottenTomatoes = self.rotten_tomatoes,
+            Imdb = self.imdb,
+        )
+
     @property
     def final_score(self):
         scores_dict = self.scores_json()
