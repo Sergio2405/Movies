@@ -37,12 +37,12 @@ class Rating(models.Model):
     @property
     def rating(self):
         return [
-            "NR: Not Rated",
-            "G: All Ages Admiteed",
-            "PG: Parental Guidance Suggested",
-            "PG-13: Parents Strongly Cautioned (+13)",
-            "R: Restricted (+17)",
-            "NC-17: Adults Only"
+            "NR",
+            "G",
+            "PG",
+            "PG-13",
+            "R",
+            "NC-17"
         ][self.rating_dummy]
 
     def __str__(self):
@@ -54,6 +54,9 @@ class Movie(models.Model):
     release_date = models.DateField()
     duration = models.IntegerField(default=0)
     image = models.ImageField(upload_to="movie_image",blank=True)
+    language = models.CharField(default = "", max_length=40)
+    sinopsis = models.TextField(default = "")
+    review = models.TextField(default = "")
 
     director = models.ForeignKey(Director,on_delete=models.CASCADE)
     rating = models.ForeignKey(Rating,on_delete=models.CASCADE,default=get_default_rating_result)
@@ -71,23 +74,23 @@ class Movie(models.Model):
 
     #fav scenes images and caption
     scene1 = models.ImageField(upload_to="scene_image",blank=True)
-    scene1_caption = models.CharField(default="",max_length=100)
+    scene1_caption = models.CharField(default="",max_length=100, blank=True)
 
     scene2 = models.ImageField(upload_to="scene_image",blank=True)
-    scene2_caption = models.CharField(default="",max_length=100)
+    scene2_caption = models.CharField(default="",max_length=100, blank=True)
 
     scene3 = models.ImageField(upload_to="scene_image",blank=True)
-    scene3_caption = models.CharField(default="",max_length=100)
+    scene3_caption = models.CharField(default="",max_length=100, blank=True)
 
     #fav 3 quotes 
-    quote1 = models.CharField(default="",max_length=100)
-    quote1_character = models.CharField(default="",max_length=100)
+    quote1 = models.CharField(default="",max_length=100, blank=True)
+    quote1_character = models.CharField(default="",max_length=100, blank=True)
 
-    quote2 = models.CharField(default="",max_length=100)
-    quote2_character = models.CharField(default="",max_length=100)
+    quote2 = models.CharField(default="",max_length=100, blank=True)
+    quote2_character = models.CharField(default="",max_length=100, blank=True)
 
-    quote3 = models.CharField(default="",max_length=100)
-    quote3_character = models.CharField(default="",max_length=100)
+    quote3 = models.CharField(default="",max_length=100, blank=True)
+    quote3_character = models.CharField(default="",max_length=100, blank=True)
 
     #other pages score
     rotten_tomatoes = models.FloatField(default=0)

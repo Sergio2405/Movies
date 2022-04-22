@@ -5,6 +5,8 @@
 
         :root {
             --page-color: rgb(61, 61, 145);
+            --page-background: rgb(63, 63, 78) ;
+            --nav-color: rgb(73, 73, 163);
         }
         
         /* CONTAINER */
@@ -15,8 +17,36 @@
             row-gap: 2%;
             margin: 3% 17% 3% 17%;
             border-radius: 1%;
+            background-color:var(--page-background) ;
             /* border: 3px solid red; */
             width: 60%;
+        }
+
+        .menu
+        {
+            background-color: var(--page-color);
+            display:flex;
+            justify-content: space-around;
+        }
+
+        .menu div
+        {
+            height: 30px;
+            padding-top: 1%;
+            width: 10%;
+            text-align: center;
+        }
+
+        .menu div a
+        {
+            text-decoration: none;
+            text-align: center;
+            color:white
+        }
+
+        .menu div:hover
+        {
+            background-color: var(--nav-color);
         }
 
         /* SEPARATOR */
@@ -33,6 +63,10 @@
         #section_name
         {
             text-align: center;
+            text-align: center;
+            font-size:x-large;
+            font-weight: 550;
+            font-style: oblique;
         }
 
         /* INFORMATION */
@@ -129,6 +163,8 @@
             width: 50%;
             text-align: center;
         }
+
+
     </style>
 </head>
 {% endblock %}
@@ -137,14 +173,15 @@
 
 <div id = "parent">
 
-    <nav class="menu">
-          <a href="{% url 'Movies' %}">Movies</a>
-          <a href="{% url 'Directors' %}">Directors</a>
-          <a href="{% url 'Actors' %}">Actors</a>
-      </nav>
+    <div class="menu">
+        <div><a href="{% url 'Home' %}">Home</a></div>
+        <div><a href="{% url 'Movies' %}">Movies</a></div>
+        <div><a href="{% url 'Directors' %}">Directors</a></div>
+        <div><a href="{% url 'Actors' %}">Actors</a></div>
+    </div>
 
     <div id = "section_name">
-         <h1>{{ movie.name }}</h1>
+         {{ movie.name }}
     </div>
 
     <div class = "section_separator">
@@ -153,41 +190,43 @@
    
     <div id = "section_information">
 
-        <div>
+        <div> 
             <table height = 200>
                 <tbody>
                     <tr>
-                        <td class = "information">Rating</td>
-                        <td class = "information_value">PG-13</td>
+                        <td class = "information">Rating:</td>
+                        <td class = "information_value">{{ movie.rating.rating }}</td>
                     </tr>
                     <tr>
-                        <td class = "information">Genre</td>
-                        <td class = "information_value">Drama, Mystery & Thriller, Fantasy</td>
+                        <td class = "information">Genre:</td>
+                        <td class = "information_value">
+                            {% for genre in movie.genres.all %} 
+                                <label>{{ genre }} </label>
+                            {% endfor %}
+                        </td>
                     </tr>
                     <tr>
-                        <td class = "information">Original Language:</td>
-                        <td class = "information_value">English</td>
+                        <td class = "information">Language:</td>
+                        <td class = "information_value"> {{ movie.language }}</td>
                     </tr>
                     <tr>
                         <td class = "information">Director:</td>
-                        <td class = "information_value">Christopher Nolan</td>
+                        <td class = "information_value">{{ movie.director }}</td>
                     </tr>
                     <tr>
-                        <td class = "information">Release Date</td>
-                        <td class = "information_value">Oct 20, 2006 </td>
+                        <td class = "information">Release Year:</td>
+                        <td class = "information_value"> {{ movie.only_year }}</td>
                     </tr>
                     <tr>
-                        <td class = "information">Runtime:</td>
-                        <td class = "information_value">2h 10m</td>
+                        <td class = "information">Runtime (minutes):</td>
+                        <td class = "information_value"> {{ movie.duration }}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
         <div>
-            The movie is about the rivalry between two young magicians Robert Angier (Hugh Jackman) and Alfred Borden ( Christian Bale) 
-        and it is based on the novel written by Christopher Priest in 1995.Two friends and fellow magicians turn into bitter enemies after a 
-        sudden tragedy. As they devote themselves to this rivalry, they make sacrifices that bring them fame but with terrible consequences.
+            {{ movie.sinopsis }}
         </div>
 
         <div style = "align-items: center;">
@@ -201,10 +240,7 @@
     </div>
 
     <div id = "section_review">
-        If u ask whether this movie worth a watch, I would say not once but twice or even thrice. 
-            This story is too complicated so u need to watch it twice to understand it clearly. 
-            This is a awesome movie with a fabulous screenplay and I can assure that this film will surprise 
-            you with various twists.
+        {{ movie.review }}.
     </div>
 
     <div class = "section_separator">
@@ -364,7 +400,5 @@
     score_bar(page_color,icon_score_column,icon_scores)
 
 </script>
-    
-
 
 {% endblock %}
