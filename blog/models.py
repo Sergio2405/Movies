@@ -1,3 +1,5 @@
+from typing import List
+from unittest.util import unorderable_list_difference
 from django.db import models
 
 # Create your models here.
@@ -6,6 +8,9 @@ class Actor(models.Model):
 
     name = models.CharField(max_length=50)
     image = models.ImageField(upload_to="actor_image",blank=True)
+
+    def movies_order(self):
+        pass
 
     def __str__(self):
         return self.name
@@ -25,10 +30,6 @@ class Genre(models.Model):
     def __str__(self):
         return self.name
 
-def get_default_rating_result():
-    """ get a default value for result status; create new result if not available """
-    return Rating.objects.get_or_create(name="not_rated",rating_dummy=1)[0].id
-
 class Rating(models.Model):
     
     name = models.CharField(default=0,max_length=100)
@@ -47,6 +48,22 @@ class Rating(models.Model):
 
     def __str__(self):
         return self.name
+
+class Scores(models.Model):
+
+    actor = models.ForeignKey(Actor, on_delete=models.CASCADE)
+    movie = models.OneToOneField("Movie", on_delete=models.CASCADE)
+
+    time_in_movie = models.IntegerField(default=0)
+    physical_aspect = models.IntegerField(default=0)
+
+    def __str__(self):
+        return self.actor.name + ' | ' + self.movie.name
+
+
+def get_default_rating_result():
+    """ get a default value for result status; create new result if not available """
+    return Rating.objects.get_or_create(name="not_rated",rating_dummy=1)[0].id
 
 class Movie(models.Model): 
 
@@ -95,6 +112,10 @@ class Movie(models.Model):
     #other pages score
     rotten_tomatoes = models.FloatField(default=0)
     imdb = models.FloatField(default=0)
+
+    # Crear metodo que reciba numero de actores (self.actors) y a cada uno
+    # un diccionario con sus respectivos seccion:score. Si quiero tener las mejores pelis 
+    # de un actor, puedo llamar a movie desde Actor e iterar por el actor que deseo y ya
 
     def scores_json(self):
         return dict(

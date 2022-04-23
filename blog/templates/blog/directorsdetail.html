@@ -1,12 +1,188 @@
-{% block title %}
-    <h1>{{ director.name }}</h1>
+{% load static %}
+{% block head %}
+<head>
+    <style>
+
+        :root {
+            --page-color: rgb(61, 61, 145);
+            /* --page-background: rgb(63, 63, 78) ; */
+            --nav-color: rgb(73, 73, 163);
+        }
+        
+        /* CONTAINER */
+        #parent
+        {
+            display: grid;
+            grid-template-columns: auto;
+            row-gap: 2%;
+            margin: 3% 17% 3% 17%;
+            border-radius: 1%;
+            background-color:var(--page-background) ;
+            /* border: 3px solid red; */
+            width: 60%;
+        }
+
+        .menu
+        {
+            background-color: var(--page-color);
+            display:flex;
+            justify-content: space-around;
+        }
+
+        .menu div
+        {
+            height: 30px;
+            padding-top: 1%;
+            width: 10%;
+            text-align: center;
+        }
+
+        .menu div a
+        {
+            text-decoration: none;
+            text-align: center;
+            color:white
+        }
+
+        .menu div:hover
+        {
+            background-color: var(--nav-color);
+        }
+
+        /* SEPARATOR */
+        .section_separator
+        {
+            background:linear-gradient(to right, var(--page-color) 0% 40% , white 40% 60% , var(--page-color) 60% 100%);
+            height: 85%;
+            text-align: center;
+            font-size: 150%;
+            font-weight: 900;
+        }
+
+        /* NAME */
+        #section_name
+        {
+            text-align: center;
+            text-align: center;
+            font-size:x-large;
+            font-weight: 550;
+            font-style: oblique;
+        }
+
+        /* INFORMATION */
+        #section_information
+        {
+            display: grid;
+            grid-template-columns: 25% 75%;
+            column-gap: 3%;
+        }
+
+        .information{
+            width: 200px;
+            text-align: left;
+        }
+
+      
+        /* SCORES */
+        #section_scores
+        {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-gap: 2px; 
+        }
+
+        .score
+        {
+            width: 300px;
+        }
+
+        .feature
+        {
+            width: 200px;
+            text-align: left;
+        }
+
+
+    </style>
+</head>
 {% endblock %}
 
 {% block content %}
 
-<h4>Movies || Release Year</h4>
-{% for movie in director.movie_set.all %}
-    <p>{{ movie.name }} || {{ movie.only_year }}</p>
-{% endfor %}
+<div id = "parent">
+
+    <div class="menu">
+        <div><a href="{% url 'Home' %}">Home</a></div>
+        <div><a href="{% url 'Movies' %}">Movies</a></div>
+        <div><a href="{% url 'Directors' %}">Directors</a></div>
+        <div><a href="{% url 'Actors' %}">Actors</a></div>
+    </div>
+
+    <div id = "section_name">
+         {{ director.name }}
+    </div>
+
+    <div class = "section_separator">
+        INFORMATION
+    </div>
+   
+    <div id = "section_information">
+
+        <div style = "align-items: center;">
+            <img src="{{ director.image.url }}" style="width: 80%;height: 240px" >
+        </div>
+
+        <div>
+            {{ movie.sinopsis }}
+        </div>
+
+    </div>
+
+    <div class = "section_separator">
+        SCORES
+    </div>
+
+    <div id = "section_scores">
+
+        <div>
+            <table height = 200>
+                <tbody>
+                    <tr>
+                        <td class = "feature">Cinematography</td>
+                        <td class = "score"></td>
+                    </tr>
+                    <tr>
+                        <td class = "feature">Acting</td>
+                        <td class = "score"></td>
+                    </tr>
+                    <tr>
+                        <td class = "feature">Editing</td>
+                        <td class = "score"></td>
+                    </tr>
+                    <tr>
+                        <td class = "feature">Custom</td>
+                        <td class = "score"></td>
+                    </tr>
+                    <tr>
+                        <td class = "feature">Music</td>
+                        <td class = "score"></td>
+                    </tr>
+                    <tr>
+                        <td class = "feature">Screenplay</td>
+                        <td class = "score"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src = "{% static 'blog/jquery.js' %}"></script>
 
 {% endblock %}
