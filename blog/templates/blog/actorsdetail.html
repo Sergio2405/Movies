@@ -14,11 +14,10 @@
         {
             display: grid;
             grid-template-columns: auto;
-            row-gap: 2%;
+            row-gap: 5%;
             margin: 3% 17% 3% 17%;
             border-radius: 1%;
             background-color:var(--page-background) ;
-            /* border: 3px solid red; */
             width: 60%;
         }
 
@@ -39,10 +38,11 @@
 
         .menu div a
         {
-            text-decoration: none;
             text-align: center;
             color:white
         }
+
+        a{ text-decoration: none;color :black}
 
         .menu div:hover
         {
@@ -102,6 +102,24 @@
             text-align: left;
         }
 
+        td
+        {
+            border-top: 1px solid black;
+            text-align: center;
+          
+        }
+        td:hover
+        {
+            background-color: var(--nav-color);
+            color: white;
+        }
+        thead th
+        {
+            background-color: var(--page-color);
+            color: white;
+        }
+
+        table { border-spacing:0 }
 
     </style>
 </head>
@@ -128,55 +146,42 @@
    
     <div id = "section_information">
 
-        <div style = "align-items: center;">
-            <img src="{{ actor.image.url }}" style="width: 80%;height: 240px" >
+        <div>
+            <img src="{{ actor.image.url }}" style="width: 80%;height: 240px;margin-left: 20%;" >
         </div>
 
-        <div>
-            {{ movie.sinopsis }}
+        <div style = "width: 90%;">
+            {{ actor.review }}
         </div>
 
     </div>
 
     <div class = "section_separator">
-        SCORES
+        MOVIES
     </div>
 
     <div id = "section_scores">
-
-        <div>
-            <table height = 200>
-                <tbody>
+        <table style = "width: 200%;">
+            <thead>
+                <th>Year</th>
+                <th>Movies</th>
+                <th>Our Score</th>
+                <th>Rotten Tomatoes</th>
+                <th>Imdb</th>
+            </thead>
+            <tbody>
+                {% for movie in actor.movies.all %}
                     <tr>
-                        <td class = "feature">Cinematography</td>
-                        <td class = "score"></td>
+                        <td>{{ movie.only_year }}</td>
+                        <td><a href = "{% url 'MoviesDetail' movie.id %}">{{ movie.name }}</a></td>
+                        <td>{{ movie.final_score }}</td>
+                        <td>{{ movie.rotten_tomatoes }}</td>
+                        <td>{{ movie.imdb }}</td>
                     </tr>
-                    <tr>
-                        <td class = "feature">Acting</td>
-                        <td class = "score"></td>
-                    </tr>
-                    <tr>
-                        <td class = "feature">Editing</td>
-                        <td class = "score"></td>
-                    </tr>
-                    <tr>
-                        <td class = "feature">Custom</td>
-                        <td class = "score"></td>
-                    </tr>
-                    <tr>
-                        <td class = "feature">Music</td>
-                        <td class = "score"></td>
-                    </tr>
-                    <tr>
-                        <td class = "feature">Screenplay</td>
-                        <td class = "score"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-
-
 </div>
 
 {% endblock %}
