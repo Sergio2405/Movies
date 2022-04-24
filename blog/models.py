@@ -38,14 +38,14 @@ class Rating(models.Model):
 
     @property
     def rating(self):
-        return [
-            "NR",
-            "G",
-            "PG",
-            "PG-13",
-            "R",
-            "NC-17"
-        ]
+        return {
+            "NR" : "Not Rated",
+            "G" : "General Audiences",
+            "PG" : "Parental Guidance Suggested",
+            "PG-13" : "Parents Strongly Cautioned",
+            "R" : "Restricted",
+            "NC-17" : "Adults Only"
+        }[self.name]
 
     def __str__(self):
         return self.name
@@ -74,6 +74,9 @@ class Character_Movie(models.Model):
     actor = models.OneToOneField(Actor,on_delete=models.CASCADE,blank=True)
     movie = models.ForeignKey("Movie",on_delete=models.CASCADE,blank=True)
 
+    def __str__(self):
+        return self.name
+
 class Scene_Movie(models.Model):
 
     image = models.ImageField(upload_to = "scenes_images",blank=True)
@@ -90,7 +93,7 @@ class Quote_Movie(models.Model):
     character = models.OneToOneField(Character_Movie,on_delete=models.CASCADE,blank=True)
 
     def __str__(self):
-        return '|'.join([self.character,self.movie.name])
+        return '|'.join([self.character.name,self.movie.name])
 
 def get_default_rating_result():
     """ get a default value for result status; create new result if not available """

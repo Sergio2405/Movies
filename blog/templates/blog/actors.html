@@ -1,8 +1,217 @@
+{% load static %}
+{% block head %}
+<head>
+    <style>
+
+        :root {
+            --page-color: rgb(61, 61, 145);
+            /* --page-background: rgb(63, 63, 78) ; */
+            --nav-color: rgb(73, 73, 163);
+        }
+        
+        /* CONTAINER */
+        #parent
+        {
+            display: grid;
+            grid-template-columns: auto;
+            row-gap: 10%;
+            margin: 3% 17% 3% 17%;
+            border-radius: 1%;
+            background-color:var(--page-background) ;
+            /* border: 3px solid red; */
+            width: 60%;
+        }
+
+        .menu
+        {
+            background-color: var(--page-color);
+            display:flex;
+            justify-content: space-around;
+        }
+
+        .menu div
+        {
+            height: 30px;
+            padding-top: 1%;
+            width: 10%;
+            text-align: center;
+        }
+
+        .menu div a
+        {
+            text-decoration: none;
+            text-align: center;
+            color:white
+        }
+
+        .menu div:hover
+        {
+            background-color: var(--nav-color);
+        }
+
+        /* SEPARATOR */
+        .section_separator
+        {
+            background:linear-gradient(to right, var(--page-color) 0% 40% , white 40% 60% , var(--page-color) 60% 100%);
+            height: 85%;
+            text-align: center;
+            font-size: 150%;
+            font-weight: 900;
+        }
+
+        /* NAME */
+        #section_name
+        {
+            text-align: center;
+            text-align: center;
+            font-size:x-large;
+            font-weight: 550;
+            font-style: oblique;
+        }
+
+        /* INFORMATION */
+        #section_information
+        {
+            display: grid;
+            grid-template-columns: 34% 33% 33%;
+            column-gap: 3%;
+        }
+
+        .information{
+            width: 200px;
+            text-align: left;
+        }
+
+        /* REVIEW */
+        #section_review
+        {
+            text-align: center;
+        }
+
+        /* SCORES */
+        #section_scores
+        {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-gap: 2px; 
+        }
+
+        .score
+        {
+            width: 300px;
+        }
+
+        .feature
+        {
+            width: 200px;
+            text-align: left;
+        }
+
+        /* CASTING */
+        #section_casting
+        {
+            display:flex;
+            justify-content: space-evenly;
+            column-gap: 5%;
+            flex-basis: 50%
+        }
+
+        /* SCENES */
+        #section_scenes
+        {
+            display:flex;
+            justify-content: space-evenly;
+            column-gap: 5%;
+            flex-basis: 50%
+        }
+
+        .scenes
+        {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* QUOTES */
+        #section_quotes
+        {
+            display:flex;
+            justify-content: space-evenly;
+            column-gap: 5%;
+            flex-basis: 50%
+        
+        }
+
+        .quotes
+        {
+            text-align: center;
+            font-family: "Times New Roman", Times, serif;
+            font-size:x-large;
+            font-weight: 550;
+            font-style: oblique;
+        }
+
+        .quotes_caption
+        {
+            text-align: center;
+            font-size:medium;
+            font-style:normal;
+            font-weight: 300;
+        }
+
+        .icons
+        {
+            height: 55%;
+            width: 20%;
+        }
+
+        .general
+        {
+            width: 50%;
+            text-align: center;
+        }
+
+        .actors
+        {
+            display:flex;
+            justify-content: space-evenly;
+            column-gap: 5%;
+            flex-basis: 50%
+        }
+
+    </style>
+</head>
+{% endblock %}
+
 {% block content %}
-    <h2>Actors</h2>
-    <ul>
+
+<div id = "parent">
+
+    <div class="menu">
+        <div><a href="{% url 'Home' %}">Home</a></div>
+        <div><a href="{% url 'Movies' %}">Movies</a></div>
+        <div><a href="{% url 'Directors' %}">Directors</a></div>
+        <div><a href="{% url 'Actors' %}">Actors</a></div>
+    </div>
+
+    <div class = "section_separator">
+        ACTORS
+    </div>
+
+    <div class = "actors">
         {% for actor in actors_list %}
-            <li><a href = "{% url 'ActorsDetail' actor.id %}">{{ actor.name }}</a></li>
+            <div>
+                <img src="{{ actor.image.url }}" style="border-radius: 50%;height: 100px;width: 70%;" >
+                <figcaption style = "text-align: center;">
+                    <a href = "{% url 'ActorsDetail' actor.id %}">{{ actor.name }}</a>
+                </figcaption>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
 {% endblock %}

@@ -112,6 +112,8 @@
         {
             display:flex;
             justify-content: space-evenly;
+            column-gap: 5%;
+            flex-basis: 50%
         }
 
         /* SCENES */
@@ -132,9 +134,10 @@
         /* QUOTES */
         #section_quotes
         {
-            display: grid;
-            grid-template-columns: 33% 33% 33%;
-            grid-gap: 2px;
+            display:flex;
+            justify-content: space-evenly;
+            column-gap: 5%;
+            flex-basis: 50%
         
         }
 
@@ -150,6 +153,9 @@
         .quotes_caption
         {
             text-align: center;
+            font-size:medium;
+            font-style:normal;
+            font-weight: 300;
         }
 
         .icons
@@ -163,7 +169,6 @@
             width: 50%;
             text-align: center;
         }
-
 
     </style>
 </head>
@@ -195,7 +200,7 @@
                 <tbody>
                     <tr>
                         <td class = "information">Rating:</td>
-                        <td class = "information_value">{{ movie.rating.rating }}</td>
+                        <td class = "information_value">{{ movie.rating.name }}</td>
                     </tr>
                     <tr>
                         <td class = "information">Genre:</td>
@@ -318,18 +323,12 @@
     </div>
 
     <div id = "section_scenes">
+        {% for scene in movie.scene_movie_set.all %}
         <div class = "scenes">
-            <img src="{{ movie.scene1.url }}" style="width: 90%; height: 200px;" >
-            <figcaption style = "text-align: center;"> {{ movie.scene1_caption }} </figcaption>
+            <img src="{{ scene.image.url }}" style="width: 90%; height: 200px;" >
+            <figcaption style = "text-align: center;"> {{ scene.description }} </figcaption>
         </div>
-        <div class = "scenes">
-            <img src="{{ movie.scene2.url }}" style="width: 90%;  height: 200px;">
-            <figcaption style = "text-align: center;"> {{ movie.scene2_caption }} </figcaption>
-        </div>
-        <div class = "scenes">
-            <img src="{{ movie.scene3.url }}" style="width: 90%;  height: 200px;" >
-            <figcaption style = "text-align: center;"> {{ movie.scene3_caption }} </figcaption>
-        </div>
+        {% endfor %}
     </div>
     
     <div class = "section_separator">
@@ -338,14 +337,12 @@
 
     <div id = "section_quotes">
 
-        <div class = "quotes">{{ movie.quote1 }}</div>
-        <div class = "quotes">{{ movie.quote2 }}</div>
-        <div class = "quotes">{{ movie.quote3 }}</div>
-
-        <div class = "quotes_caption"> - {{ movie.quote1_character }}</div>
-        <div class = "quotes_caption"> - {{ movie.quote2_character }}</div>
-        <div class = "quotes_caption"> - {{ movie.quote3_character }}</div>
-       
+        {% for quote in movie.quote_movie_set.all %}
+            <div class = "quotes">
+                <div>{{ quote.quote }}</div>
+                <div class = "quotes_caption">- {{ quote.character.name }}</div>
+            </div>
+        {% endfor %}
     </div>
 
     <div class = "section_separator">
@@ -360,7 +357,7 @@
 
 {% block scripts %}
 
-<script src = "{% static 'blog/jquery.js' %}"></script>
+<script src = "{% static 'blog/js/jquery.js' %}"></script>
 
 {{ movie.scores_json|json_script:'scores_json' }}
 {{ movie.icons_scores_json|json_script:'icons_scores_json' }}
