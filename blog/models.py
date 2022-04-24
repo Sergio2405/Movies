@@ -92,6 +92,10 @@ class Quote_Movie(models.Model):
     movie = models.ForeignKey("Movie",on_delete=models.CASCADE,blank=True)
     character = models.OneToOneField(Character_Movie,on_delete=models.CASCADE,blank=True)
 
+    @property
+    def actor(self):
+        return self.character.actor.name
+
     def __str__(self):
         return '|'.join([self.character.name,self.movie.name])
 
