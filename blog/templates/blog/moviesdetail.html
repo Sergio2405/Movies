@@ -19,18 +19,21 @@
         <div><a href="{% url 'Directors' %}">Directors</a></div>
         <div><a href="{% url 'Actors' %}">Actors</a></div>
     </div>
+    <br>
 
     <div id = "section_name">
          {{ movie.name }}
     </div>
+    <br>
 
     <div class = "section_separator">
         INFORMATION
     </div>
+    <br>
    
     <div id = "section_information">
 
-        <div style = "margin-left: 20%;margin-top: 5%;"> 
+        <div style = "margin-left: 20%;margin-top: 15%;"> 
             <table height = 200>
                 <tbody>
                     <tr>
@@ -75,18 +78,22 @@
         </div>
 
     </div>
+    <br>
 
     <div class = "section_separator">
         REVIEW
     </div>
+    <br>
 
     <div id = "section_review">
         {{ movie.review }}.
     </div>
+    <br>
 
     <div class = "section_separator">
         SCORES
     </div>
+    <br>
 
     <div id = "section_scores">
 
@@ -140,10 +147,12 @@
             </table>
         </div>
     </div>
+    <br>
 
     <div class = "section_separator">
         CASTING
     </div>
+    <br>
 
     <div id = "section_casting">
         {% for actor in movie.actors.all %}
@@ -153,10 +162,12 @@
         </div>
         {% endfor %}
     </div>
+    <br>
 
     <div class = "section_separator">
         SCENES
     </div>
+    <br>
 
     <div id = "section_scenes">
         {% for scene in movie.scene_movie_set.all %}
@@ -166,10 +177,12 @@
         </div>
         {% endfor %}
     </div>
+    <br>
     
     <div class = "section_separator">
         QUOTES
     </div>
+    <br>
 
     <div id = "section_quotes">
 
@@ -180,10 +193,12 @@
             </div>
         {% endfor %}
     </div>
+    <br>
 
     <div class = "section_separator">
         RELATED
     </div>
+    <br>
 
     <div id = "section_related">
     </div>
