@@ -10,7 +10,10 @@
 {
     display: grid;
     grid-template-columns: auto;
-    row-gap: 1%;
+    row-gap: 1%; 
+    /* display: flex; */
+    /* row-gap: 10%;
+    flex-direction: column;  */
     margin: 3% 17% 3% 17%;
     border-radius: 1%;
     background-color:var(--page-background) ;

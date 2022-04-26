@@ -36,10 +36,12 @@
 
     <div class = "actors">
         {% for actor in actors_list %}
-            <div class = "images" style = "width: 22%;height: 230px;">
-                <img src="{{ actor.image.url }}" style="width: 100%; height: 100%;">
+            <div class = "images" style = "max-height: 45%;max-width: 10%;">
+                <a href = "{% url 'ActorsDetail' actor.id %}" target = "_blank">
+                    <img src="{{ actor.image.url }}" style="width: 100%; height: 100%;">
+                </a>
                 <figcaption style = "text-align: center;">
-                    <a href = "{% url 'ActorsDetail' actor.id %}">{{ actor.name }}</a>
+                    {{ actor.name }}
                 </figcaption>
             </div>
         {% endfor %}
