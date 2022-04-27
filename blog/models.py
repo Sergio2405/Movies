@@ -9,6 +9,8 @@ class Actor(models.Model):
     name = models.CharField(max_length=50,blank=True)
     image = models.ImageField(upload_to="actor_image",blank=True)
     review = models.TextField(default = "",blank=True)
+    reference_image = models.URLField(max_length=200, default = "")
+    reference_description = models.URLField(max_length=200, default = "")
 
     def movies_order(self):
         pass
@@ -21,6 +23,8 @@ class Director(models.Model):
     name = models.CharField(max_length=50,blank=True)
     image = models.ImageField(upload_to="director_image",blank=True)
     review = models.TextField(default = "",blank=True)
+    reference_image = models.URLField(max_length=200, default = "")
+    reference_description = models.URLField(max_length=200, default = "")
 
     def __str__(self):
         return self.name
@@ -82,6 +86,9 @@ class Scene_Movie(models.Model):
     image = models.ImageField(upload_to = "scenes_images",blank=True)
     description = models.CharField(max_length=100,blank=True,default = "")
     movie = models.ForeignKey("Movie",on_delete=models.CASCADE,blank=True)
+    caption = models.TextField(default = "",blank=True)
+
+    reference_image = models.URLField(max_length=200, default = "")
 
     def __str__(self):
         return '|'.join([self.description,self.movie.name]) 
@@ -91,6 +98,7 @@ class Quote_Movie(models.Model):
     quote = models.CharField(max_length=100,default = "", blank=True)
     movie = models.ForeignKey("Movie",on_delete=models.CASCADE,blank=True)
     character = models.OneToOneField(Character_Movie,on_delete=models.CASCADE,blank=True)
+    description = models.TextField(default = "",blank=True)
 
     @property
     def actor(self):
@@ -112,6 +120,9 @@ class Movie(models.Model):
     language = models.CharField(default = "", max_length=40,blank=True)
     sinopsis = models.TextField(default = "",blank=True)
     review = models.TextField(default = "",blank=True)
+
+    reference_image = models.URLField(max_length=200, default = "")
+    reference_description = models.URLField(max_length=200, default = "")
 
     director = models.ForeignKey(Director,on_delete=models.CASCADE,blank=True)
     rating = models.ForeignKey(Rating,on_delete=models.CASCADE,default=get_default_rating_result,blank=True)
