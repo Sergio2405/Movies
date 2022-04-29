@@ -3,6 +3,8 @@ from django.views.generic import (
     DetailView,
     TemplateView
 )
+from django.http import HttpResponse
+from django.views import View
 from django.shortcuts import render
 from .models import Actor, Director, Movie
 

@@ -1,12 +1,116 @@
-{% block title %}
-    <h1>{{ actor.name }}</h1>
+{% load static %}
+{% block head %}
+
+<link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
+<style>
+
+    a{ text-decoration: none;color :black}
+
+    td
+    {
+        border-top: 1px solid black;
+        text-align: center;
+        
+    }
+    td:hover
+    {
+        background-color: var(--nav-color);
+        color: white;
+    }
+
+    td a:hover
+    {
+        background-color: var(--nav-color);
+        color: white;
+    }
+
+    thead th
+    {
+        background-color: var(--page-color);
+        color: white;
+    }
+
+    table { border-spacing:0 }
+
+    #section_information
+{
+    display: grid;
+    grid-template-columns: 70% 30%;
+    column-gap: 3%;
+
+}
+
+</style>
 {% endblock %}
 
 {% block content %}
 
-<h4>Movies || Release Year</h4>
-{% for movie in actor.movies.all %}
-    <p>{{ movie.name }} || {{ movie.only_year }}</p>
-{% endfor %}
+<div id = "parent">
+
+    <div class="menu">
+        <div><a href="{% url 'Home' %}">Home</a></div>
+        <div><a href="{% url 'Movies' %}">Movies</a></div>
+        <div><a href="{% url 'Directors' %}">Directors</a></div>
+        <div><a href="{% url 'Actors' %}">Actors</a></div>
+    </div>
+    <br>
+
+    <div id = "section_name">
+         {{ actor.name }}
+    </div>
+    <br>
+
+    <div class = "section_separator">
+        INFORMATION
+    </div>
+    <br>
+
+    <div id = "section_information">
+
+        <div style = "width: 100%;margin-top: 5%;margin-left: 3%;">
+            {{ actor.review }}
+        </div>
+
+        <div class = "images" style = "width: 70%;height: 200px">
+            <img src="{{ actor.image.url }}" style="width: 100%;height: 100%" >
+            <figcaption style = "text-align: center;"> {{ actor.name }} </figcaption>
+        </div>
+
+    </div>
+    <br>
+    <div class = "section_separator">
+        MOVIES
+    </div>
+    <br>
+
+    <div>
+        <table style = "width: 90%;margin-left: 5%;margin-top: 3%;">
+            <thead>
+                <th>Year</th>
+                <th>Movies</th>
+                <th>Our Score</th>
+                <th>Rotten Tomatoes</th>
+                <th>Imdb</th>
+            </thead>
+            <tbody>
+                {% for movie in actor.movies.all %}
+                    <tr>
+                        <td>{{ movie.only_year }}</td>
+                        <td><a href = "{% url 'MoviesDetail' movie.id %}">{{ movie.name }}</a></td>
+                        <td>{{ movie.final_score }}</td>
+                        <td>{{ movie.rotten_tomatoes }}</td>
+                        <td>{{ movie.imdb }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src = "{% static 'blog/jquery.js' %}"></script>
 
 {% endblock %}

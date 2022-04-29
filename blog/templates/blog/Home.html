@@ -1,9 +1,38 @@
-{% block title %}
-    <h1>Home</h1>
+
+{% load static %}
+{% block head %}
+<link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
+<style>
+
+    .directors
+    {
+        display:flex;
+        justify-content: space-evenly;
+        column-gap: 5%;
+        row-gap:10%;
+        flex-basis: 50%;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+
+</style>
 {% endblock %}
 
 {% block content %}
-    <p><a href = "{% url 'Movies' %}">Movies</a></p>
-    <p><a href = "{% url 'Directors' %}">Directors</a></p>
-    <p><a href = "{% url 'Actors' %}">Actors</a></p>
+
+<div id = "parent">
+
+    <div class="menu">
+        <div><a href="{% url 'Home' %}">Home</a></div>
+        <div><a href="{% url 'Movies' %}">Movies</a></div>
+        <div><a href="{% url 'Directors' %}">Directors</a></div>
+        <div><a href="{% url 'Actors' %}">Actors</a></div>
+    </div>
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
 {% endblock %}

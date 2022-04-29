@@ -1,284 +1,272 @@
 {% load static %}
 {% block head %}
-<head>
-    <style>
-        
-        #parent{
-            display: grid;
-            grid-template-columns: auto;
-            row-gap: 50px;
-            margin: 50px 200px 50px 200px;
-            border-radius: 1%;
-            /* border: 3px solid red; */
-          
-        }
-        #container1{
-            text-align: center;
-            
-            /* background-color: rgb(16, 205, 205); */
-        }
-        #container2{
-            display: grid;
-            grid-template-columns: 34% 33% 33%;
-            column-gap: 2px;
-          
-            align-items: center;
-        }
-        #casting{
-            display: grid;
-            grid-template-columns: 20% 20% 20% 20% 20%;
-            column-gap: 15px;
-           
-        
-        }
 
-        .section_separator{
-            background:linear-gradient(to right, green 0% 40% , white 40% 60% ,green 60% 100%);
-            height: 27px;
-            text-align: center;
-            font-size: x-large;
-            font-weight: 900;
-        }
+<link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
 
-        #review{
-            text-align: center;
-            
-        
-        }
-        .parts{
-            font-weight: 900;
-            text-decoration: underline;
-        }
-        #grades{
-            display: grid;
-            grid-template-columns: 50% 50%;
-            grid-gap: 2px;
-           
-        }
-        #photo{
-            display: flex;
-            justify-content: center;
-        }
+<style>
 
-        img {
-            height:400px;
-            width: 320px;
-            margin-bottom: 10px;
-            }
+</style>
 
-
-        .score{
-            width: 300px;
-        }
-
-        .feature{
-            width: 200px;
-            text-align: left;
-        }
-
-        #section_quotes{
-            display: grid;
-            grid-template-columns: 33% 33% 33%;
-            grid-gap: 2px;
-           
-        }
-
-        .quotes{
-            text-align: center;
-            font-family: "Times New Roman", Times, serif;
-            font-size:x-large;
-            font-weight: 550;
-            font-style: oblique
-        }
-
-        .scenes{
-            display: grid;
-            grid-template-columns: 20% 20% 20%;
-            column-gap: 15px;
-          
-        }
-
-    </style>
-</head>
 {% endblock %}
 
 {% block content %}
 
-<div id = "parent">
 
-    <div id = "container1">
-         <h1>{{ movie.name }}</h1>
-    </div>
+<div id = "header">
+        header
+</div> 
 
-    <div class = "section_separator">
-        INFORMATION
-    </div>
-   
-    <div id = "container2">
-        <div id = "photo">
-            <img src="{{ movie.image.url }}">
-        </div>
-
-        <div id = "sinopsis">
-            <p>The movie is about the rivalry between two young magicians Robert Angier (Hugh Jackman) and Alfred Borden ( Christian Bale) 
-        and it is based on the novel written by Christopher Priest in 1995.Two friends and fellow magicians turn into bitter enemies after a 
-        sudden tragedy. As they devote themselves to this rivalry, they make sacrifices that bring them fame but with terrible consequences.
-            </p>
-        </div>
-
-    </div>
-
-    <div class = "section_separator">
-        REVIEW
-    </div>
-
-    <div id = "review">
-        <p>If u ask whether this movie worth a watch, I would say not once but twice or even thrice. 
-            This story is too complicated so u need to watch it twice to understand it clearly. 
-            This is a awesome movie with a fabulous screenplay and I can assure that this film will surprise 
-            you with various twists.
-        </p>
-    </div>
-
-    <div class = "section_separator">
-        SCORES
-    </div>
-
-    <div id = "grades">
-
-        <div>
-            <table height = 200>
-                <thead>
-                    <th>Features</th>
-                    <th>Score</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class = "feature">Cinematography</td>
-                        <td class = "score"></td>
-                    </tr>
-                    <tr>
-                        <td class = "feature">Acting</td>
-                        <td class = "score"></td>
-                    </tr>
-                    <tr>
-                        <td class = "feature">Editing</td>
-                        <td class = "score"></td>
-                    </tr>
-                    <tr>
-                        <td class = "feature">Custom</td>
-                        <td class = "score"></td>
-                    </tr>
-                    <tr>
-                        <td class = "feature">Music</td>
-                        <td class = "score"></td>
-                    </tr>
-                    <tr>
-                        <td class = "feature">Screenplay</td>
-                        <td class = "score"></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div>
-            <ul>
-                <li>Our Score: {{ movie.final_score }}</li>
-                <li>Rotten Tomatoes: {{ movie.rotten_tomatoes }}</li>
-                <li>IMDb: {{ movie.imdb }}</li>
-            </ul>
-        </div>
-
-    </div>
-
-    <div class = "section_separator">
-        CASTING
-    </div>
-
-    <div id = "casting">
-        {% for actor in movie.actors.all %}
-        <div>
-            <img src="{{ actor.image.url }}" style="border-radius: 50%;width: 170px;height: 175px;" >
-            <figcaption style = "text-align: left;"> {{ actor.name }} </figcaption>
-        </div>
-        {% endfor %}
-    </div>
-
-    <div class = "section_separator">
-        SCEMES
-    </div>
-
-    <div class = "scenes">
-        <div>
-            <img src="{{ movie.scene1.url }}" style="width: 230px; height: 200px;" >
-            <figcaption style = "text-align: left;">  </figcaption>
-        </div>
-        <div>
-            <img src="{{ movie.scene2.url }}" style="width: 230px; height: 200px;">
-            <figcaption style = "text-align: left;">  </figcaption>
-        </div>
-        <div>
-            <img src="{{ movie.scene3.url }}" style="width: 230px; height: 200px;" >
-            <figcaption style = "text-align: left;">  </figcaption>
-        </div>
-    </div>
+<div id = "page">
     
-    <div class = "section_separator">
-        QUOTES
+    <div id = "right_side">
+        right
     </div>
 
-    <div id = "section_quotes">
-       <div class = "quotes">{{ movie.quote1 }}</div>
-       <div class = "quotes">{{ movie.quote2 }}</div>
-       <div class = "quotes">{{ movie.quote3 }}</div>
+    <div id = "parent">
+
+        <div class="menu">
+            <div><a href="{% url 'Home' %}">Home</a></div>
+            <div><a href="{% url 'Movies' %}">Movies</a></div>
+            <div><a href="{% url 'Directors' %}">Directors</a></div>
+            <div><a href="{% url 'Actors' %}">Actors</a></div>
+        </div>
+        <br>
+
+        <div id = "section_name">
+            {{ movie.name }}
+        </div>
+        <br>
+
+        <div class = "section_separator">
+            INFORMATION
+        </div>
+        <br>
+    
+        <div id = "section_information">
+
+            <div style = "margin-left: 20%;margin-top: 15%;"> 
+                <table style = "height: 20%;">
+                    <tbody>
+                        <tr>
+                            <td class = "information">Rating:</td>
+                            <td class = "information_value">{{ movie.rating.name }}</td>
+                        </tr>
+                        <tr>
+                            <td class = "information">Genre:</td>
+                            <td class = "information_value">
+                                {% for genre in movie.genres.all %} 
+                                    <label>{{ genre }} </label>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class = "information">Language:</td>
+                            <td class = "information_value"> {{ movie.language }}</td>
+                        </tr>
+                        <tr>
+                            <td class = "information">Director:</td>
+                            <td class = "information_value">{{ movie.director }}</td>
+                        </tr>
+                        <tr>
+                            <td class = "information">Release Year:</td>
+                            <td class = "information_value"> {{ movie.only_year }}</td>
+                        </tr>
+                        <tr>
+                            <td class = "information">Runtime (minutes):</td>
+                            <td class = "information_value"> {{ movie.duration }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                {{ movie.sinopsis }}
+            </div>
+
+            <div class = "images" style = "width: 65%;height: 90%;">
+                <img src="{{ movie.image.url }}" style="width: 100%;height: 100%;">
+                <figcaption style = "text-align: center;"> {{ movie.name }} </figcaption>
+            </div>
+
+        </div>
+        <br>
+
+        <div class = "section_separator">
+            REVIEW
+        </div>
+        <br>
+
+        <div id = "section_review">
+            {{ movie.review }}.
+        </div>
+        <br>
+
+        <div class = "section_separator">
+            SCORES
+        </div>
+        <br>
+
+        <div id = "section_scores">
+
+            <div style = "margin-left: 10%;">
+                <table style = "height: 20%;">
+                    <tbody>
+                        <tr>
+                            <td class = "feature">Cinematography</td>
+                            <td class = "score"></td>
+                        </tr>
+                        <tr>
+                            <td class = "feature">Acting</td>
+                            <td class = "score"></td>
+                        </tr>
+                        <tr>
+                            <td class = "feature">Editing</td>
+                            <td class = "score"></td>
+                        </tr>
+                        <tr>
+                            <td class = "feature">Custom</td>
+                            <td class = "score"></td>
+                        </tr>
+                        <tr>
+                            <td class = "feature">Music</td>
+                            <td class = "score"></td>
+                        </tr>
+                        <tr>
+                            <td class = "feature">Screenplay</td>
+                            <td class = "score"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <table style = "height:20%">
+                    <tbody>
+                        <tr>
+                            <td class = "general">Our Score</td>
+                            <td class = "icon_score"></td>
+                        </tr>
+                        <tr>
+                            <td class = "general"><img class = "icons" src = "/media/icons/RottenTomatoesIcon.png"></td>
+                            <td class = "icon_score"></td>
+                        </tr>
+                        <tr>
+                            <td class = "general"><img class = "icons" src = "/media/icons/ImdbIcon.png"></td>
+                            <td class = "icon_score"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+
+        <div class = "section_separator">
+            CASTING
+        </div>
+        <br>
+    
+        <div id = "section_casting">
+            {% for actor in movie.actors.all %}
+            <div class = "images" style = "width: 10%;height: 50%;">
+                <img src="{{ actor.image.url }}" style="width: 100%;height: 100%;" >
+                <figcaption style = "text-align: center;"> {{ actor.name }} </figcaption>
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+
+        <div class = "section_separator">
+            SCENES
+        </div>
+        <br>
+
+        <div id = "section_scenes">
+            {% for scene in movie.scene_movie_set.all %}
+            <div class = "scenes images" style = "width: 30%;height: 100%;">
+                <img src="{{ scene.image.url }}" style="width: 100%;height: 100%;">
+                <figcaption style = "text-align: center;"> {{ scene.description }} </figcaption>
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+        
+        <div class = "section_separator">
+            QUOTES
+        </div>
+        <br>
+
+        <div id = "section_quotes">
+
+            {% for quote in movie.quote_movie_set.all %}
+                <div class = "quotes">
+                    <div>{{ quote.quote }}</div>
+                    <div class = "quotes_caption">- {{ quote.character.name }}</div>
+                </div>
+            {% endfor %}
+        </div>
+        <br>
+
+        <div class = "section_separator">
+            RELATED
+        </div>
+        <br>
+
+        <div id = "section_related">
+        </div>
     </div>
 
-    <div class = "section_separator">
-        RELATED FILMS
+    <div id = "left_side">
+        left
     </div>
 
-    <div id = "related">
-            <p>If u ask whether this movie worth a watch, I would say not once but twice or even thrice. 
-                This story is too complicated so u need to watch it twice to understand it clearly. 
-                This is a awesome movie with a fabulous screenplay and I can assure that this film will surprise 
-                you with various twists.
-            </p>
-    </div>
 </div>
 
+<div id = "bottom">
+        bottom
+</div> 
 {% endblock %}
 
 {% block scripts %}
 
-<script src = "{% static 'blog/jquery.js' %}"></script>
+<script src = "{% static 'blog/js/jquery.js' %}"></script>
 
 {{ movie.scores_json|json_script:'scores_json' }}
+{{ movie.icons_scores_json|json_script:'icons_scores_json' }}
 
 <script>
 
-    var scores = $("#scores_json").text();
-    scores = jQuery.parseJSON(scores);
-    
-    var features = Object.keys(scores)
-    var score_column = $(".score") 
+    var score_bar = function(bar_color,column,json_data){
 
-    for (let cell = 0; cell < score_column.length; cell++ )
-    {
-        let score = scores[features[cell]]
-        $(score_column[cell]).append($('<div>'+score+'%</div>')
-                             .css({
-                                "border":"1px solid black",
-                                "height":"20px",
-                                "width":"90%",
-                                "margin-left":"5px",
-                                "text-align":"center",
-                                "background":"linear-gradient(to right, green 0" + score + "%,white " + score + "% 100%)"
-                             })
-                             )
+        let features = Object.keys(json_data)
+
+        for (let cell = 0; cell < column.length; cell++ )
+        {
+            let score = json_data[features[cell]]
+            $(column[cell]).append($('<div class = "images">'+score+'%</div>')
+                                .css({
+                                    "border":"1px solid black",
+                                    "height":"20px",
+                                    "width":"90%",
+                                    "margin-left":"5px",
+                                    "text-align":"center",
+                                    "background":"linear-gradient(to right, "+ bar_color +" 0" + score + "%,white " + score + "% 100%)"
+                                })
+                                )
+        }
     }
-  
-</script>
-    
 
+    // accesing color of the page
+    const page_color = getComputedStyle(document.documentElement).getPropertyValue('--page-color')
+
+    var scores =jQuery.parseJSON($("#scores_json").text());
+    var score_column = $(".score")
+    
+    var icon_scores =jQuery.parseJSON($("#icons_scores_json").text());
+    var icon_score_column = $(".icon_score")
+
+    score_bar(page_color,score_column,scores)
+    score_bar(page_color,icon_score_column,icon_scores)
+
+</script>
 
 {% endblock %}
