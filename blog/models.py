@@ -7,8 +7,8 @@ from django.db import models
 class Actor(models.Model):
 
     name = models.CharField(max_length=50,blank=True)
-    image = models.ImageField(upload_to="actor_image",blank=True)
     review = models.TextField(default = "",blank=True)
+    image = models.ImageField(upload_to='actor_image',blank=True,default="",null=True)
     reference_image = models.URLField(max_length=200, default = "")
     reference_description = models.URLField(max_length=200, default = "")
 
