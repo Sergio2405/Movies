@@ -5,21 +5,23 @@
     --font-letter: "Times New Roman", Times, serif
 }
 
+#webpage
+{
+    border: 1px solid black;
+    margin-left: 15%;
+    margin-right: 15%;
+    font-family: var(--font-letter);
+    background-color:var(--page-background) ;
+}
 /* CONTAINER */
 #parent
 {
     display: grid;
     grid-template-columns: auto;
     row-gap: auto; 
-    /* display: flex; */
-    /* row-gap: 10%;
-    flex-direction: column;  */
-    /* margin: 3% 17% 3% 17%; */
-    background-color:var(--page-background) ;
     border: 3px solid red; 
-    width: 60%;
+    width: 70%;
     height: auto;
-    font-family: var(--font-letter);
 }
 
 #page
@@ -34,8 +36,18 @@
 #right_side 
 {
     border: 3px solid red; 
-    width: 20%;
+    width: 30%;
     height: auto;
+    display: grid;
+    grid-template-rows: 2% auto auto auto;
+    row-gap: auto;
+}
+
+#right_side div
+{
+    border: 1px solid blue;
+        width: auto;
+        height: auto;
 }
 
 #left_side 
@@ -60,6 +72,7 @@
 }
 .menu
 {
+    margin-top: 5%;
     background-color: var(--page-color);
     display:flex;
     justify-content: space-around;

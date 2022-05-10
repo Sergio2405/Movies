@@ -55,7 +55,7 @@ class Rating(models.Model):
         return self.name
 
 class Actor_Movie(models.Model):
-
+    
     actor = models.ForeignKey(Actor, on_delete=models.CASCADE,blank=True) 
     movie = models.OneToOneField("Movie", on_delete=models.CASCADE,blank=True)
     
@@ -158,7 +158,7 @@ class Movie(models.Model):
             RottenTomatoes = self.rotten_tomatoes,
             Imdb = self.imdb,
         )
-
+        
     @property
     def final_score(self):
         scores_dict = self.scores_json()
