@@ -39,97 +39,125 @@
     column-gap: 3%;
 
 }
-
+.movies
+    {
+        display:flex;
+        justify-content: space-evenly;
+        column-gap: 5%;
+        row-gap: 20px;
+        flex-basis: 50%;
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin-top: 10%;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
 
-<div id = "header">
-    header
-</div> 
+<div id = "webpage">
 
-<div id = "page">
-
-    <div id = "right_side">
-        right
-    </div>
-
-    <div id = "parent">
-
+    <div id = "header">
         <div class="menu">
             <div><a href="{% url 'Home' %}">Home</a></div>
             <div><a href="{% url 'Movies' %}">Movies</a></div>
             <div><a href="{% url 'Directors' %}">Directors</a></div>
             <div><a href="{% url 'Actors' %}">Actors</a></div>
         </div>
-        <br>
+    </div> 
 
-        <div id = "section_name">
-            {{ actor.name }}
-        </div>
-        <br>
+    <div id = "page">
 
-        <div class = "section_separator">
-            INFORMATION
-        </div>
-        <br>
+        <div id = "right_side">
 
-        <div id = "section_information">
-
-            <div style = "display: flex;align-items: center;">
-                {{ actor.review }}
+            <div class = "section_separator">
+                RELATED FILMS
             </div>
-
-            <div class = "images" style = "width: 70%;height: auto">
-                {% if actor.iamge %}
-                    <img src="{{ actor.image.url }}" style="width: 100%;height: auto">
-                {% else %}
+    
+            <div class = "movies">
+                <div class = "images" style = "width: 30%;height: auto;">
                     <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                {% endif %}
-                <figcaption style = "text-align: center;"> {{ actor.name }} </figcaption>
+                    <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
+                </div>
+                <div class = "images" style = "width: 30%;height: auto;">
+                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
+                    <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
+                </div>
+                <div class = "images" style = "width: 30%;height: auto;">
+                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
+                    <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
+                </div>
+                <div class = "images" style = "width: 30%;height: auto;">
+                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
+                    <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
+                </div>
+            </div>
+        </div>
+
+        <div id = "parent">
+
+            <div id = "section_name">
+                {{ actor.name }}
+            </div>
+            <br>
+
+            <div class = "section_separator">
+                INFORMATION
+            </div>
+            <br>
+
+            <div id = "section_information">
+
+                <div style = "display: flex;align-items: center;">
+                    {{ actor.review }}
+                </div>
+
+                <div class = "images" style = "width: 70%;height: auto">
+                    {% if actor.iamge %}
+                        <img src="{{ actor.image.url }}" style="width: 100%;height: auto">
+                    {% else %}
+                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
+                    {% endif %}
+                    <figcaption style = "text-align: center;"> {{ actor.name }} </figcaption>
+                </div>
+
             </div>
 
-        </div>
+            <br>
+            <div class = "section_separator">
+                MOVIES
+            </div>
+            <br>
 
-        <br>
-        <div class = "section_separator">
-            MOVIES
-        </div>
-        <br>
-
-        <div>
-            <table style = "width: 90%;margin-left: 5%;margin-top: 3%;">
-                <thead>
-                    <th>Year</th>
-                    <th>Movies</th>
-                    <th>Our Score</th>
-                    <th>Rotten Tomatoes</th>
-                    <th>Imdb</th>
-                </thead>
-                <tbody>
-                    {% for movie in actor.movies.all %}
-                        <tr>
-                            <td>{{ movie.only_year }}</td>
-                            <td><a href = "{% url 'MoviesDetail' movie.id %}">{{ movie.name }}</a></td>
-                            <td>{{ movie.final_score }}</td>
-                            <td>{{ movie.rotten_tomatoes }}</td>
-                            <td>{{ movie.imdb }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <div>
+                <table style = "width: 90%;margin-left: 5%;margin-top: 3%;">
+                    <thead>
+                        <th>Year</th>
+                        <th>Movies</th>
+                        <th>Our Score</th>
+                        <th>Rotten Tomatoes</th>
+                        <th>Imdb</th>
+                    </thead>
+                    <tbody>
+                        {% for movie in actor.movies.all %}
+                            <tr>
+                                <td>{{ movie.only_year }}</td>
+                                <td><a href = "{% url 'MoviesDetail' movie.id %}">{{ movie.name }}</a></td>
+                                <td>{{ movie.final_score }}</td>
+                                <td>{{ movie.rotten_tomatoes }}</td>
+                                <td>{{ movie.imdb }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
-    <div id = "left_side">
-        left
-    </div>
+    <div id = "bottom">
+        bottom
+    </div> 
 </div>
-
-<div id = "bottom">
-    bottom
-</div> 
 {% endblock %}
 
 {% block scripts %}

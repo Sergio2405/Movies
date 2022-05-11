@@ -1,48 +1,63 @@
-from django.views.generic import (
-    ListView, 
-    DetailView,
-    TemplateView
-)
 from django.http import HttpResponse
 from django.views import View
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Actor, Director, Movie
 
-class HomeView(TemplateView):
-    template_name = "blog/Home.html"
+def general(request):
+    return redirect('Home')
 
-class MoviesView(ListView):
+def home(request):
+    return render(request,"blog/Home.html")
 
-    model = Movie 
-    template_name = "blog/movies.html"
-    queryset = Movie.objects.all()
-    context_object_name = "movies_list"
+def movies(request):
 
-class MovieDetailView(DetailView):
+    movie_list = Movie.objects.all()
+    return render(request,"blog/movies.html",context={
+        "movies_list" : movie_list
+    })
 
-    model = Movie 
-    template_name = "blog/moviesdetail.html"
+def directors(request):
+    
+    director_list = Director.objects.all()
+    return render(request,"blog/directors.html",context={
+        "directors_list" : director_list
+    })
 
-class DirectorsView(ListView):
+def actors(request):
+    
+    actor_list = Actor.objects.all()
+    return render(request,"blog/actors.html",context={
+        "actors_list" : actor_list
+    })
 
-    model = Director
-    template_name = "blog/directors.html"
-    queryset = Director.objects.all()
-    context_object_name = "directors_list"
+def actorsdetail(request,pk):
 
-class DirectorsDetailView(DetailView):
+    actor = Actor.objects.get(id=pk)
 
-    model = Director
-    template_name = "blog/directorsdetail.html"
+    return render(request,"blog/actorsdetail.html",context={
+        "actor" : actor
+    })
 
-class ActorsView(ListView):
+def directorsdetail(request,pk):
 
-    model = Actor
-    template_name = "blog/actors.html"
-    queryset = Actor.objects.all()
-    context_object_name = "actors_list"
+    director = Director.objects.get(id=pk)
+    
+    return render(request,"blog/directorsdetail.html",context={
+        "director" : director
+    })
 
-class ActorsDetailView(DetailView):
+def moviesdetail(request,pk):
 
-    model = Actor
-    template_name = "blog/actorsdetail.html"
+    movie_0 = Movie.objects.get(id=pk)
+  
+    genre_dict = {}
+    for genre in movie_0.genres.all():
+        
+        genre_movie_list = list(filter(lambda movie: movie != movie_0, genre.movie_set.all()))
+        if len(genre_movie_list) != 0:
+            genre_dict[genre.name] = genre_movie_list
+
+    return render(request,"blog/moviesdetail.html",context={
+        "movie" : movie_0,
+        "genre_dict" : genre_dict
+    })

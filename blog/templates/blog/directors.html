@@ -18,35 +18,50 @@
 {% endblock %}
 
 {% block content %}
-
-<div id = "parent">
-
-    <div class="menu">
-        <div><a href="{% url 'Home' %}">Home</a></div>
-        <div><a href="{% url 'Movies' %}">Movies</a></div>
-        <div><a href="{% url 'Directors' %}">Directors</a></div>
-        <div><a href="{% url 'Actors' %}">Actors</a></div>
+<div id = "webpage">
+    <div id = "header">
+        <div class="menu">
+            <div><a href="{% url 'Home' %}">Home</a></div>
+            <div><a href="{% url 'Movies' %}">Movies</a></div>
+            <div><a href="{% url 'Directors' %}">Directors</a></div>
+            <div><a href="{% url 'Actors' %}">Actors</a></div>
+        </div>
     </div>
-    <br>
 
-    <div class = "section_separator">
-        DIRECTORS
-    </div>
-    <br>
-  
-    <div class = "directors">
-        {% for director in directors_list %}
-            <div class = "images" style = "width: 70%;height: auto;max-width: fit-content;">
-                <a href = "{% url 'DirectorsDetail' director.id %}" target="_blank">
-                    <img src="{{ director.image.url }}" style="width: 100%; height: auto;" >
-                </a>
-                <figcaption style = "text-align: center;">
-                   {{ director.name }}
-                </figcaption>
+    <div id = "page">
+
+        <div id = "right_side" style = "width: 20%;">
+            <div class = "section_separator">
+                FILTER
             </div>
-        {% endfor %}
-    </div>
+            <br>
+            
+        </div>
+        <div id = "parent" style = "width: 80%;">
 
+            <div class = "section_separator">
+                DIRECTORS
+            </div>
+            <br>
+        
+            <div class = "directors">
+                {% for director in directors_list %}
+                    <div class = "images" style = "width: 70%;height: auto;max-width: fit-content;">
+                        <a href = "{% url 'DirectorsDetail' director.id %}" target="_blank">
+                            <img src="{{ director.image.url }}" style="width: 100%; height: auto;" >
+                        </a>
+                        <figcaption style = "text-align: center;">
+                        {{ director.name }}
+                        </figcaption>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <div id = "bottom">
+        bottom
+    </div> 
+    
 </div>
 
 {% endblock %}

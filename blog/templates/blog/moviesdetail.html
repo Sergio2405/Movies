@@ -14,7 +14,7 @@
         flex-basis: 50%;
         flex-wrap: wrap;
         flex-direction: row;
-        margin-top: 10%;
+        margin-top: 5%;
     }
 </style>
 
@@ -36,96 +36,25 @@
     <div id = "page">
         
         <div id = "right_side">
-            <div class = "section_separator">
-                RELATED FILMS
-            </div>
-            <div>
-                <br>
+            {% for genre, movies in genre_dict.items %}
+                <div>
+                    <br>
 
-                <div class = "section_separator">
-                    INFORMATION
-                </div>
-                <br>
-    
-                <div class = "movies">
-                    <div class = "images" style = "width: 30%;height: auto;">
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                        <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
+                    <div class = "section_separator">
+                        {{ genre }}
                     </div>
-                    <div class = "images" style = "width: 30%;height: auto;">
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                        <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                    </div>
-                    <div class = "images" style = "width: 30%;height: auto;">
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                        <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                    </div>
-                    <div class = "images" style = "width: 30%;height: auto;">
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                        <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
+                    <br>
+        
+                    <div class = "movies">
+                        {% for movie in movies %}
+                            <div class = "images" style = "width: 30%;height: auto;">
+                                <img src="{{ movie.image.url }}" style="width: 100%; height: auto"> 
+                                <figcaption style = "text-align: center;"> {{ movie.name }} </figcaption>
+                            </div>
+                        {% endfor %}
                     </div>
                 </div>
-
-            </div>
-    
-            <div>
-                <br>
-
-                <div class = "section_separator">
-                    INFORMATION
-                </div>
-                <br>
-    
-                <div class = "movies">
-                    <div class = "images" style = "width: 30%;height: auto;">
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                        <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                    </div>
-                    <div class = "images" style = "width: 30%;height: auto;">
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                        <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                    </div>
-                    <div class = "images" style = "width: 30%;height: auto;">
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                        <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                    </div>
-                    <div class = "images" style = "width: 30%;height: auto;">
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                        <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                    </div>
-                </div>
-
-            </div>
-
-            <div>
-                <br>
-
-                <div class = "section_separator">
-                    INFORMATION
-                </div>
-                <br>
-    
-                <div class = "movies">
-                    <div class = "images" style = "width: 30%;height: auto;">
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                        <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                    </div>
-                    <div class = "images" style = "width: 30%;height: auto;">
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                        <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                    </div>
-                    <div class = "images" style = "width: 30%;height: auto;">
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                        <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                    </div>
-                    <div class = "images" style = "width: 30%;height: auto;">
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                        <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                    </div>
-                </div>
-
-            </div>
-
+            {% endfor %}
         </div>
 
         <div id = "parent">

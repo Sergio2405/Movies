@@ -38,9 +38,12 @@
     border: 3px solid red; 
     width: 30%;
     height: auto;
-    display: grid;
-    grid-template-rows: 2% auto auto auto;
-    row-gap: auto;
+    /* display: grid;
+    grid-template-rows: auto auto auto;
+    row-gap: auto; */
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
 }
 
 #right_side div
