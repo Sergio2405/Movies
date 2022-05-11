@@ -1,17 +1,20 @@
 :root {
     --page-color: rgb(61, 61, 145);
-    /* --page-background: rgb(63, 63, 78) ; */
+    --page-background: white ; 
+    --body--color: rgb(254, 254, 254);
     --nav-color: rgb(73, 73, 163);
     --font-letter: "Times New Roman", Times, serif
 }
 
+body{background-color:var(--body--color) ;}
+
 #webpage
 {
-    border: 1px solid black;
-    margin-left: 15%;
-    margin-right: 15%;
+    margin-left: 20%;
     font-family: var(--font-letter);
-    background-color:var(--page-background) ;
+    background-color:var(--page-background);
+    width: 1000px;
+    height: auto;
 }
 /* CONTAINER */
 #parent
@@ -19,7 +22,6 @@
     display: grid;
     grid-template-columns: auto;
     row-gap: auto; 
-    border: 3px solid red; 
     width: 70%;
     height: auto;
 }
@@ -31,40 +33,30 @@
     column-gap: 1%;
     width: 100%;
     height: auto;
+    border: 1px solid red;
 }
 
 #right_side 
 {
-    border: 3px solid red; 
     width: 30%;
     height: auto;
-    /* display: grid;
-    grid-template-rows: auto auto auto;
-    row-gap: auto; */
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
 }
 
-#left_side 
-{
-    border: 3px solid red; 
-    width: 20%;
-    height: auto;
-}
-
 #header
 {
-    border: 3px solid rgb(0, 255, 47); 
     width: 100%;
-    height: 20%;
+    height: 10%;
+    background-color: var(--nav-color);
 }
 
 #bottom
 {
-    border: 3px solid rgb(0, 21, 255); 
+    background-color: var(--nav-color);
     width: 100%;
-    height: 20%;
+    height: 10%;
 }
 .menu
 {
@@ -106,13 +98,8 @@
     text-align: center;
     font-size: 150%;
     font-weight: 900;
-    display:grid;
-    grid-template-columns: 5% repeat(8,auto);
-}
-
-.section_separator :not(div:nth-child(2))
-{
-    background-color: var(--page-color)
+    width: auto;
+    border: 3px solid var(--page-color);
 }
 
 /* NAME */
@@ -123,13 +110,14 @@
     font-size:x-large;
     font-weight: 550;
     font-style: oblique;
+    border: 1px solid red;
 }
 
 /* INFORMATION */
 #section_information
 {
     display: grid;
-    grid-template-columns: 34% 33% 33%;
+    grid-template-columns: 20% 40% 40%;
     column-gap: 3%;
 }
 

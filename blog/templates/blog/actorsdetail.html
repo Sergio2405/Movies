@@ -39,17 +39,9 @@
     column-gap: 3%;
 
 }
-.movies
-    {
-        display:flex;
-        justify-content: space-evenly;
-        column-gap: 5%;
-        row-gap: 20px;
-        flex-basis: 50%;
-        flex-wrap: wrap;
-        flex-direction: row;
-        margin-top: 10%;
-    }
+
+#right_side {width: 40%;}
+#parent {width: 60%;}
 </style>
 {% endblock %}
 
@@ -66,40 +58,43 @@
         </div>
     </div> 
 
+    <div id = "section_name">
+        {{ actor.name }}
+    </div>
+
     <div id = "page">
 
         <div id = "right_side">
-
-            <div class = "section_separator">
-                RELATED FILMS
-            </div>
     
-            <div class = "movies">
-                <div class = "images" style = "width: 30%;height: auto;">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                    <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                </div>
-                <div class = "images" style = "width: 30%;height: auto;">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                    <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                </div>
-                <div class = "images" style = "width: 30%;height: auto;">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                    <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                </div>
-                <div class = "images" style = "width: 30%;height: auto;">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                    <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                </div>
+            <div class = "section_separator">
+                MOVIES
+            </div>
+
+            <div>
+                <table style = "width: 100%;">
+                    <thead>
+                        <th>Year</th>
+                        <th>Movies</th>
+                        <th>Our Score</th>
+                        <th>Rotten Tomatoes</th>
+                        <th>Imdb</th>
+                    </thead>
+                    <tbody>
+                        {% for movie in actor.movies.all %}
+                            <tr>
+                                <td>{{ movie.only_year }}</td>
+                                <td><a href = "{% url 'MoviesDetail' movie.id %}">{{ movie.name }}</a></td>
+                                <td>{{ movie.final_score }}</td>
+                                <td>{{ movie.rotten_tomatoes }}</td>
+                                <td>{{ movie.imdb }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
             </div>
         </div>
 
         <div id = "parent">
-
-            <div id = "section_name">
-                {{ actor.name }}
-            </div>
-            <br>
 
             <div class = "section_separator">
                 INFORMATION
@@ -124,33 +119,6 @@
             </div>
 
             <br>
-            <div class = "section_separator">
-                MOVIES
-            </div>
-            <br>
-
-            <div>
-                <table style = "width: 90%;margin-left: 5%;margin-top: 3%;">
-                    <thead>
-                        <th>Year</th>
-                        <th>Movies</th>
-                        <th>Our Score</th>
-                        <th>Rotten Tomatoes</th>
-                        <th>Imdb</th>
-                    </thead>
-                    <tbody>
-                        {% for movie in actor.movies.all %}
-                            <tr>
-                                <td>{{ movie.only_year }}</td>
-                                <td><a href = "{% url 'MoviesDetail' movie.id %}">{{ movie.name }}</a></td>
-                                <td>{{ movie.final_score }}</td>
-                                <td>{{ movie.rotten_tomatoes }}</td>
-                                <td>{{ movie.imdb }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 
