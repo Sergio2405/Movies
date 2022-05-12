@@ -3,17 +3,6 @@
     <link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
     <style>
     
-        .actors
-        {
-            display:flex;
-            justify-content: space-evenly;
-            column-gap: 5%;
-            row-gap:10%;
-            flex-basis: 50%;
-            flex-wrap: wrap;
-            flex-direction: row;
-        }
-    
     </style>
 {% endblock %}
 
@@ -35,6 +24,16 @@
                 FILTER
             </div>
             <br>
+
+            <div>
+                <form>
+
+                    <label class = "filter">Z-A:<input type = "checkbox"></label>
+
+                    <p></p>
+                    <button>Apply filter</button>
+                </form>
+            </div>
             
         </div>
         <div id = "parent" style = "width: 80%;">
@@ -44,7 +43,7 @@
             </div>
             <br>
 
-            <div class = "actors">
+            <div class = "wrap_objects">
                 {% for actor in actors_list %}
                     <div class = "images" style = "max-height: 85%;max-width: 10%">
                         <a href = "{% url 'ActorsDetail' actor.id %}" target = "_blank">
@@ -53,7 +52,6 @@
                             {% else %}
                                 <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto">
                             {% endif %}
-
                         </a>
                         <figcaption style = "text-align: center;">
                             {{ actor.name }}

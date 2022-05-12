@@ -3,18 +3,6 @@
 
 <link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
 <style>
-
-    .movies
-    {
-        display:flex;
-        justify-content: space-evenly;
-        column-gap: 5%;
-        row-gap:10%;
-        flex-basis: 50%;
-        flex-wrap: wrap;
-        flex-direction: row;
-    }
-
 </style>
 
 {% endblock %}
@@ -37,8 +25,34 @@
             <div class = "section_separator">
                 FILTER
             </div>
-            <br>
+            <br>     
+            
+            <div>
+                <form>
+                    <label class = "filter">By Genre:</label>
+                    <br>
 
+                    {% for genre in genres %}
+                        <label><input type = "checkbox" value = "{{ genre.id }}">{{ genre.name }}</label><br>
+                    {% endfor %}
+
+                    <label class = "filter">Exact Matching: <input type = "checkbox"></label>
+ 
+                    <p></p>
+                    <label class = "filter">By Release Date:<input type = checkbox></label> 
+
+                    <p></p>
+
+                    <label class = "filter">By Review Date:<input type = "checkbox"></label>
+
+                    <p></p>
+
+                    <label class = "filter">Z-A:<input type = "checkbox"></label>
+
+                    <p></p>
+                    <button>Apply filter</button>
+                </form>
+            </div>
         </div>
 
         <div id = "parent" style = "width: 80%;">
@@ -48,7 +62,7 @@
             </div>
             <br>
           
-            <div class = "movies">
+            <div class = "wrap_objects">
                 {% for movie in movies_list %}
                     <div class = "images" style = "max-height: 45%;max-width: 10%">
                         <a href = "{% url 'MoviesDetail' movie.id %}" target="_blank">
@@ -63,7 +77,7 @@
         </div>
 
     </div>
-    <div id = "bottom" style = "margin-top: 2%;">
+    <div id = "bottom">
       
     </div> 
 </div>

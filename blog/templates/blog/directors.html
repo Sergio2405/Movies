@@ -3,17 +3,6 @@
 <link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
 <style>
 
-    .directors
-    {
-        display:flex;
-        justify-content: space-evenly;
-        column-gap: 5%;
-        row-gap:5%;
-        flex-basis: 50%;
-        flex-wrap: wrap;
-        flex-direction: row;
-    }
-
 </style>
 {% endblock %}
 
@@ -35,6 +24,16 @@
                 FILTER
             </div>
             <br>
+
+            <div>
+                <form>
+
+                    <label class = "filter">Z-A:<input type = "checkbox"></label>
+
+                    <p></p>
+                    <button>Apply filter</button>
+                </form>
+            </div>
             
         </div>
         <div id = "parent" style = "width: 80%;">
@@ -44,7 +43,7 @@
             </div>
             <br>
         
-            <div class = "directors">
+            <div class = "wrap_objects">
                 {% for director in directors_list %}
                     <div class = "images" style = "max-height: 85%;max-width: 10%">
                         <a href = "{% url 'DirectorsDetail' director.id %}" target="_blank">
@@ -54,32 +53,11 @@
                         {{ director.name }}
                         </figcaption>
                     </div>
-                {% endfor %} 
-                <div class = "images" style = "max-height: 85%;max-width: 10%">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto;"> 
-                    <figcaption style = "text-align: center;">  </figcaption>
-                </div>
-                <div class = "images" style = "max-height: 85%;max-width: 10%">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto;"> 
-                    <figcaption style = "text-align: center;">  </figcaption>
-                </div>
-                <div class = "images" style = "max-height: 85%;max-width: 10%">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto;"> 
-                    <figcaption style = "text-align: center;">  </figcaption>
-                </div>
-                <div class = "images" style = "max-height: 85%;max-width: 10%">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto;"> 
-                    <figcaption style = "text-align: center;">  </figcaption>
-                </div>
-                <div class = "images" style = "max-height: 85%;max-width: 10%">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto;"> 
-                    <figcaption style = "text-align: center;">  </figcaption>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
     <div id = "bottom">
-        bottom
     </div> 
     
 </div>

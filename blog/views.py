@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.views import View
 from django.shortcuts import render, redirect
-from .models import Actor, Director, Movie
+from .models import Actor, Director, Movie, Genre
 
 def general(request):
     return redirect('Home')
@@ -13,7 +13,8 @@ def movies(request):
 
     movie_list = Movie.objects.all()
     return render(request,"blog/movies.html",context={
-        "movies_list" : movie_list
+        "movies_list" : movie_list,
+        "genres" : Genre.objects.all()
     })
 
 def directors(request):

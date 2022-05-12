@@ -19,9 +19,7 @@ body{background-color:var(--body--color) ;}
 /* CONTAINER */
 #parent
 {
-    display: grid;
-    grid-template-columns: auto;
-    row-gap: auto; 
+    
     width: 70%;
     height: auto;
 }
@@ -53,6 +51,7 @@ body{background-color:var(--body--color) ;}
     width: 100%;
     height: 10%;
     background-color: var(--nav-color);
+    margin-bottom: 2%;
 }
 
 #bottom
@@ -60,6 +59,7 @@ body{background-color:var(--body--color) ;}
     background-color: var(--nav-color);
     width: 100%;
     height: 10%;
+    margin-top: 2%;
 }
 .menu
 {
@@ -91,7 +91,7 @@ body{background-color:var(--body--color) ;}
 
 .images
 {
-    box-shadow: 5px 5px 8px rgb(148, 147, 147);
+    box-shadow: 5px 5px 8px rgb(77, 77, 77);
 }
 
 /* SEPARATOR */
@@ -212,4 +212,20 @@ body{background-color:var(--body--color) ;}
     text-align: center;
 }
 
+.filter
+{
+    text-decoration: underline black;
+    font-weight: bold;
+}
+
+.wrap_objects
+{
+    display:flex;
+        justify-content: space-evenly;
+        column-gap: 5%;
+        row-gap: 10px;
+        flex-basis: 50%;
+        flex-wrap: wrap;
+        flex-direction: row;
+}
 
