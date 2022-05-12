@@ -8,7 +8,7 @@
         display:flex;
         justify-content: space-evenly;
         column-gap: 5%;
-        row-gap:10%;
+        row-gap:5%;
         flex-basis: 50%;
         flex-wrap: wrap;
         flex-direction: row;
@@ -46,7 +46,7 @@
         
             <div class = "directors">
                 {% for director in directors_list %}
-                    <div class = "images" style = "width: 70%;height: auto;max-width: fit-content;">
+                    <div class = "images" style = "max-height: 85%;max-width: 10%">
                         <a href = "{% url 'DirectorsDetail' director.id %}" target="_blank">
                             <img src="{{ director.image.url }}" style="width: 100%; height: auto;" >
                         </a>
@@ -54,7 +54,27 @@
                         {{ director.name }}
                         </figcaption>
                     </div>
-                {% endfor %}
+                {% endfor %} 
+                <div class = "images" style = "max-height: 85%;max-width: 10%">
+                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto;"> 
+                    <figcaption style = "text-align: center;">  </figcaption>
+                </div>
+                <div class = "images" style = "max-height: 85%;max-width: 10%">
+                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto;"> 
+                    <figcaption style = "text-align: center;">  </figcaption>
+                </div>
+                <div class = "images" style = "max-height: 85%;max-width: 10%">
+                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto;"> 
+                    <figcaption style = "text-align: center;">  </figcaption>
+                </div>
+                <div class = "images" style = "max-height: 85%;max-width: 10%">
+                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto;"> 
+                    <figcaption style = "text-align: center;">  </figcaption>
+                </div>
+                <div class = "images" style = "max-height: 85%;max-width: 10%">
+                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto;"> 
+                    <figcaption style = "text-align: center;">  </figcaption>
+                </div>
             </div>
         </div>
     </div>

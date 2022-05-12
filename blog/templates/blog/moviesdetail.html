@@ -40,29 +40,36 @@
         <br>
 
         <div id = "page">
-            
+             
             <div id = "right_side">
-                {% for genre, movies in genre_dict.items %}
-                    <div>
-                        <br>
 
-                        <div class = "section_separator">
-                            {{ genre }}
+                <div class = "section_separator">
+                    RELATED FILMS
+                </div>
+
+                <div id = "beba">
+                    {% for genre, movies in genre_dict.items %}
+                        <div>
+                            <br>
+
+                            <div class = "section_separator">
+                                {{ genre }}
+                            </div>
+                            <br>
+                
+                            <div class = "movies">
+                                {% for movie in movies %}
+                                    <div class = "images" style = "width: 30%;height: auto;">
+                                        <a href = "{% url 'MoviesDetail' movie.id %}" target = "_blank">
+                                            <img src="{{ movie.image.url }}" style="width: 100%; height: auto"> 
+                                        </a>
+                                        <figcaption style = "text-align: center;"> {{ movie.name }} </figcaption>
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
-                        <br>
-            
-                        <div class = "movies">
-                            {% for movie in movies %}
-                                <div class = "images" style = "width: 30%;height: auto;">
-                                    <a href = "{% url 'MoviesDetail' movie.id %}" target = "_blank">
-                                        <img src="{{ movie.image.url }}" style="width: 100%; height: auto"> 
-                                    </a>
-                                    <figcaption style = "text-align: center;"> {{ movie.name }} </figcaption>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
             </div>
 
             <div id = "parent">

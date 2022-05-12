@@ -25,6 +25,7 @@
         flex-direction: row;
         margin-top: 10%;
     }
+    #parent{width: 100%;}
 </style>
 {% endblock %}
 
@@ -42,58 +43,10 @@
 
     <div id = "page">
 
-        <div id = "right_side">
-
-            <div class = "section_separator">
-                RELATED FILMS
-            </div>
-    
-            <div class = "movies">
-                <div class = "images" style = "width: 30%;height: auto;">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                    <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                </div>
-                <div class = "images" style = "width: 30%;height: auto;">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                    <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                </div>
-                <div class = "images" style = "width: 30%;height: auto;">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                    <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                </div>
-                <div class = "images" style = "width: 30%;height: auto;">
-                    <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                    <figcaption style = "text-align: center;"> fgsdfgdf </figcaption>
-                </div>
-            </div>
-        </div>
-
         <div id = "parent">
-
-            <div id = "section_name">
-                {{ director.name }}
-            </div>
-            <br>
 
             <div class = "section_separator">
                 INFORMATION
-            </div>
-            <br>
-        
-            <div id = "section_information">
-
-                <div style = "display: flex;align-items: center;">
-                    {{ director.review }}
-                </div>
-
-                <div class = "images" style = "width: 70%;height: auto">
-                    {% if director.image %}
-                        <img src="{{ director.image.url }}" style="width: 100%;height:auto">
-                    {% else %}
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto">
-                    {% endif %}
-                    <figcaption style = "text-align: center;"> {{ director.name }} </figcaption>
-                </div>
             </div>
             <br>
 
@@ -102,7 +55,6 @@
     </div>
 
     <div id = "bottom">
-        bottom
     </div> 
 </div>
 

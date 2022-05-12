@@ -46,7 +46,7 @@
 
             <div class = "actors">
                 {% for actor in actors_list %}
-                    <div class = "images" style = "width: 70%;height: auto;max-width: fit-content">
+                    <div class = "images" style = "max-height: 85%;max-width: 10%">
                         <a href = "{% url 'ActorsDetail' actor.id %}" target = "_blank">
                             {% if actor.image %}
                                 <img src="{{ actor.image.url }}" style="width: 100%; height: auto">
@@ -64,7 +64,6 @@
         </div>
     </div>
     <div id = "bottom">
-        bottom
     </div> 
     
 </div>

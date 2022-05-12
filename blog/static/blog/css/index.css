@@ -33,12 +33,15 @@ body{background-color:var(--body--color) ;}
     column-gap: 1%;
     width: 100%;
     height: auto;
-    border: 1px solid red;
 }
 
 #right_side 
 {
     width: 30%;
+    height: auto;
+}
+
+#beba{
     height: auto;
     display: flex;
     justify-content: space-evenly;
@@ -89,7 +92,6 @@ body{background-color:var(--body--color) ;}
 .images
 {
     box-shadow: 5px 5px 8px rgb(148, 147, 147);
-    
 }
 
 /* SEPARATOR */
@@ -110,7 +112,6 @@ body{background-color:var(--body--color) ;}
     font-size:x-large;
     font-weight: 550;
     font-style: oblique;
-    border: 1px solid red;
 }
 
 /* INFORMATION */
