@@ -28,15 +28,17 @@
             <br>     
             
             <div>
-                <form>
+                
+                <form method = "POST" action="">{% csrf_token %}
+                    
                     <label class = "filter">By Genre:</label>
                     <br>
 
                     {% for genre in genres %}
-                        <label><input type = "checkbox" value = "{{ genre.id }}">{{ genre.name }}</label><br>
+                        <label for = "{{ genre.name }}"><input name = "{{ genre.name }}" type = "checkbox" value = "{{ genre.id }}">{{ genre.name }}</label><br>
                     {% endfor %}
 
-                    <label class = "filter">Exact Matching: <input type = "checkbox"></label>
+                    <!-- <label class = "filter">Exact Matching: <input type = "checkbox"></label>
  
                     <p></p>
                     <label class = "filter">By Release Date:<input type = checkbox></label> 
@@ -47,10 +49,10 @@
 
                     <p></p>
 
-                    <label class = "filter">Z-A:<input type = "checkbox"></label>
+                    <label class = "filter">Z-A:<input type = "checkbox"></label> -->
 
                     <p></p>
-                    <button>Apply filter</button>
+                    <input type = "submit">
                 </form>
             </div>
         </div>
@@ -78,7 +80,7 @@
 
     </div>
     <div id = "bottom">
-      
+        
     </div> 
 </div>
 
@@ -86,4 +88,24 @@
 
 {% block scripts %}
 
+<script src = "{% static 'blog/js/jquery.js' %}"></script>
+
+<script>
+
+    load_posts()
+
+    // Load all posts on page load
+    function load_posts() { 
+        $.ajax({
+            url : "/blog/api/v1/movie", // the endpoint
+            type : "GET", // http method
+            // handle a successful response
+            success : function(json) {
+                for (var i = 0; i < json.length; i++) {
+                    console.log(json[i])
+                }
+            },
+        });
+    };
+</script>
 {% endblock %}

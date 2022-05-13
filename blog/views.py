@@ -3,6 +3,11 @@ from django.views import View
 from django.shortcuts import render, redirect
 from .models import Actor, Director, Movie, Genre
 
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+from .serializers import MovieSerializer
+
 def general(request):
     return redirect('Home')
 
@@ -10,6 +15,10 @@ def home(request):
     return render(request,"blog/Home.html")
 
 def movies(request):
+
+    if request.method == "POST":
+        print(request.POST.dict())
+        print("llego un post request")
 
     movie_list = Movie.objects.all()
     return render(request,"blog/movies.html",context={
@@ -62,3 +71,11 @@ def moviesdetail(request,pk):
         "movie" : movie_0,
         "genre_dict" : genre_dict
     })
+
+@api_view(['GET'])
+def movie_collection(request):
+
+    if request.method == 'GET':
+        movies = Movie.objects.all()
+        serializer = MovieSerializer(movies,many=True)
+        return Response(serializer.data)

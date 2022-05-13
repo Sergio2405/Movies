@@ -116,7 +116,7 @@ class Movie(models.Model):
     name = models.CharField(max_length=50,blank=True)
     release_date = models.DateField(blank=True)
     duration = models.IntegerField(default=0,blank=True)
-    image = models.ImageField(upload_to="movie_image",blank=True)
+    image = models.ImageField(upload_to="movie_image",blank=True,default = "actor_image/ProfilePic.png")
     language = models.CharField(default = "", max_length=40,blank=True)
     sinopsis = models.TextField(default = "",blank=True)
     review = models.TextField(default = "",blank=True)
