@@ -26,9 +26,9 @@
             <br>
 
             <div>
-                <form>
+                <form method = "POST" action="">{% csrf_token %}
 
-                    <label class = "filter">Z-A:<input type = "checkbox"></label>
+                    <label class = "filter">A-Z:<input type = "checkbox" name = "A-Z"></label>
 
                     <p></p>
                     <button>Apply filter</button>

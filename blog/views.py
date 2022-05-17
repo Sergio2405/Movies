@@ -29,7 +29,7 @@ def movies(request):
 
         print(genres_post)
 
-        new_movie_list = []
+        new_movie_list = list(movie_list) if len(genres_post) == 0 else []
 
         if 'Exact Matching' in applied_filters:
             
@@ -43,13 +43,15 @@ def movies(request):
                 
         else:
 
-            for movie in movie_list: 
-                movie_genre = list(map(lambda genre: genre.name , movie.genres.all()))
-                for genre in genres_post:
-                    if genre in movie_genre:
-                       
-                        new_movie_list.append(movie)
-                        break
+            if len(genres_post) != 0:
+
+                for movie in movie_list: 
+                    movie_genre = list(map(lambda genre: genre.name , movie.genres.all()))
+                    for genre in genres_post:
+                        if genre in movie_genre:
+                        
+                            new_movie_list.append(movie)
+                            break
         
         print("By Genre",new_movie_list)
 
@@ -86,15 +88,39 @@ def movies(request):
     })
 
 def directors(request):
+
+    director_list = list(Director.objects.all())
     
-    director_list = Director.objects.all()
+    if request.method == "POST":
+        applied_filters = list(request.POST.dict().keys())[1:]
+        print(applied_filters)
+
+        if 'A-Z'in applied_filters:
+                director_list.sort(
+                    key = lambda movie: movie.name
+                )
+
+                print("By Alfa",director_list)
+
     return render(request,"blog/directors.html",context={
         "directors_list" : director_list
     })
 
 def actors(request):
+
+    actor_list = list(Actor.objects.all())
     
-    actor_list = Actor.objects.all()
+    if request.method == "POST":
+        applied_filters = list(request.POST.dict().keys())[1:]
+        print(applied_filters)
+
+        if 'A-Z'in applied_filters:
+                actor_list.sort(
+                    key = lambda movie: movie.name
+                )
+
+                print("By Alfa",actor_list)
+    
     return render(request,"blog/actors.html",context={
         "actors_list" : actor_list
     })
