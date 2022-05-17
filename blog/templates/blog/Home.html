@@ -4,27 +4,32 @@
 <link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
 <style>
 
-    .directors
-    {
-        display:flex;
-        justify-content: space-evenly;
-        column-gap: 5%;
-        row-gap:10%;
-        flex-basis: 50%;
-        flex-wrap: wrap;
-        flex-direction: row;
-    }
-    .movies
-    {
-        display:flex;
-        justify-content: space-evenly;
-        column-gap: 5%;
-        row-gap: 20px;
-        flex-basis: 50%;
-        flex-wrap: wrap;
-        flex-direction: row;
-        margin-top: 10%;
-    }
+.menu
+{
+    background-color: var(--page-color);
+    display:flex;
+    flex-direction: row;
+    height: 20%;
+}
+
+.menu a
+{
+    height: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.menu a
+{
+    text-decoration: none;
+    text-align: center;
+    color:white;
+}
+
+.menu div:hover
+{
+    background-color: var(--nav-color);
+}
     #parent{width: 100%;}
 </style>
 {% endblock %}
@@ -34,10 +39,10 @@
 <div id = "webpage">
     <div id = "header">
         <div class="menu">
-            <div><a href="{% url 'Home' %}">Home</a></div>
-            <div><a href="{% url 'Movies' %}">Movies</a></div>
-            <div><a href="{% url 'Directors' %}">Directors</a></div>
-            <div><a href="{% url 'Actors' %}">Actors</a></div>
+            <a href="{% url 'Home' %}">Home</a>
+            <a href="{% url 'Movies' %}">Movies</a>
+            <a href="{% url 'Directors' %}">Directors</a>
+            <a href="{% url 'Actors' %}">Actors</a>
         </div>
     </div> 
 
@@ -50,8 +55,63 @@
             </div>
             <br>
 
+            <div>
+                <h3>Welcome to Sergio's library!</h3>
+                <p>
+                    Here you will find reviews and opinions for movies, actors and directors.
+                    This page is divided in three sections: Movies, Actors and Directors. In each one
+                    you can filter by Release date, or by Genre and Alphabetical order. The point is that
+                    this library is organizad so you can navigate through easily.
+                    
+                    <ul>
+                        <li>Objetive</li>
+                        <ul>
+                            <li>
+                            Give a rigorous and detailed reviews in form of essays about 600 to 1000 words. Not just 
+                            like a review briefing
+                            </li>
+                            <li>
+                                Being pure objetive
+                            </li>
+                            <li>
+                                A quantiative view of rating movies and acting. Giving scores to some aspects in the movie,
+                                basicaly the ones who are considered in the Oscars such as cinematography, music, screenplay ,etc.
+                            </li>
+                            <li>
+                                To rate actors is kind of different it is measured in a specific way it is possible to capture and for instance
+                                give a precise score to the acting. A lot comes from the idea of being more strict if the actor has more
+                                time on screen.
+                            </li>
+                        </ul>
+                        <li>Vision</li>
+                        <ul>
+                            <li>This is not going to be a page like rotten tomatoes or imdb</li>
+                            <li>This page will last until i get tired of watching movies and tired of rating</li>
+                            <li>I want to fill the database with more movies and reviews</li>
+                            <li>I will want the opinion of other people on my reviews and ratings</li>
+                        </ul>
+                        <li>Important Considerations</li>
+                        <ul>
+                            <li>Every review at the end of the day is just my opinion but i will try to empathize with every perspective
+                                so i can give a more precised review without lacking of details and not abusing of generality.
+                            </li>
+                            <li>
+                                The scores for acting and movies also will come from my opinion. But at least for acting there will be some calculus 
+                                behind to give a precise score. Obviously i will accept discuss of the calculus behind if some don't agree.
+                            </li>
+                            <li>Every picture or score is taken from another websites for instance the link or reference to those sources are included</li>
+                        </ul>
+                    </ul>
+                </p>
+                <p>Now with all this being said, here i will attached the sections of the page so you can navigate:</p>
+                <div class="menu">
+                    <div><a href="{% url 'Home' %}">Home</a></div>
+                    <div><a href="{% url 'Movies' %}">Movies</a></div>
+                    <div><a href="{% url 'Directors' %}">Directors</a></div>
+                    <div><a href="{% url 'Actors' %}">Actors</a></div>
+                </div>
+            </div>
         </div>
-
     </div>
 
     <div id = "bottom">

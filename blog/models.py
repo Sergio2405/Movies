@@ -1,6 +1,8 @@
 from typing import List
 from unittest.util import unorderable_list_difference
 from django.db import models
+import datetime
+
 
 # Create your models here.
 
@@ -120,6 +122,8 @@ class Movie(models.Model):
     language = models.CharField(default = "", max_length=40,blank=True)
     sinopsis = models.TextField(default = "",blank=True)
     review = models.TextField(default = "",blank=True)
+    review_date = models.DateField(blank=True, default = datetime.date.today)
+    
 
     reference_image = models.URLField(max_length=200, default = "")
     reference_description = models.URLField(max_length=200, default = "")
