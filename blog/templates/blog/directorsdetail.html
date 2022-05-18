@@ -3,7 +3,37 @@
 
 <link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
 <style>
+   .menu
+{
+    background-color: var(--page-color);
+    display:flex;
+    flex-direction: row;
+    height: 100%;
+}
 
+.menu div
+{
+    height: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.menu div a
+{
+    text-decoration: none;
+    text-align: center;
+    color:white;
+}
+
+.menu div a div
+{
+    height: 100%;
+}
+
+.menu div a div:hover
+{
+    background-color: var(--nav-color);
+}
     a{ text-decoration: none;color :black}
 
     td
@@ -48,12 +78,18 @@
 <div id = "webpage">
     <div id = "header">
         <div class="menu">
-            <div><a href="{% url 'Home' %}">Home</a></div>
-            <div><a href="{% url 'Movies' %}">Movies</a></div>
-            <div><a href="{% url 'Directors' %}">Directors</a></div>
-            <div><a href="{% url 'Actors' %}">Actors</a></div>
+            <div>
+                <a href="{% url 'Home' %}">
+                    <div>
+                        Home
+                    </div>
+                </a>
+            </div>
+            <div><a href="{% url 'Movies' %}"><div>Movies</div></a></div>
+            <div><a href="{% url 'Directors' %}"><div>Directors</div></a></div>
+            <div><a href="{% url 'Actors' %}"><div>Actors</div></a></div>
         </div>
-    </div> 
+    </div>
 
     <div id = "section_name">
         {{ director.name }}
