@@ -5,225 +5,258 @@
 
 <style>
 
+.movies
+    {
+        display:flex;
+        justify-content: space-evenly;
+        column-gap: 5%;
+        row-gap: 20px;
+        flex-basis: 50%;
+        flex-wrap: wrap;
+        flex-direction: row;
+        margin-top: 5%;
+    }
 </style>
 
 {% endblock %}
 
 {% block content %}
 
+    <div id = "webpage">
 
-<div id = "header">
-        header
-</div> 
-
-<div id = "page">
-    
-    <div id = "right_side">
-        right
-    </div>
-
-    <div id = "parent">
-
-        <div class="menu">
-            <div><a href="{% url 'Home' %}">Home</a></div>
-            <div><a href="{% url 'Movies' %}">Movies</a></div>
-            <div><a href="{% url 'Directors' %}">Directors</a></div>
-            <div><a href="{% url 'Actors' %}">Actors</a></div>
-        </div>
-        <br>
+        <div id = "header">
+            <div class="menu">
+                <div><a href="{% url 'Home' %}">Home</a></div>
+                <div><a href="{% url 'Movies' %}">Movies</a></div>
+                <div><a href="{% url 'Directors' %}">Directors</a></div>
+                <div><a href="{% url 'Actors' %}">Actors</a></div>
+            </div>
+            <br>
+        </div> 
 
         <div id = "section_name">
             {{ movie.name }}
         </div>
         <br>
 
-        <div class = "section_separator">
-            INFORMATION
-        </div>
-        <br>
-    
-        <div id = "section_information">
+        <div id = "page">
+             
+            <div id = "right_side">
 
-            <div style = "margin-left: 20%;margin-top: 15%;"> 
-                <table style = "height: 20%;">
-                    <tbody>
-                        <tr>
-                            <td class = "information">Rating:</td>
-                            <td class = "information_value">{{ movie.rating.name }}</td>
-                        </tr>
-                        <tr>
-                            <td class = "information">Genre:</td>
-                            <td class = "information_value">
-                                {% for genre in movie.genres.all %} 
-                                    <label>{{ genre }} </label>
-                                {% endfor %}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class = "information">Language:</td>
-                            <td class = "information_value"> {{ movie.language }}</td>
-                        </tr>
-                        <tr>
-                            <td class = "information">Director:</td>
-                            <td class = "information_value">{{ movie.director }}</td>
-                        </tr>
-                        <tr>
-                            <td class = "information">Release Year:</td>
-                            <td class = "information_value"> {{ movie.only_year }}</td>
-                        </tr>
-                        <tr>
-                            <td class = "information">Runtime (minutes):</td>
-                            <td class = "information_value"> {{ movie.duration }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div>
-                {{ movie.sinopsis }}
-            </div>
-
-            <div class = "images" style = "width: 65%;height: 90%;">
-                <img src="{{ movie.image.url }}" style="width: 100%;height: 100%;">
-                <figcaption style = "text-align: center;"> {{ movie.name }} </figcaption>
-            </div>
-
-        </div>
-        <br>
-
-        <div class = "section_separator">
-            REVIEW
-        </div>
-        <br>
-
-        <div id = "section_review">
-            {{ movie.review }}.
-        </div>
-        <br>
-
-        <div class = "section_separator">
-            SCORES
-        </div>
-        <br>
-
-        <div id = "section_scores">
-
-            <div style = "margin-left: 10%;">
-                <table style = "height: 20%;">
-                    <tbody>
-                        <tr>
-                            <td class = "feature">Cinematography</td>
-                            <td class = "score"></td>
-                        </tr>
-                        <tr>
-                            <td class = "feature">Acting</td>
-                            <td class = "score"></td>
-                        </tr>
-                        <tr>
-                            <td class = "feature">Editing</td>
-                            <td class = "score"></td>
-                        </tr>
-                        <tr>
-                            <td class = "feature">Custom</td>
-                            <td class = "score"></td>
-                        </tr>
-                        <tr>
-                            <td class = "feature">Music</td>
-                            <td class = "score"></td>
-                        </tr>
-                        <tr>
-                            <td class = "feature">Screenplay</td>
-                            <td class = "score"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div>
-                <table style = "height:20%">
-                    <tbody>
-                        <tr>
-                            <td class = "general">Our Score</td>
-                            <td class = "icon_score"></td>
-                        </tr>
-                        <tr>
-                            <td class = "general"><img class = "icons" src = "/media/icons/RottenTomatoesIcon.png"></td>
-                            <td class = "icon_score"></td>
-                        </tr>
-                        <tr>
-                            <td class = "general"><img class = "icons" src = "/media/icons/ImdbIcon.png"></td>
-                            <td class = "icon_score"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <br>
-
-        <div class = "section_separator">
-            CASTING
-        </div>
-        <br>
-    
-        <div id = "section_casting">
-            {% for actor in movie.actors.all %}
-            <div class = "images" style = "width: 10%;height: 50%;">
-                <img src="{{ actor.image.url }}" style="width: 100%;height: 100%;" >
-                <figcaption style = "text-align: center;"> {{ actor.name }} </figcaption>
-            </div>
-            {% endfor %}
-        </div>
-        <br>
-
-        <div class = "section_separator">
-            SCENES
-        </div>
-        <br>
-
-        <div id = "section_scenes">
-            {% for scene in movie.scene_movie_set.all %}
-            <div class = "scenes images" style = "width: 30%;height: 100%;">
-                <img src="{{ scene.image.url }}" style="width: 100%;height: 100%;">
-                <figcaption style = "text-align: center;"> {{ scene.description }} </figcaption>
-            </div>
-            {% endfor %}
-        </div>
-        <br>
-        
-        <div class = "section_separator">
-            QUOTES
-        </div>
-        <br>
-
-        <div id = "section_quotes">
-
-            {% for quote in movie.quote_movie_set.all %}
-                <div class = "quotes">
-                    <div>{{ quote.quote }}</div>
-                    <div class = "quotes_caption">- {{ quote.character.name }}</div>
+                <div class = "section_separator">
+                    RELATED FILMS
                 </div>
-            {% endfor %}
-        </div>
-        <br>
 
-        <div class = "section_separator">
-            RELATED
-        </div>
-        <br>
+                <div id = "beba">
+                    {% for genre, movies in genre_dict.items %}
+                        <div>
+                            <br>
 
-        <div id = "section_related">
+                            <div class = "section_separator">
+                                {{ genre }}
+                            </div>
+                            <br>
+                
+                            <div class = "movies">
+                                {% for movie in movies %}
+                                    <div class = "images" style = "width: 30%;height: auto;">
+                                        <a href = "{% url 'MoviesDetail' movie.id %}" target = "_blank">
+                                            <img src="{{ movie.image.url }}" style="width: 100%; height: auto"> 
+                                        </a>
+                                        <figcaption style = "text-align: center;"> {{ movie.name }} </figcaption>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id = "parent">
+
+                <div class = "section_separator">
+                    INFORMATION
+                </div>
+                <br>
+            
+                <div id = "section_information">
+
+                    <div style = "display: flex;align-items: center;"> 
+                        <table style = "height: 20%;">
+                            <tbody>
+                                <tr>
+                                    <td class = "information">Rating:</td>
+                                    <td class = "information_value">{{ movie.rating.name }}</td>
+                                </tr>
+                                <tr>
+                                    <td class = "information">Genre:</td>
+                                    <td class = "information_value">
+                                        {% for genre in movie.genres.all %} 
+                                            <label>{{ genre }} </label>
+                                        {% endfor %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class = "information">Language:</td>
+                                    <td class = "information_value"> {{ movie.language }}</td>
+                                </tr>
+                                <tr>
+                                    <td class = "information">Director:</td>
+                                    <td class = "information_value"><a href = "{% url 'DirectorsDetail' movie.director.id %}">{{ movie.director }}</a></td>
+                                </tr>
+                                <tr>
+                                    <td class = "information">Release Year:</td>
+                                    <td class = "information_value"> {{ movie.only_year }}</td>
+                                </tr>
+                                <tr>
+                                    <td class = "information">Runtime (minutes):</td>
+                                    <td class = "information_value"> {{ movie.duration }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div style = "display: flex;align-items: center;">
+                        {{ movie.sinopsis }}
+                    </div>
+
+                    <div class = "images" style = "width: 65%;height: auto;display: flex;align-items: center;flex-direction: column;">
+                        <img src="{{ movie.image.url }}" style="width: 100%;height: auto">
+                        <figcaption style = "text-align: center;"> {{ movie.name }} </figcaption>
+                    </div>
+
+                </div>
+                <br>
+
+                <div class = "section_separator">
+                    REVIEW
+                </div>
+                <br>
+
+                <div id = "section_review">
+                    {{ movie.review }}.
+                </div>
+                <br>
+
+                <div class = "section_separator">
+                    SCORES
+                </div>
+                <br>
+
+                <div id = "section_scores">
+
+                    <div style = "margin-left: 10%;">
+                        <table style = "height: 20%;">
+                            <tbody>
+                                <tr>
+                                    <td class = "feature">Cinematography</td>
+                                    <td class = "score"></td>
+                                </tr>
+                                <tr>
+                                    <td class = "feature">Acting</td>
+                                    <td class = "score"></td>
+                                </tr>
+                                <tr>
+                                    <td class = "feature">Editing</td>
+                                    <td class = "score"></td>
+                                </tr>
+                                <tr>
+                                    <td class = "feature">Custom</td>
+                                    <td class = "score"></td>
+                                </tr>
+                                <tr>
+                                    <td class = "feature">Music</td>
+                                    <td class = "score"></td>
+                                </tr>
+                                <tr>
+                                    <td class = "feature">Screenplay</td>
+                                    <td class = "score"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        <table style = "height:20%">
+                            <tbody>
+                                <tr>
+                                    <td class = "general">Our Score</td>
+                                    <td class = "icon_score"></td>
+                                </tr>
+                                <tr>
+                                    <td class = "general"><img class = "icons" src = "/media/icons/RottenTomatoesIcon.png"></td>
+                                    <td class = "icon_score"></td>
+                                </tr>
+                                <tr>
+                                    <td class = "general"><img class = "icons images" src = "/media/icons/ImdbIcon.png"></td>
+                                    <td class = "icon_score"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <br>
+
+                <div class = "section_separator">
+                    CASTING
+                </div>
+                <br>
+            
+                <div id = "section_casting" style = "margin-top: 1%">
+                    {% for actor in movie.actors.all %}
+                    <div class = "images" style = "width: 10%;height: auto;">
+                        <a href = "{% url 'ActorsDetail' actor.id %}" target = "_blank">
+                            {% if actor.image %}
+                                <img src="{{ actor.image.url }}" style="width: 100%; height: auto">
+                            {% else %}
+                                <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto">
+                            {% endif %}
+                        </a>
+                        <figcaption style = "text-align: center;"> {{ actor.name }} </figcaption>
+                    </div>
+                    {% endfor %}
+                </div>
+                <br>
+
+                <div class = "section_separator">
+                    SCENES
+                </div>
+                <br>
+
+                <div id = "section_scenes">
+                    {% for scene in movie.scene_movie_set.all %}
+                    <div class = "scenes images" style = "width: 30%;height: 100%;">
+                        <img src="{{ scene.image.url }}" style="width: 100%;height: 100%;">
+                        <figcaption style = "text-align: center;"> {{ scene.description }} </figcaption>
+                    </div>
+                    {% endfor %}
+                </div>
+                <br>
+                
+                <div class = "section_separator">
+                    QUOTES
+                </div>
+                <br>
+
+                <div id = "section_quotes">
+
+                    {% for quote in movie.quote_movie_set.all %}
+                        <div class = "quotes">
+                            <div>{{ quote.quote }}</div>
+                            <div class = "quotes_caption">- {{ quote.character.name }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <br>
+            </div>
+
         </div>
+
+        <div id = "bottom">
+        </div> 
     </div>
+    
 
-    <div id = "left_side">
-        left
-    </div>
-
-</div>
-
-<div id = "bottom">
-        bottom
-</div> 
 {% endblock %}
 
 {% block scripts %}

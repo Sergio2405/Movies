@@ -1,14 +1,16 @@
 from typing import List
 from unittest.util import unorderable_list_difference
 from django.db import models
+import datetime
+
 
 # Create your models here.
 
 class Actor(models.Model):
 
     name = models.CharField(max_length=50,blank=True)
-    image = models.ImageField(upload_to="actor_image",blank=True)
     review = models.TextField(default = "",blank=True)
+    image = models.ImageField(upload_to='actor_image',blank=True,default="",null=True)
     reference_image = models.URLField(max_length=200, default = "")
     reference_description = models.URLField(max_length=200, default = "")
 
@@ -55,7 +57,7 @@ class Rating(models.Model):
         return self.name
 
 class Actor_Movie(models.Model):
-
+    
     actor = models.ForeignKey(Actor, on_delete=models.CASCADE,blank=True) 
     movie = models.OneToOneField("Movie", on_delete=models.CASCADE,blank=True)
     
@@ -116,10 +118,12 @@ class Movie(models.Model):
     name = models.CharField(max_length=50,blank=True)
     release_date = models.DateField(blank=True)
     duration = models.IntegerField(default=0,blank=True)
-    image = models.ImageField(upload_to="movie_image",blank=True)
+    image = models.ImageField(upload_to="movie_image",blank=True,default = "actor_image/ProfilePic.png")
     language = models.CharField(default = "", max_length=40,blank=True)
     sinopsis = models.TextField(default = "",blank=True)
     review = models.TextField(default = "",blank=True)
+    review_date = models.DateField(blank=True, default = datetime.date.today)
+    
 
     reference_image = models.URLField(max_length=200, default = "")
     reference_description = models.URLField(max_length=200, default = "")
@@ -158,7 +162,7 @@ class Movie(models.Model):
             RottenTomatoes = self.rotten_tomatoes,
             Imdb = self.imdb,
         )
-
+        
     @property
     def final_score(self):
         scores_dict = self.scores_json()

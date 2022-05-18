@@ -3,56 +3,98 @@
 
 <link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
 <style>
-
-    .movies
-    {
-        display:flex;
-        justify-content: space-evenly;
-        column-gap: 5%;
-        row-gap:10%;
-        flex-basis: 50%;
-        flex-wrap: wrap;
-        flex-direction: row;
-    }
-
 </style>
 
 {% endblock %}
 
 {% block content %}
 
-<div id = "parent">
-
-    <div class="menu">
-        <div><a href="{% url 'Home' %}">Home</a></div>
-        <div><a href="{% url 'Movies' %}">Movies</a></div>
-        <div><a href="{% url 'Directors' %}">Directors</a></div>
-        <div><a href="{% url 'Actors' %}">Actors</a></div>
+<div id = "webpage">
+    <div id = "header">
+        <div class="menu">
+            <div><a href="{% url 'Home' %}">Home</a></div>
+            <div><a href="{% url 'Movies' %}">Movies</a></div>
+            <div><a href="{% url 'Directors' %}">Directors</a></div>
+            <div><a href="{% url 'Actors' %}">Actors</a></div>
+        </div>
     </div>
-    <br>
 
-    <div class = "section_separator">
-        MOVIES
-    </div>
-    <br>
-  
-    <div class = "movies">
-        {% for movie in movies_list %}
-            <div class = "images" style = "max-height: 45%;max-width: 10%;">
-                <a href = "{% url 'MoviesDetail' movie.id %}" target="_blank">
-                    <img src="{{ movie.image.url }}" style="width: 100%; height: 100%;" >
-                </a>
-                <figcaption style = "text-align: center;">
-                    {{ movie.name }}
-                </figcaption>
+    <div id = "page">
+
+        <div id = "right_side" style = "width: 20%;">
+            <div class = "section_separator">
+                FILTER
             </div>
-        {% endfor %}
-    </div>
+            <br>     
+            
+            <div>
+                
+                <form method = "POST" action="">{% csrf_token %}
+                    
+                    <label class = "filter">By Genre:</label>
+                    <br>
 
+                    {% for genre in genres %}
+                        <label for = "{{ genre.name }}"><input name = "{{ genre.name }}" type = "checkbox">{{ genre.name }}</label><br>
+                    {% endfor %}
+
+                    <label class = "filter">Exact Matching: <input type = "checkbox" name  = "Exact Matching"></label>
+ 
+                    <p></p>
+                    <label class = "filter">By Release Date:<input type = checkbox name = "Release Date"></label> 
+
+                    <p></p>
+
+                    <label class = "filter">By Review Date:<input type = "checkbox" name = "Review Date"></label>
+
+                    <p></p>
+
+                    <label class = "filter">A-Z:<input type = "checkbox" name = "A-Z"></label>
+
+                    <p></p>
+                    <button>Apply Filter</button>
+                </form>
+
+                <p>Applied Filters: </p>
+                {% for filter in applied_filters %}
+                    <label>{{ filter }}</label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div id = "parent" style = "width: 80%;">
+        
+            <div class = "section_separator">
+                MOVIES
+            </div>
+            <br>
+          
+            <div class = "wrap_objects">
+                {% for movie in movies_list %}
+                    <div class = "images" style = "max-height: 45%;max-width: 10%">
+                        <a href = "{% url 'MoviesDetail' movie.id %}" target="_blank">
+                            <img src="{{ movie.image.url }}" style="width: 100%; height: 100%;" >
+                        </a>
+                        <figcaption style = "text-align: center;">
+                            {{ movie.name }}
+                        </figcaption>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+    <div id = "bottom">
+        
+    </div> 
 </div>
 
 {% endblock %}
 
 {% block scripts %}
 
+<script src = "{% static 'blog/js/jquery.js' %}"></script>
+
+<script>
+</script>
 {% endblock %}

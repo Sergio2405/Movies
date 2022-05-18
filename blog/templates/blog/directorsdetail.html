@@ -37,76 +37,95 @@
     display: grid;
     grid-template-columns: 70% 30%;
     column-gap: 3%;
-
 }
-
+#right_side {width: 40%;}
+#parent {width: 60%;}
 </style>
 {% endblock %}
 
 {% block content %}
 
-<div id = "parent">
-
-    <div class="menu">
-        <div><a href="{% url 'Home' %}">Home</a></div>
-        <div><a href="{% url 'Movies' %}">Movies</a></div>
-        <div><a href="{% url 'Directors' %}">Directors</a></div>
-        <div><a href="{% url 'Actors' %}">Actors</a></div>
-    </div>
-    <br>
+<div id = "webpage">
+    <div id = "header">
+        <div class="menu">
+            <div><a href="{% url 'Home' %}">Home</a></div>
+            <div><a href="{% url 'Movies' %}">Movies</a></div>
+            <div><a href="{% url 'Directors' %}">Directors</a></div>
+            <div><a href="{% url 'Actors' %}">Actors</a></div>
+        </div>
+    </div> 
 
     <div id = "section_name">
-         {{ director.name }}
+        {{ director.name }}
     </div>
-    <br>
 
-    <div class = "section_separator">
-        INFORMATION
-    </div>
-    <br>
-   
-    <div id = "section_information">
+    <div id = "page">
 
-        <div style = "width: 100%;margin-top: 5%;margin-left: 3%;">
-            {{ director.review }}
+        <div id = "right_side">
+
+            <div class = "section_separator">
+                MOVIES
+            </div>
+            <br>
+            
+            <div>
+                <table style = "width: 100%">
+                    <thead>
+                        <th>Year</th>
+                        <th>Movies</th>
+                        <th>Our Score</th>
+                        <th>Rotten Tomatoes</th>
+                        <th>Imdb</th>
+                    </thead>
+                    <tbody>
+                        {% for movie in director.movie_set.all %}
+                            <tr>
+                                <td>{{ movie.only_year }}</td>
+                                <td><a href = "{% url 'MoviesDetail' movie.id %}">{{ movie.name }}</a></td>
+                                <td>{{ movie.final_score }}</td>
+                                <td>{{ movie.rotten_tomatoes }}</td>
+                                <td>{{ movie.imdb }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <div class = "images" style = "width: 70%;height: 200px">
-            <img src="{{ director.image.url }}" style="width: 100%;height: 100%" >
-            <figcaption style = "text-align: center;"> {{ director.name }} </figcaption>
+        <div id = "parent">
+
+            <div class = "section_separator">
+                INFORMATION
+            </div>
+            <br>
+        
+            <div id = "section_information">
+
+                <div style = "display: flex;align-items: center;">
+                    {{ director.review }}
+                </div>
+
+                <div class = "images" style = "width: 70%;height: auto">
+                    {% if director.image %}
+                        <img src="{{ director.image.url }}" style="width: 100%;height:auto">
+                    {% else %}
+                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto">
+                    {% endif %}
+                    <figcaption style = "text-align: center;"> {{ director.name }} </figcaption>
+                </div>
+            </div>
+            <br>
+
+            
         </div>
 
     </div>
-    <br>
 
-    <div class = "section_separator">
-        MOVIES
-    </div>
-    <br>
-    
-    <div>
-        <table style = "width: 90%;margin-left: 5%;margin-top: 3%;">
-            <thead>
-                <th>Year</th>
-                <th>Movies</th>
-                <th>Our Score</th>
-                <th>Rotten Tomatoes</th>
-                <th>Imdb</th>
-            </thead>
-            <tbody>
-                {% for movie in director.movie_set.all %}
-                    <tr>
-                        <td>{{ movie.only_year }}</td>
-                        <td><a href = "{% url 'MoviesDetail' movie.id %}">{{ movie.name }}</a></td>
-                        <td>{{ movie.final_score }}</td>
-                        <td>{{ movie.rotten_tomatoes }}</td>
-                        <td>{{ movie.imdb }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+    <div id = "bottom">
+        bottom
+    </div> 
 </div>
+
 
 {% endblock %}
 
