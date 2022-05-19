@@ -157,6 +157,11 @@ def moviesdetail(request,pk):
         "genre_dict" : genre_dict
     })
 
+def login_user(request):
+    return render(request, "blog/login.html")
+
+def register_user(request):
+    return render(request, "blog/register.html")
 # @api_view(['GET'])
 # def movie_collection(request):
 

@@ -1,0 +1,54 @@
+{% load static %}
+{% block styles %}
+<link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
+<style>
+     #parent{width: 100%;}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div id = "webpage">
+    <div id = "header">
+        <div class="menu">
+            <div>
+                <a href="{% url 'Home' %}">
+                    <div>
+                        Home
+                    </div>
+                </a>
+            </div>
+            <div><a href="{% url 'Movies' %}"><div>Movies</div></a></div>
+            <div><a href="{% url 'Directors' %}"><div>Directors</div></a></div>
+            <div><a href="{% url 'Actors' %}"><div>Actors</div></a></div>
+        </div>
+    </div> 
+
+    <div id = "page">
+
+        <div id = "parent">
+
+            <div class = "section_separator">
+                LOGIN
+            </div>
+            <br>
+
+            <div>
+                <form method = "POST">
+                    <label for = "user">User</label>
+                    <input name = "user" type = "text">
+                    <br><br>
+
+                    <label for = "password">Contraseña</label>
+                    <input name = "password" type ="password">
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div id = "bottom">
+    </div> 
+</div>
+
+{% endblock %}
