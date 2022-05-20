@@ -10,7 +10,7 @@ urlpatterns = [
     path('actors/', views.actors, name = "Actors"),
     path('actors/<int:pk>/', views.actorsdetail,name='ActorsDetail'),
     path('login/', views.login_user , name = "login"),
-    path('register/', views.register_user, name = "register"),
+    path('register/', views.register_user, name = "Register"),
     # path('api/v1/movie', views.movie_collection),
 ]
 

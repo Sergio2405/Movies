@@ -1,53 +1,22 @@
+{% extends "blog/header.html" %}
 {% load static %}
-{% block head %}
+{% block styles %}
 
-<link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
+    {{ block.super }}
+    <style>
 
-<style>
-
-.movies
-    {
-        display:flex;
-        justify-content: space-evenly;
-        column-gap: 5%;
-        row-gap: 20px;
-        flex-basis: 50%;
-        flex-wrap: wrap;
-        flex-direction: row;
-        margin-top: 5%;
-    }   
-    .menu
-{
-    background-color: var(--page-color);
-    display:flex;
-    flex-direction: row;
-    height: 100%;
-}
-
-.menu div
-{
-    height: auto;
-    width: 100%;
-    text-align: center;
-}
-
-.menu div a
-{
-    text-decoration: none;
-    text-align: center;
-    color:white;
-}
-
-.menu div a div
-{
-    height: 100%;
-}
-
-.menu div a div:hover
-{
-    background-color: var(--nav-color);
-}
-</style>
+    .movies
+        {
+            display:flex;
+            justify-content: space-evenly;
+            column-gap: 5%;
+            row-gap: 20px;
+            flex-basis: 50%;
+            flex-wrap: wrap;
+            flex-direction: row;
+            margin-top: 5%;
+        }   
+    </style>
 
 {% endblock %}
 
@@ -55,20 +24,7 @@
 
     <div id = "webpage">
 
-        <div id = "header">
-            <div class="menu">
-                <div>
-                    <a href="{% url 'Home' %}">
-                        <div>
-                            Home
-                        </div>
-                    </a>
-                </div>
-                <div><a href="{% url 'Movies' %}"><div>Movies</div></a></div>
-                <div><a href="{% url 'Directors' %}"><div>Directors</div></a></div>
-                <div><a href="{% url 'Actors' %}"><div>Actors</div></a></div>
-            </div>
-        </div>
+        {{ block.super }}
 
         <div id = "section_name">
             {{ movie.name }}

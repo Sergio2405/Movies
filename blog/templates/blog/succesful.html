@@ -1,6 +1,8 @@
+{% extends "blog/header.html" %}
 {% load static %}
 {% block styles %}
-<link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
+
+    {{ block.super }}
 <style>
      #parent{width: 100%;}
 </style>
@@ -9,24 +11,25 @@
 {% block content %}
 
 <div id = "webpage">
-    <div id = "header">
-        <div class="menu">
-            <div>
-                <a href="{% url 'Home' %}">
-                    <div>
-                        Home
-                    </div>
-                </a>
-            </div>
-            <div><a href="{% url 'Movies' %}"><div>Movies</div></a></div>
-            <div><a href="{% url 'Directors' %}"><div>Directors</div></a></div>
-            <div><a href="{% url 'Actors' %}"><div>Actors</div></a></div>
-        </div>
-    </div> 
+    
+    {{ block.super }}
 
     <div id = "page">
-
-       <h1>Congratulations you complete the registration form!!!!!!</h1>
+        <div id = "parent">
+            <div class = "section_separator">
+                        Succesful Registration
+            </div>
+            <br>
+            
+            <div>
+            
+                <p>
+                     Now you can subscribe to all the kinds of letters and articles that are published. Also to 
+                     notifications to review posts.
+                </p>
+                <p>Link to letters suscription</p>
+            </div>
+        </div>
     </div>
 
     <div id = "bottom">

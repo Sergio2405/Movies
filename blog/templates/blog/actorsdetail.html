@@ -1,98 +1,56 @@
+{% extends "blog/header.html" %}
 {% load static %}
-{% block head %}
+{% block styles %}
+    
+    {{ block.super }}
 
-<link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
-<style>
-   .menu
-{
-    background-color: var(--page-color);
-    display:flex;
-    flex-direction: row;
-    height: 100%;
-}
+    <style>
+        a{ text-decoration: none;color :black}
 
-.menu div
-{
-    height: auto;
-    width: 100%;
-    text-align: center;
-}
+        td
+        {
+            border-top: 1px solid black;
+            text-align: center;
+            
+        }
+        td:hover
+        {
+            background-color: var(--nav-color);
+            color: white;
+        }
 
-.menu div a
-{
-    text-decoration: none;
-    text-align: center;
-    color:white;
-}
+        td a:hover
+        {
+            background-color: var(--nav-color);
+            color: white;
+        }
 
-.menu div a div
-{
-    height: 100%;
-}
+        thead th
+        {
+            background-color: var(--page-color);
+            color: white;
+        }
 
-.menu div a div:hover
-{
-    background-color: var(--nav-color);
-}
-    a{ text-decoration: none;color :black}
+        table { border-spacing:0 }
 
-    td
-    {
-        border-top: 1px solid black;
-        text-align: center;
-        
-    }
-    td:hover
-    {
-        background-color: var(--nav-color);
-        color: white;
-    }
+        #section_information
+        {
+            display: grid;
+            grid-template-columns: 70% 30%;
+            column-gap: 3%;
 
-    td a:hover
-    {
-        background-color: var(--nav-color);
-        color: white;
-    }
+        }
 
-    thead th
-    {
-        background-color: var(--page-color);
-        color: white;
-    }
-
-    table { border-spacing:0 }
-
-    #section_information
-{
-    display: grid;
-    grid-template-columns: 70% 30%;
-    column-gap: 3%;
-
-}
-
-#right_side {width: 40%;}
-#parent {width: 60%;}
-</style>
+        #right_side {width: 40%;}
+        #parent {width: 60%;}
+    </style>
 {% endblock %}
 
 {% block content %}
 
 <div id = "webpage">
 
-    <div id = "header">
-        <div class="menu">
-            <div>
-                <a href="{% url 'Home' %}">
-                    <div>
-                        Home
-                    </div>
-                </a>
-            </div>
-            <div><a href="{% url 'Movies' %}"><div>Movies</div></a></div>
-            <div><a href="{% url 'Directors' %}"><div>Directors</div></a></div>
-            <div><a href="{% url 'Actors' %}"><div>Actors</div></a></div>
-        </div>
-    </div>
+    {{ block.super }}
 
     <div id = "section_name">
         {{ actor.name }}

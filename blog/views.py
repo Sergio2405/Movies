@@ -59,7 +59,7 @@ def register_user(request):
 
         print("usuario creado")
 
-        return render(request, "blog/register.html")
+        return render(request, "blog/succesful.html")
     else:
         return render(request, "blog/register.html")
 
