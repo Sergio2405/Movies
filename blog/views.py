@@ -1,12 +1,68 @@
+#http responses
 from django.http import HttpResponse
-from django.views import View
 from django.shortcuts import render, redirect
+
+#.models
 from .models import Actor, Director, Movie, Genre
 
+#user model
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+
+#django rest framework imports and serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .serializers import MovieSerializer
+
+
+def login_user(request):
+    if request.method == "POST":
+
+        user_name = request.POST['user']
+        password = request.POST['password']
+
+        user = authenticate(request, username = user_name, password=password)
+
+        if user is not None:
+            login(request,user)
+        
+        else:
+            pass
+
+        print(user_name,password)
+
+        return render(request, "blog/succesful.html")
+    else:
+        return render(request, "blog/login.html")
+
+
+def register_user(request):
+
+    if request.method == "POST":
+
+        user_name = request.POST['user']
+        email = request.POST['email']
+        password = request.POST['password']
+
+        print(user_name, email, password)
+
+        user = User.objects.create_user(
+            user_name,
+            email,
+            password
+        )
+
+        print(user)
+
+        user.save()
+
+        print("usuario creado")
+
+        return render(request, "blog/register.html")
+    else:
+        return render(request, "blog/register.html")
+
 
 def general(request):
     return redirect('Home')
@@ -157,11 +213,6 @@ def moviesdetail(request,pk):
         "genre_dict" : genre_dict
     })
 
-def login_user(request):
-    return render(request, "blog/login.html")
-
-def register_user(request):
-    return render(request, "blog/register.html")
 # @api_view(['GET'])
 # def movie_collection(request):
 

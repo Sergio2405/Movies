@@ -34,7 +34,7 @@
             <br>
             
             <div>
-                <form method = "POST">
+                <form method = "POST">{% csrf_token %}
                     <label for = "user">User</label>
                     <input name = "user" type = "text">
                     <br><br>
@@ -43,12 +43,21 @@
                     <input name = "email" type = "email">
                     <br><br>
 
-                    <label for = "password">Contraseña</label>
+                    <label for = "password">Password</label>
                     <input name = "password" type ="password">
+                    <br><br>
+
+                    <label for = "password">Re - Password</label>
+                    <input name = "password" type ="password">
+                    <br><br>
+
+                    <label for = "password">Accept Terms & Conditions</label>
+                    <input name = "password" type ="checkbox">
+
+                    <br><br>
+                    <button>Send</button>
                 </form>
             </div>
-
-            
         </div>
     </div>
 
