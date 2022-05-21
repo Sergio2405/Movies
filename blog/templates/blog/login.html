@@ -27,14 +27,18 @@
 
             <div>
                 <form method = "POST">{% csrf_token %}
-                    <label for = "user">User</label>
-                    <input name = "user" type = "text">
-                    <br><br>
+                    <table>
+                        <tr>
+                            <td>User</td>
+                            <td><input name = "user" type = "text"></td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td><input name = "password" type ="password"></td>
+                        </tr>
+                    </table>
 
-                    <label for = "password">Password</label>
-                    <input name = "password" type ="password">
-                    <br><br>
-
+                    <br>
                     <button>Login</button>
                 </form>
             </div>

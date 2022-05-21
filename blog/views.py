@@ -139,11 +139,13 @@ def movies(request):
             "genres" : Genre.objects.all(),
             "applied_filters" : applied_filters
         })
-            
-    return render(request,"blog/movies.html",context={
-        "movies_list" : Movie.objects.all(),
-        "genres" : Genre.objects.all()
-    })
+
+    else:      
+
+        return render(request,"blog/movies.html",context={
+            "movies_list" : Movie.objects.all(),
+            "genres" : Genre.objects.all()
+        })
 
 def directors(request):
 
@@ -159,10 +161,11 @@ def directors(request):
                 )
 
                 print("By Alfa",director_list)
+    else:
 
-    return render(request,"blog/directors.html",context={
-        "directors_list" : director_list
-    })
+        return render(request,"blog/directors.html",context={
+            "directors_list" : director_list
+        })
 
 def actors(request):
 
@@ -178,10 +181,11 @@ def actors(request):
                 )
 
                 print("By Alfa",actor_list)
-    
-    return render(request,"blog/actors.html",context={
-        "actors_list" : actor_list
-    })
+    else:
+
+        return render(request,"blog/actors.html",context={
+            "actors_list" : actor_list
+        })
 
 def actorsdetail(request,pk):
 
