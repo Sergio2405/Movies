@@ -9,7 +9,7 @@ urlpatterns = [
     path('directors/<int:pk>', views.directorsdetail,name="DirectorsDetail"),
     path('actors/', views.actors, name = "Actors"),
     path('actors/<int:pk>/', views.actorsdetail,name='ActorsDetail'),
-    path('login/', views.login_user , name = "login"),
+    path('login/', views.login_user , name = "Login"),
     path('register/', views.register_user, name = "Register"),
     # path('api/v1/movie', views.movie_collection),
 ]

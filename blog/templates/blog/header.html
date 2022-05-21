@@ -33,23 +33,66 @@
     {
         background-color: var(--nav-color);
     }
+
+    .register-content {
+        display: none;
+        background-color: black !important;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        position: relative;
+        color:white
+    }
+
+    .register{
+        background-color:black !important;
+    }
+
+    .register:hover .register-content {
+    display: block;
+    }
+
+    .register:hover a div{
+        background-color: black !important;
+    }
+
+    .register-content div:hover{
+        background-color: var(--page-color);
+    }
+
+    .home{
+        background-color: rgb(107, 27, 27) !important;
+    }
+    .home:hover a div{
+        background-color: rgb(107, 27, 27) !important;
+    }
+
+    .contact{
+        background-color: rgb(88, 88, 22) !important
+    }
+
+    .contact:hover a div{
+        background-color: rgb(88, 88, 22) !important
+    }
+
 </style>
 {% endblock %}
 
 {% block content %}
 <div id = "header">
     <div class="menu">
-        <div>
-            <a href="{% url 'Home' %}">
-                <div>
-                    Home
-                </div>
-            </a>
-        </div>
+        <div class = "home"><a href="{% url 'Home' %}"><div>Home</div></a></div>
         <div><a href="{% url 'Movies' %}"><div>Movies</div></a></div>
         <div><a href="{% url 'Directors' %}"><div>Directors</div></a></div>
         <div><a href="{% url 'Actors' %}"><div>Actors</div></a></div>
-        <div><a href="{% url 'Register' %}"><div>Register</div></a></div>
+        <div class = "register">
+            <a href="{% url 'Register' %}">
+                <div>Account</div>
+            </a>
+            <div class = "register-content">
+                <div><a href="{% url 'Register' %}">Create Account</a></div>
+                <div><a href="{% url 'Login' %}">Login</a></div>
+            </div>
+        </div>
+        <div class = "contact"><a><div>Contact</div></a></div>
     </div>
 </div> 
 {% endblock %}
