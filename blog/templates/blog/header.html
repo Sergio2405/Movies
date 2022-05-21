@@ -84,15 +84,13 @@
         <div><a href="{% url 'Directors' %}"><div>Directors</div></a></div>
         <div><a href="{% url 'Actors' %}"><div>Actors</div></a></div>
         <div class = "register">
-            <a href="{% url 'Register' %}">
-                <div>Account</div>
-            </a>
+            <a><div>Account</div></a>
             <div class = "register-content">
                 <div><a href="{% url 'Register' %}">Create Account</a></div>
                 <div><a href="{% url 'Login' %}">Login</a></div>
             </div>
         </div>
-        <div class = "contact"><a><div>Contact</div></a></div>
+        <div class = "contact"><a href="{% url 'Contact' %}"><div>Contact</div></a></div>
     </div>
 </div> 
 {% endblock %}

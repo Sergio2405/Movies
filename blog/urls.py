@@ -11,6 +11,7 @@ urlpatterns = [
     path('actors/<int:pk>/', views.actorsdetail,name='ActorsDetail'),
     path('login/', views.login_user , name = "Login"),
     path('register/', views.register_user, name = "Register"),
+    path('contact/', views.contact, name = "Contact")
     # path('api/v1/movie', views.movie_collection),
 ]
 

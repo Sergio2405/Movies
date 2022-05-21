@@ -15,6 +15,8 @@ from rest_framework.response import Response
 
 from .serializers import MovieSerializer
 
+def contact(request):
+    return render(request,"blog/contact.html")
 
 def login_user(request):
     if request.method == "POST":
