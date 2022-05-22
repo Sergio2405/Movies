@@ -25,6 +25,9 @@
                     <label class = "filter">A-Z:<input type = "checkbox" name = "A-Z"></label>
 
                     <p></p>
+                    <button type = button>Clear All Filters</button>
+
+                    <p></p>
                     <button>Apply filter</button>
                 </form>
             </div>
@@ -60,4 +63,32 @@
 
 {% block scripts %}
 
+<script src = "{% static 'blog/js/jquery.js' %}"></script>
+
+{{ applied_filters|json_script:'applied_filters' }}
+
+<script>
+
+    var applied_filters = jQuery.parseJSON($("#applied_filters").text())
+    var inputs = $("input");
+
+    console.log(applied_filters)
+
+    for (input of inputs)
+    {
+        for (filter of applied_filters)
+        {
+            if (input.name == filter)
+            {
+                console.log(input.name)
+                $(input).prop("checked",true)
+            }
+        }
+    }
+
+    $("button[type=button]").click(function(event){
+        inputs.map((index,input) => $(input).prop("checked",false))
+    })
+
+</script>
 {% endblock %}

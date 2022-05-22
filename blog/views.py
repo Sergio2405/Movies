@@ -120,10 +120,10 @@ def movies(request):
 
             print("By Release Date",new_movie_list)
         
-        # if 'review_date' in applied_filters:
-        #     new_movie_list.sort(
-        #         key = lambda movie: movie.review_release_date
-        #     )
+        if 'Review Date' in applied_filters:
+            new_movie_list.sort(
+                key = lambda movie: movie.review_date
+            )
 
         if 'A-Z'in applied_filters:
             new_movie_list.sort(
@@ -161,6 +161,12 @@ def directors(request):
                 )
 
                 print("By Alfa",director_list)
+        
+        return render(request,"blog/directors.html",context={
+            "directors_list" : director_list,
+            "applied_filters" : applied_filters
+        })
+
     else:
 
         return render(request,"blog/directors.html",context={
@@ -181,6 +187,12 @@ def actors(request):
                 )
 
                 print("By Alfa",actor_list)
+        
+        return render(request,"blog/actors.html",context={
+            "actors_list" : actor_list,
+            "applied_filters" : applied_filters
+        })
+        
     else:
 
         return render(request,"blog/actors.html",context={
