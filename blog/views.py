@@ -202,18 +202,118 @@ def actors(request):
 def actorsdetail(request,pk):
 
     actor = Actor.objects.get(id=pk)
+    movie_list = list(actor.movies.all())
 
-    return render(request,"blog/actorsdetail.html",context={
-        "actor" : actor
-    })
+    if request.method == "POST":
+        
+        applied_filters = list(request.POST.dict().keys())[1:]
+        print(applied_filters)
+
+        if 'Year' in applied_filters:
+                movie_list.sort(
+                    key = lambda movie: movie.release_date
+                )
+
+                print("By Year",movie_list)
+        
+        if 'Movie' in applied_filters:
+                movie_list.sort(
+                    key = lambda movie: movie.name
+                )
+
+                print("By Name",movie_list)
+
+        if 'Our_score' in applied_filters:
+                movie_list.sort(
+                    key = lambda movie: movie.final_score
+                )
+
+                print("By Our Score",movie_list)
+            
+        if 'Rotten' in applied_filters:
+                movie_list.sort(
+                    key = lambda movie: movie.rotten_tomatoes
+                )
+
+                print("By Rotten",movie_list)
+
+        if 'imdb' in applied_filters:
+                movie_list.sort(
+                    key = lambda movie: movie.imdb
+                )
+
+                print("By Imdb",movie_list)
+
+        movie_list.reverse()
+
+        return render(request,"blog/directorsdetail.html",context={
+                "director": actor,
+                "movie_list" : movie_list,
+                "applied_filters" : applied_filters
+            })
+    else:
+        return render(request,"blog/directorsdetail.html",context={
+            "director": actor,
+            "movie_list" : movie_list,
+        })
 
 def directorsdetail(request,pk):
 
     director = Director.objects.get(id=pk)
-    
-    return render(request,"blog/directorsdetail.html",context={
-        "director" : director
-    })
+    movie_list = list(director.movie_set.all())
+
+    if request.method == "POST":
+        
+        applied_filters = list(request.POST.dict().keys())[1:]
+        print(applied_filters)
+
+        if 'Year' in applied_filters:
+                movie_list.sort(
+                    key = lambda movie: movie.release_date
+                )
+
+                print("By Year",movie_list)
+        
+        if 'Movie' in applied_filters:
+                movie_list.sort(
+                    key = lambda movie: movie.name
+                )
+
+                print("By Name",movie_list)
+
+        if 'Our_score' in applied_filters:
+                movie_list.sort(
+                    key = lambda movie: movie.final_score
+                )
+
+                print("By Our Score",movie_list)
+            
+        if 'Rotten' in applied_filters:
+                movie_list.sort(
+                    key = lambda movie: movie.rotten_tomatoes
+                )
+
+                print("By Rotten",movie_list)
+
+        if 'imdb' in applied_filters:
+                movie_list.sort(
+                    key = lambda movie: movie.imdb
+                )
+
+                print("By Imdb",movie_list)
+
+        movie_list.reverse()
+
+        return render(request,"blog/directorsdetail.html",context={
+                "director": director,
+                "movie_list" : movie_list,
+                "applied_filters" : applied_filters
+            })
+    else:
+        return render(request,"blog/directorsdetail.html",context={
+            "director": director,
+            "movie_list" : movie_list,
+        })
 
 def moviesdetail(request,pk):
 

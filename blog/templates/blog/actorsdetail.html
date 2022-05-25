@@ -42,7 +42,7 @@
         }
 
         #right_side {width: 40%;}
-        #parent {width: 60%;}
+        #parent {width: 100%;}
     </style>
 {% endblock %}
 
@@ -65,29 +65,6 @@
             </div>
             <br>
             
-            <div>
-                
-                <table style = "width: 100%;">
-                    <thead>
-                        <th>Year</th>
-                        <th>Movies</th>
-                        <th>Our Score</th>
-                        <th>Rotten Tomatoes</th>
-                        <th>Imdb</th>
-                    </thead>
-                    <tbody>
-                        {% for movie in actor.movies.all %}
-                            <tr>
-                                <td>{{ movie.only_year }}</td>
-                                <td><a href = "{% url 'MoviesDetail' movie.id %}">{{ movie.name }}</a></td>
-                                <td>{{ movie.final_score }}</td>
-                                <td>{{ movie.rotten_tomatoes }}</td>
-                                <td>{{ movie.imdb }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
         </div>
 
         <div id = "parent">
@@ -113,19 +90,81 @@
                 </div>
 
             </div>
+            <br>
+
+            <div class = "section_separator">
+                MOVIES
+            </div>
+            <br>
+
+            <div>
+                <table style = "width: 100%;">
+                    <thead>
+                        <form method = "POST">{% csrf_token %}
+                            <th>Year<input name = "Year" type = "checkbox"></th>
+                            <th>Movies<input name = "Movie" type = "checkbox"></th>
+                            <th>Our Score<input name = "Our_score" type = "checkbox"></th>
+                            <th>Rotten Tomatoes<input name = "Rotten" type = "checkbox"></th>
+                            <th>Imdb<input name = "imdb" type = "checkbox"></th>
+                        </form>
+                    </thead>
+                    <tbody>
+                        {% for movie in movie_list %}
+                            <tr>
+                                <td>{{ movie.only_year }}</td>
+                                <td><a href = "{% url 'MoviesDetail' movie.id %}">{{ movie.name }}</a></td>
+                                <td>{{ movie.final_score }}</td>
+                                <td>{{ movie.rotten_tomatoes }}</td>
+                                <td>{{ movie.imdb }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
 
             <br>
         </div>
     </div>
 
     <div id = "bottom">
-        bottom
     </div> 
 </div>
 {% endblock %}
 
 {% block scripts %}
 
-<script src = "{% static 'blog/jquery.js' %}"></script>
+{{ applied_filters|json_script:'applied_filters' }}
+<script src = "{% static 'blog/js/jquery.js' %}"></script>
+<script>
+   
+    var applied_filters = jQuery.parseJSON($("#applied_filters").text())
+    var inputs = $("input");
+
+    console.log(applied_filters)
+
+    for (input of inputs)
+    {
+        for (filter of applied_filters)
+        {
+            if (input.name == filter)
+            {
+                console.log(input.name)
+                $(input).prop("checked",true)
+            }else{
+                $(input).css("display","None")
+            }
+        }
+    }
+
+    for (input of inputs)
+    {
+        $(input).change(function(){
+            console.log(this.name)
+            this.form.submit()
+        })
+    } 
+    
+    
+</script>
 
 {% endblock %}
