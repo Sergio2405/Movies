@@ -6,6 +6,7 @@
 
     <style>
         #parent{width: 100%;}
+        textarea{resize: none;}
     </style>
     
 {% endblock %}
@@ -26,7 +27,28 @@
             <br>
             
             <div>
-                <!-- write form to contact send email -->
+                <form method = "POST">{% csrf_token %}
+                    <table>
+                        <tr>
+                            <td>Suggest a Movie:</td>
+                            <td><input name = "Movie" type = "text"></td>
+                        </tr>
+                        <tr>
+                            <td>Suggest an Actor:</td>
+                            <td><input name = "Actor" type = "text"></td>
+                        </tr>
+                        <tr>
+                            <td>Suggest a Director:</td>
+                            <td><input name = "Director" type = "text"></td>
+                        </tr>
+                        <tr>
+                            <td>General Suggestion:</td>
+                            <td><textarea name = "Suggestion" maxlength="250" rows="10" cols="30"></textarea></td>
+                        </tr>
+                    </table>
+                    <br>
+                    <button>Send</button>
+                </form>
             </div>
         </div>
     </div>
