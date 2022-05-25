@@ -197,7 +197,7 @@
                 <div id = "section_casting" style = "margin-top: 1%">
                     {% for actor in movie.actors.all %}
                     <div class = "images" style = "width: 10%;height: auto;">
-                        <a href = "{% url 'ActorsDetail' actor.id %}" target = "_blank">
+                        <a href = "{% url 'ActorsDetail' actor.id %}">
                             {% if actor.image %}
                                 <img src="{{ actor.image.url }}" style="width: 100%; height: auto">
                             {% else %}

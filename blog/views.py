@@ -13,7 +13,10 @@ from django.contrib.auth import authenticate, login
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .serializers import MovieSerializer
+from .serializers import (
+    MovieSerializer, 
+    DirectorSerializer, 
+    ActorSerializer)
 
 def contact(request):
     return render(request,"blog/contact.html")
@@ -331,10 +334,26 @@ def moviesdetail(request,pk):
         "genre_dict" : genre_dict
     })
 
-# @api_view(['GET'])
-# def movie_collection(request):
+@api_view(['GET'])
+def movie_collection(request):
 
-#     if request.method == 'GET':
-#         movies = Movie.objects.all()
-#         serializer = MovieSerializer(movies,many=True)
-#         return Response(serializer.data)
+    if request.method == 'GET':
+        movies = Movie.objects.all()
+        serializer = MovieSerializer(movies,many=True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def director_collection(request):
+
+    if request.method == 'GET':
+        directors = Director.objects.all()
+        serializer = MovieSerializer(directors,many=True)
+        return Response(serializer.data)
+
+@api_view(['GET'])
+def actor_collection(request):
+
+    if request.method == 'GET':
+        actors = Movie.objects.all()
+        serializer = MovieSerializer(actors,many=True)
+        return Response(serializer.data)

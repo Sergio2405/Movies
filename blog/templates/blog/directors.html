@@ -43,7 +43,7 @@
             <div class = "wrap_objects">
                 {% for director in directors_list %}
                     <div class = "images" style = "max-height: 85%;max-width: 10%">
-                        <a href = "{% url 'DirectorsDetail' director.id %}" target="_blank">
+                        <a href = "{% url 'DirectorsDetail' director.id %}">
                             <img src="{{ director.image.url }}" style="width: 100%; height: auto;" >
                         </a>
                         <figcaption style = "text-align: center;">

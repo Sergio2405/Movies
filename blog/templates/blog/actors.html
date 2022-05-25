@@ -43,7 +43,7 @@
             <div class = "wrap_objects">
                 {% for actor in actors_list %}
                     <div class = "images" style = "max-height: 85%;max-width: 10%">
-                        <a href = "{% url 'ActorsDetail' actor.id %}" target = "_blank">
+                        <a href = "{% url 'ActorsDetail' actor.id %}">
                             {% if actor.image %}
                                 <img src="{{ actor.image.url }}" style="width: 100%; height: auto">
                             {% else %}
