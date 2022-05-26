@@ -74,40 +74,6 @@
 {{ applied_filters|json_script:'applied_filters' }}
 {{ searched|json_script:'searched' }}
 
-<script type="text/javascript">
-
-    var applied_filters = jQuery.parseJSON($("#applied_filters").text())
-    var searched = jQuery.parseJSON($("#searched").text())
-    var inputs = $("input");
-
-    console.log(searched)
-
-    console.log(applied_filters)
-
-    for (input of inputs)
-    {
-        for (filter of applied_filters)
-        {
-            if (input.name == filter)
-            {
-                if (input.name == 'search'){
-                    $(input).val(searched.join(' '))
-                }
-                console.log(input.name)
-                $(input).prop("checked",true)
-            }
-        }
-    }
-
-    $("button[type=button]").click(function(event){
-        inputs.map((index,input) => $(input).prop("checked",false))
-    })
-
-    $("input[name=search]").change(function(event){
-        console.log(this.value)
-        this.form.submit()
-    })
-
-</script>
+<script type="text/javascript" src = "{% static 'blog/js/filter.js' %}"></script>
 
 {% endblock %}

@@ -1,10 +1,15 @@
 from typing import List
 from unittest.util import unorderable_list_difference
+from django.contrib.auth.models import User
 from django.db import models
 import datetime
 
+class Profile(models.Model):
 
-# Create your models here.
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
 
 class Actor(models.Model):
 

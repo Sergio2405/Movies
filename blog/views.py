@@ -228,9 +228,9 @@ def actors(request):
         applied_filters = list(request.POST.dict().keys())[1:]
         print(applied_filters)
 
-        if 'A-Z'in applied_filters:
+        if 'A-Z' in applied_filters:
                 actor_list.sort(
-                    key = lambda movie: movie.name
+                    key = lambda actor: actor.name
                 )
 
                 print("By Alfa",actor_list)
