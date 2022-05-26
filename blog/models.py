@@ -1,8 +1,19 @@
-from typing import List
-from unittest.util import unorderable_list_difference
+# models built in
 from django.contrib.auth.models import User
 from django.db import models
+
+#django utils
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+#python std
 import datetime
+
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        user_profile = Profile(user=instance)
+        user_profile.save()
 
 class Profile(models.Model):
 
