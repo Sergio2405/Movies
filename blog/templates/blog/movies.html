@@ -18,11 +18,13 @@
             <div class = "section_separator">
                 FILTER
             </div>
-            <br>     
             
             <div>
-                
+                <br>
                 <form method = "POST" action="">{% csrf_token %}
+                    
+                    <input name = "search" type = "text" placeholder="Search a Movie">
+                    <p></p>
                     
                     <label class = "filter">By Genre:</label>
                     <br>
@@ -30,6 +32,7 @@
                     {% for genre in genres %}
                         <label for = "{{ genre.name }}"><input name = "{{ genre.name }}" type = "checkbox">{{ genre.name }}</label><br>
                     {% endfor %}
+                    <p></p>
 
                     <label class = "filter">Exact Matching: <input type = "checkbox" name  = "Exact Matching"></label>
  
@@ -60,7 +63,7 @@
                 MOVIES
             </div>
             <br>
-          
+
             <div class = "wrap_objects">
                 {% for movie in movies_list %}
                     <div class = "images" style = "max-height: 45%;max-width: 10%">
@@ -87,12 +90,17 @@
 
 <script src = "{% static 'blog/js/jquery.js' %}"></script>
 
-{{ applied_filters|json_script:'applied_filters' }}
 
-<script>
+{{ applied_filters|json_script:'applied_filters' }}
+{{ searched|json_script:'searched' }}
+
+<script type="text/javascript">
 
     var applied_filters = jQuery.parseJSON($("#applied_filters").text())
+    var searched = jQuery.parseJSON($("#searched").text())
     var inputs = $("input");
+
+    console.log(searched)
 
     console.log(applied_filters)
 
@@ -102,6 +110,9 @@
         {
             if (input.name == filter)
             {
+                if (input.name == 'search'){
+                    $(input).val(searched.join(' '))
+                }
                 console.log(input.name)
                 $(input).prop("checked",true)
             }
@@ -110,6 +121,11 @@
 
     $("button[type=button]").click(function(event){
         inputs.map((index,input) => $(input).prop("checked",false))
+    })
+
+    $("input[name=search]").change(function(event){
+        console.log(this.value)
+        this.form.submit()
     })
 
 </script>

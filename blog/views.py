@@ -135,12 +135,34 @@ def movies(request):
 
             print("By Alfa",new_movie_list)
 
+        if 'search' in applied_filters:
+
+            movie_searched = request.POST['search']
+            print(movie_searched)
+
+            if movie_searched != '':
+                final_movie_list = [] 
+                movie_searched = movie_searched.lower().split()  
+                for movie in new_movie_list:
+                    movie_words = movie.name.lower().split(' ')
+                    
+                    matched = 0
+                    for word in movie_words:
+                        if (word in movie_searched):
+                            matched += 1 
+
+                    if matched >= 1:
+                        final_movie_list.append(movie)
+
+                new_movie_list = final_movie_list
+
         print("New list",new_movie_list)
 
         return render(request,"blog/movies.html",context={
-            "movies_list" : new_movie_list,
+            "movies_list" :new_movie_list,
             "genres" : Genre.objects.all(),
-            "applied_filters" : applied_filters
+            "applied_filters" : applied_filters,
+            "searched": movie_searched
         })
 
     else:      
@@ -160,14 +182,36 @@ def directors(request):
 
         if 'A-Z'in applied_filters:
                 director_list.sort(
-                    key = lambda movie: movie.name
+                    key = lambda director: director.name
                 )
 
                 print("By Alfa",director_list)
+
+        if 'search' in applied_filters:
+
+            director_searched = request.POST['search']
+            print(director_searched)
+
+            if director_searched != '':
+                final_director_list = [] 
+                director_searched = director_searched.lower().split()  
+                for director in director_list:
+                    director_words = director.name.lower().split(' ')
+                    
+                    matched = 0
+                    for word in director_words:
+                        if (word in director_searched):
+                            matched += 1 
+
+                    if matched >= 1:
+                        final_director_list.append(director)
+
+                director_list = final_director_list
         
         return render(request,"blog/directors.html",context={
             "directors_list" : director_list,
-            "applied_filters" : applied_filters
+            "applied_filters" : applied_filters,
+            "searched": director_searched
         })
 
     else:
@@ -190,10 +234,32 @@ def actors(request):
                 )
 
                 print("By Alfa",actor_list)
+
+        if 'search' in applied_filters:
+
+            actor_searched = request.POST['search']
+            print(actor_searched)
+
+            if actor_searched != '':
+                final_actor_list = [] 
+                actor_searched = actor_searched.lower().split()  
+                for actor in actor_list:
+                    actor_words = actor.name.lower().split(' ')
+                    
+                    matched = 0
+                    for word in actor_words:
+                        if (word in actor_searched):
+                            matched += 1 
+
+                    if matched >= 1:
+                        final_actor_list.append(actor)
+
+                actor_list = final_actor_list
         
         return render(request,"blog/actors.html",context={
             "actors_list" : actor_list,
-            "applied_filters" : applied_filters
+            "applied_filters" : applied_filters,
+            "searched": actor_searched
         })
         
     else:
@@ -334,26 +400,26 @@ def moviesdetail(request,pk):
         "genre_dict" : genre_dict
     })
 
-@api_view(['GET'])
-def movie_collection(request):
+# @api_view(['GET'])
+# def movie_collection(request):
 
-    if request.method == 'GET':
-        movies = Movie.objects.all()
-        serializer = MovieSerializer(movies,many=True)
-        return Response(serializer.data)
+#     if request.method == 'GET':
+#         movies = Movie.objects.all()
+#         serializer = MovieSerializer(movies,many=True)
+#         return Response(serializer.data)
 
-@api_view(['GET'])
-def director_collection(request):
+# @api_view(['GET'])
+# def director_collection(request):
 
-    if request.method == 'GET':
-        directors = Director.objects.all()
-        serializer = MovieSerializer(directors,many=True)
-        return Response(serializer.data)
+#     if request.method == 'GET':
+#         directors = Director.objects.all()
+#         serializer = MovieSerializer(directors,many=True)
+#         return Response(serializer.data)
 
-@api_view(['GET'])
-def actor_collection(request):
+# @api_view(['GET'])
+# def actor_collection(request):
 
-    if request.method == 'GET':
-        actors = Movie.objects.all()
-        serializer = MovieSerializer(actors,many=True)
-        return Response(serializer.data)
+#     if request.method == 'GET':
+#         actors = Actor.objects.all()
+#         serializer = MovieSerializer(actors,many=True)
+#         return Response(serializer.data)
