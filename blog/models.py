@@ -18,6 +18,7 @@ def create_profile(sender, instance, created, **kwargs):
 class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    # favorite actors, directors, movies, genres.
 
     def __str__(self):
         return self.user.username
@@ -47,6 +48,7 @@ class Director(models.Model):
 class Genre(models.Model):
     
     name = models.CharField(default="Non Genre",max_length=100,blank=True)
+    # profile = models.ForeignKey()
     
     def __str__(self):
         return self.name

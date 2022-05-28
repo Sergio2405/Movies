@@ -1,0 +1,36 @@
+{% extends "blog/header.html" %}
+{% load static %}
+{% block styles %}
+
+    {{ block.super }}
+
+    <style>
+        #parent{width: 100%;}
+    </style>
+    
+{% endblock %}
+
+{% block content %}
+
+<div id = "webpage">
+    
+    {{ block.super }}
+
+    <div id = "page">
+
+        <div id = "parent">
+
+            <div class = "section_separator">
+                LOGOUT
+            </div>
+            <br>
+
+            <p>Thanks visiting Sergio's movie library!!!</p>
+        </div>
+    </div>
+
+    <div id = "bottom">
+    </div> 
+</div>
+
+{% endblock %}

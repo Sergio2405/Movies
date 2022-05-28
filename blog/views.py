@@ -7,7 +7,7 @@ from .models import Actor, Director, Movie, Genre
 
 #user model
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 #django rest framework imports and serializers
@@ -23,7 +23,15 @@ from .serializers import (
 def contact(request):
     return render(request,"blog/contact.html")
 
+def logout_user(request):
+    logout(request)
+
+    print("Loggouteado")
+
+    return render(request,"blog/logout.html")
+
 def login_user(request):
+
     if request.method == "POST":
 
         user_name = request.POST['user']
@@ -41,13 +49,13 @@ def login_user(request):
             print(user_name,password)
 
             return render(request, "blog/succesful.html", context = {
-            "username": user.username
+                "username": user.username
             })
         
         else:
-            pass
-
-        return render(request, "blog/login.html")
+            return render(request, "blog/login.html", context = {
+                "logged" : True
+            })
     else:
         return render(request, "blog/login.html")
 
