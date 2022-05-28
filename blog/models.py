@@ -29,10 +29,7 @@ class Actor(models.Model):
     image = models.ImageField(upload_to='actor_image',blank=True,default="",null=True)
     reference_image = models.URLField(max_length=200, default = "")
     reference_description = models.URLField(max_length=200, default = "")
-
-    def movies_order(self):
-        pass
-
+ 
     def __str__(self):
         return self.name
 

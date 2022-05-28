@@ -8,6 +8,7 @@ from .models import Actor, Director, Movie, Genre
 #user model
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
 #django rest framework imports and serializers
 from rest_framework.decorators import api_view
@@ -18,6 +19,7 @@ from .serializers import (
     DirectorSerializer, 
     ActorSerializer)
 
+@login_required(login_url='Login')
 def contact(request):
     return render(request,"blog/contact.html")
 
@@ -26,18 +28,26 @@ def login_user(request):
 
         user_name = request.POST['user']
         password = request.POST['password']
+        print(user_name,password)
 
-        user = authenticate(request, username = user_name, password=password)
+        user = authenticate(username = user_name, password=password)
+        print(user)
 
         if user is not None:
+
             login(request,user)
+
+            print("Usuario loggeado")
+            print(user_name,password)
+
+            return render(request, "blog/succesful.html", context = {
+            "username": user.username
+            })
         
         else:
             pass
 
-        print(user_name,password)
-
-        return render(request, "blog/succesful.html")
+        return render(request, "blog/login.html")
     else:
         return render(request, "blog/login.html")
 
