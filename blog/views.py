@@ -59,7 +59,6 @@ def login_user(request):
     else:
         return render(request, "blog/login.html")
 
-
 def register_user(request):
 
     if request.method == "POST":
