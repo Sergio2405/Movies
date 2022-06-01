@@ -86,9 +86,13 @@
         <div class = "register">
             <a><div>Account</div></a>
             <div class = "register-content">
-                <div><a href="{% url 'Register' %}">Create Account</a></div>
-                <div><a href="{% url 'Login' %}">Login</a></div>
-                <div><a href="{% url 'Logout' %}">Logout</a></div>
+                {% if user.username != "" %}
+                    <div><a href="{% url 'Profile' %}">{{ user.username }}</a></div>
+                    <div><a href="{% url 'Logout' %}">Logout</a></div>
+                {% else %}
+                    <div><a href="{% url 'Register' %}">Create Account</a></div>
+                    <div><a href="{% url 'Login' %}">Login</a></div>
+                {% endif %}
             </div>
         </div>
         <div class = "contact"><a href="{% url 'Contact' %}"><div>Contact</div></a></div>

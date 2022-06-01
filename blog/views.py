@@ -20,6 +20,11 @@ from .serializers import (
     ActorSerializer)
 
 @login_required(login_url='Login')
+def profile(request):
+    print(request.user.username)
+    return render(request, "blog/profile.html")
+
+@login_required(login_url='Login')
 def contact(request):
     return render(request,"blog/contact.html")
 
