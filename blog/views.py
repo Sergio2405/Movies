@@ -17,7 +17,8 @@ from rest_framework.response import Response
 from .serializers import (
     MovieSerializer, 
     DirectorSerializer, 
-    ActorSerializer)
+    ActorSerializer
+)
 
 @login_required(login_url='Login')
 def profile(request):
