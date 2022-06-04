@@ -18,10 +18,10 @@ def create_profile(sender, instance, created, **kwargs):
 class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    genres = models.ForeignKey("Genre", on_delete=models.CASCADE, blank=True, null = True)
-    actors = models.ForeignKey("Actor", on_delete=models.CASCADE, blank=True, null = True)
-    directors = models.ForeignKey("Director", on_delete=models.CASCADE, blank=True, null = True)
-    movies = models.ForeignKey("Movie", on_delete=models.CASCADE, blank=True, null = True)
+    genres = models.ManyToManyField("Genre", blank=True)
+    actors = models.ManyToManyField("Actor", blank=True)
+    directors = models.ManyToManyField("Director", blank=True)
+    movies = models.ManyToManyField("Movie", blank=True)
 
     def __str__(self):
         return self.user.username
@@ -30,7 +30,7 @@ class Actor(models.Model):
 
     name = models.CharField(max_length=50,blank=True)
     review = models.TextField(default = "",blank=True)
-    image = models.ImageField(upload_to='actor_image',blank=True,default="",null=True)
+    image = models.ImageField(upload_to='actor_image',blank=True,default="actor_image/ProfilePic.png",null=True)
     reference_image = models.URLField(max_length=200, default = "")
     reference_description = models.URLField(max_length=200, default = "")
  
