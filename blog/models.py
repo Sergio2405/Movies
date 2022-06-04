@@ -40,7 +40,7 @@ class Actor(models.Model):
 class Director(models.Model):
 
     name = models.CharField(max_length=50,blank=True)
-    image = models.ImageField(upload_to="director_image",blank=True)
+    image = models.ImageField(upload_to="director_image",default="actor_image/ProfilePic.png",blank=True)
     review = models.TextField(default = "",blank=True)
     reference_image = models.URLField(max_length=200, default = "")
     reference_description = models.URLField(max_length=200, default = "")
