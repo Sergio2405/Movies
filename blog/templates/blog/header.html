@@ -85,14 +85,14 @@
         <div><a href="{% url 'Directors' %}"><div>Directors</div></a></div>
         <div><a href="{% url 'Actors' %}"><div>Actors</div></a></div>
         <div class = "register">
-            <a><div>Account</div></a>
-            <div class = "register-content">
+            <div style = "color: white" class = "btn" type="button" aria-expanded="false"><a>Account</a></div>
+            <div class = "register-content dropdown-menu">
                 {% if user.username != "" %}
-                    <div><a href="{% url 'Profile' %}">{{ user.username }}</a></div>
-                    <div><a href="{% url 'Logout' %}">Logout</a></div>
+                    <div class="dropdown-item"><a href="{% url 'Profile' %}">{{ user.username }}</a></div>
+                    <div class="dropdown-item"><a href="{% url 'Logout' %}">Logout</a></div>
                 {% else %}
-                    <div><a href="{% url 'Register' %}">Create Account</a></div>
-                    <div><a href="{% url 'Login' %}">Login</a></div>
+                    <div class="dropdown-item"><a href="{% url 'Register' %}">Create Account</a></div>
+                    <div class="dropdown-item"><a href="{% url 'Login' %}">Login</a></div>
                 {% endif %}
             </div>
         </div>

@@ -2,15 +2,59 @@
 {% load static %}
 {% block styles %}
     
-    {{ block.super }}
+<link href = "{% static 'blog/css/index.css' %}" rel="stylesheet" type="text/css">
+<link href = "https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     
 {% endblock %}
 
 {% block content %}
 
 <div id = "webpage">
-    
-    {{ block.super }}
+
+    <div id = "header">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+            <a class="nav-link"  href="{% url 'Home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'Movies' %}">Movies</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'Directors' %}">Directors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="{% url 'Actors' %}">Actors</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Account</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="{% url 'Register' %}">Register</a></li>
+                    <li><a class="dropdown-item" href="{% url 'Login' %}">Login</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <!-- <div id = "header">
+        <div class="menu">
+            <div class = "home"><a href="{% url 'Home' %}"><div>Home</div></a></div>
+            <div><a href="{% url 'Movies' %}"><div>Movies</div></a></div>
+            <div><a href="{% url 'Directors' %}"><div>Directors</div></a></div>
+            <div><a href="{% url 'Actors' %}"><div>Actors</div></a></div>
+            <div class = "register">
+                <div style = "color: white" class = "btn" type="button" aria-expanded="false"><a>Account</a></div>
+                <div class = "register-content dropdown-menu">
+                    {% if user.username != "" %}
+                        <div class="dropdown-item"><a href="{% url 'Profile' %}">{{ user.username }}</a></div>
+                        <div class="dropdown-item"><a href="{% url 'Logout' %}">Logout</a></div>
+                    {% else %}
+                        <div class="dropdown-item"><a href="{% url 'Register' %}">Create Account</a></div>
+                        <div class="dropdown-item"><a href="{% url 'Login' %}">Login</a></div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class = "contact"><a href="{% url 'Contact' %}"><div>Suggest</div></a></div>
+        </div>
+    </div>  -->
 
     <div id = "page">
 
@@ -23,35 +67,59 @@
                 <br>
                 <form method = "POST" action="">{% csrf_token %}
                     
-                    <input name = "search" type = "text" placeholder="Search a Movie">
+                    <input class="form-control" name = "search" type = "text" placeholder="Search a Movie">
                     <p></p>
                     
-                    <label class = "filter">By Genre:</label>
+                    <label class = "badge text-bg-info">By Genre:</label>
                     <br>
 
                     {% for genre in genres %}
-                        <label for = "{{ genre.name }}"><input name = "{{ genre.name }}" type = "checkbox">{{ genre.name }}</label><br>
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" role="switch" name = "{{ genre.name }}" id = "{{ genre.name }}">
+                            <label class="form-check-label" for="{{ genre.name }}">{{ genre.name }}</label>
+                        </div>
                     {% endfor %}
                     <p></p>
 
-                    <label class = "filter">Exact Matching: <input type = "checkbox" name  = "Exact Matching"></label>
+                    <div>
+                        <label class="form-check-label badge text-bg-info" for="Exact Matching">
+                        Exact Matching
+                        </label>
+                        <input class="form-check-input" type="checkbox" name = "Exact Matching" id="Exact Matching">
+                    </div>
  
                     <p></p>
-                    <label class = "filter">By Release Date:<input type = checkbox name = "Release Date"></label> 
+
+                    <div>
+                        <label class="form-check-label badge text-bg-info" for="Release Date">
+                        By Release Date  
+                        </label>
+                        <input class="form-check-input" type="checkbox" name = "Release Date" id="Release Date">
+                    </div>
 
                     <p></p>
 
-                    <label class = "filter">By Review Date:<input type = "checkbox" name = "Review Date"></label>
+                    <div>
+                        <label class="form-check-label badge text-bg-info" for="Review Date">
+                        By Review Date
+                        </label>
+                        <input class="form-check-input" type="checkbox" name = "Review Date" id="Review Date">
+                    </div>
 
                     <p></p>
 
-                    <label class = "filter">A-Z:<input type = "checkbox" name = "A-Z"></label>
+                    <div>
+                        <label class="form-check-label badge text-bg-info" for="A-Z">
+                        A-Z
+                        </label>
+                        <input class="form-check-input" type="checkbox" name = "A-Z" id="A-Z">
+                    </div>
 
                     <p></p>
-                    <button type = button>Clear All Filters</button>
+                    <button class="btn btn-secondary" type = button>Clear All Filters</button>
 
                     <p></p>
-                    <button>Apply Filter</button>
+                    <button class="btn btn-primary" >Apply Filter</button>
                 </form>
 
             </div>
@@ -94,4 +162,8 @@
 {{ searched|json_script:'searched' }}
 
 <script type="text/javascript" src = "{% static 'blog/js/filter.js' %}"></script>
+<script>
+    const dropdownElementList = document.querySelectorAll('.dropdown-toggle')
+    const dropdownList = [...dropdownElementList].map(dropdownToggleEl => new bootstrap.Dropdown(dropdownToggleEl))
+</script>
 {% endblock %}
