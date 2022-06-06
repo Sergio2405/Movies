@@ -3,7 +3,7 @@
     --page-background: white ; 
     --body--color: rgb(254, 254, 254);
     --nav-color: rgb(73, 73, 163);
-    --font-letter: "Times New Roman", Times, serif
+    /* --font-letter: "Times New Roman", Times, serif */
 }
 
 body{background-color:var(--body--color) ;}
@@ -49,7 +49,7 @@ body{background-color:var(--body--color) ;}
 #header
 {
     width: 100%;
-    height: 5%;
+    height: 8%;
     /* background-color: var(--nav-color); */
     margin-bottom: 2%;
     margin-top: 1%;
