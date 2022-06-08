@@ -59,9 +59,9 @@
               </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'Actors' %}">
+                <a class="nav-link" href="{% url 'Suggest' %}">
                     <button type="button" class="btn btn-warning position-relative">
-                        Suggestion
+                        Suggest
                     </button>
                 </a>
             </li>
@@ -189,9 +189,4 @@
 {{ searched|json_script:'searched' }}
 
 <script type="text/javascript" src = "{% static 'blog/js/filter.js' %}"></script>
-<script>
-    $(document).ready(function() {
-    $(".dropdown-toggle").dropdown();
-});
-</script>
 {% endblock %}

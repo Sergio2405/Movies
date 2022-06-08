@@ -58,9 +58,9 @@
               </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'Actors' %}">
+                <a class="nav-link" href="{% url 'Suggest' %}">
                     <button type="button" class="btn btn-warning position-relative">
-                        Suggestion
+                        Suggest
                     </button>
                 </a>
             </li>
@@ -70,7 +70,7 @@
             <button class="btn btn-outline-success" type="submit">Search</button>
           </form> -->
         </div>
-      </nav>
+    </nav>
 
     <div id = "page">
 
@@ -125,8 +125,7 @@
                         </a>
                         <h6 class="card-title" style = "text-align: center;">
                             {{ director.name }}
-                        </h6>
-                             
+                        </h6>   
                     </div>
                 </div>
                 {% endfor %}
@@ -148,9 +147,4 @@
 {{ searched|json_script:'searched' }}
 
 <script type="text/javascript" src = "{% static 'blog/js/filter.js' %}"></script>
-<script>
-    $(document).ready(function() {
-    $(".dropdown-toggle").dropdown();
-});
-</script>
 {% endblock %}

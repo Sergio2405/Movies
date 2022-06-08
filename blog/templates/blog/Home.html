@@ -14,7 +14,68 @@
 
 <div id = "webpage">
     
-    {{ block.super }}
+    <nav class="navbar navbar-expand-lg navbar-light" id = "header">
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Home' %}">
+                <button type="button" class="btn btn-primary position-relative">
+                    Home
+                </button>
+            </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Movies' %}">
+                <button type="button" class="btn btn-light position-relative">
+                    Movies
+                </button>
+            </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Directors' %}">
+                    <button type="button" class="btn btn-light position-relative">
+                        Directors
+                    </button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Actors' %}">
+                    <button type="button" class="btn btn-light position-relative">
+                        Actors
+                    </button>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-dark position-relative">
+                    Account
+                </button>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                {% if user.username != "" %}
+                    <li><a class="dropdown-item" href="{% url 'Profile' %}">{{ user.username }}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'Logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a class="dropdown-item" href="{% url 'Register' %}">Register</a></li>
+                    <li><a class="dropdown-item" href="{% url 'Login' %}">Login</a></li>
+                {% endif %}
+              </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Suggest' %}">
+                    <button type="button" class="btn btn-warning position-relative">
+                        Suggest
+                    </button>
+                </a>
+            </li>
+          </ul>
+          <!-- <form class="d-flex">
+            <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form> -->
+        </div>
+    </nav>
 
     <div id = "page">
 
@@ -26,7 +87,7 @@
             <br>
 
             <div>
-                <h3>Welcome to Sergio's library!</h3>
+                <div class="rounded p-3 mb-2 bg-light" style = "text-align: center;"><h3 class="text-info">Welcome to Sergio's library!</h3></div>
                 <p>
                     Here you will find reviews and opinions for movies, actors and directors.
                     This page is divided in three sections: Movies, Actors and Directors. In each one
@@ -34,7 +95,7 @@
                     this library is organizad so you can navigate through easily.
                     
                     <ul>
-                        <li>Objetive</li>
+                        <li class="badge badge-info">Objetive</li>
                         <ul>
                             <li>
                             Give a rigorous and detailed reviews in form of essays about 600 to 1000 words. Not just 
@@ -53,14 +114,14 @@
                                 time on screen.
                             </li>
                         </ul>
-                        <li>Vision</li>
+                        <li class="badge badge-info">Vision</li>
                         <ul>
                             <li>This is not going to be a page like rotten tomatoes or imdb</li>
                             <li>This page will last until i get tired of watching movies and tired of rating</li>
                             <li>I want to fill the database with more movies and reviews</li>
                             <li>I will want the opinion of other people on my reviews and ratings</li>
                         </ul>
-                        <li>Important Considerations</li>
+                        <li class="badge badge-warning">Important Considerations</li>
                         <ul>
                             <li>Every review at the end of the day is just my opinion but i will try to empathize with every perspective
                                 so i can give a more precised review without lacking of details and not abusing of generality.

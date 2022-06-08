@@ -12,7 +12,7 @@ urlpatterns = [
     path('login/', views.login_user , name = "Login"),
     path('logout/', views.logout_user , name = "Logout"),
     path('register/', views.register_user, name = "Register"),
-    path('contact/', views.contact, name = "Contact"),
+    path('suggest/', views.contact, name = "Suggest"),
     path('profile/', views.profile, name = "Profile"),
     # path('api/v1/movie', views.movie_collection),
     # path('api/v1/director', views.director_collection),
