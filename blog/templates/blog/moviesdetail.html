@@ -152,11 +152,11 @@
                         <table style = "height: 20%;">
                             <tbody>
                                 <tr>
-                                    <td class = "information">Rating:</td>
+                                    <td class = "information "><div class = "badge badge-danger">Rating</div></td>
                                     <td class = "information_value">{{ movie.rating.name }}</td>
                                 </tr>
                                 <tr>
-                                    <td class = "information">Genre:</td>
+                                    <td class = "information"><div class = "badge badge-info">Genre</div></td>
                                     <td class = "information_value">
                                         {% for genre in movie.genres.all %} 
                                             <label>{{ genre }} </label>
@@ -164,19 +164,19 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class = "information">Language:</td>
+                                    <td class = "information"><div class="badge badge-secondary">Language</div></td>
                                     <td class = "information_value"> {{ movie.language }}</td>
                                 </tr>
                                 <tr>
-                                    <td class = "information">Director:</td>
+                                    <td class = "information"><div class="badge badge-primary">Director</div></td>
                                     <td class = "information_value"><a href = "{% url 'DirectorsDetail' movie.director.id %}">{{ movie.director }}</a></td>
                                 </tr>
                                 <tr>
-                                    <td class = "information">Release Year:</td>
+                                    <td class = "information"><div class="badge badge-secondary">Year</div></td>
                                     <td class = "information_value"> {{ movie.only_year }}</td>
                                 </tr>
                                 <tr>
-                                    <td class = "information">Runtime (minutes):</td>
+                                    <td class = "information"><div class="badge badge-info">Runtime</div></td>
                                     <td class = "information_value"> {{ movie.duration }}</td>
                                 </tr>
                             </tbody>
@@ -192,7 +192,7 @@
                         <figcaption style = "text-align: center;"> {{ movie.name }} </figcaption>
                     </div> -->
 
-                    <div class="card h-100">
+                    <div class = "images" style = "width: 80%;height: auto">
                         <img src = "{{ movie.image.url }}" style = "max-width: 100%;max-height: 100%;">
                         <h6 class="card-title" style = "text-align: center;">
                             {{ movie.name }}
@@ -333,7 +333,6 @@
         </div> 
     </div>
     
-
 {% endblock %}
 
 {% block scripts %}

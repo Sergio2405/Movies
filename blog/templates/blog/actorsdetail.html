@@ -43,6 +43,17 @@
 
         #right_side {width: 40%;}
         #parent {width: 100%;}
+        .movies
+        {
+            display:flex;
+            justify-content: space-evenly;
+            column-gap: 5%;
+            row-gap: 20px;
+            flex-basis: 50%;
+            flex-wrap: wrap;
+            flex-direction: row;
+            margin-top: 5%;
+        }   
     </style>
 {% endblock %}
 
@@ -116,6 +127,7 @@
     <div id = "section_name">
         {{ actor.name }}
     </div>
+    <br>
 
     <div id = "page">
 
@@ -124,7 +136,17 @@
             <div class = "section_separator">
                 MOVIES
             </div>
-            <br>
+
+            <div class = "movies">
+                {% for movie in actor.movie_set.all %}
+                    <div class = "images" style = "width: 30%;height: auto;">
+                        <a href = "{% url 'MoviesDetail' movie.id %}" target = "_blank">
+                            <img src="{{ movie.image.url }}" style="width: 100%; height: auto"> 
+                        </a>
+                        <figcaption style = "text-align: center;"> {{ movie.name }} </figcaption>
+                    </div>
+                {% endfor %}
+            </div>
             
         </div>
 
@@ -154,19 +176,19 @@
             <br>
 
             <div class = "section_separator">
-                MOVIES
+                STATISTICS
             </div>
             <br>
 
             <div>
-                <table style = "width: 100%;">
+                <table class = "table" style = "width: 100%;">
                     <thead>
                         <form method = "POST">{% csrf_token %}
-                            <th>Year<input name = "Year" type = "checkbox"></th>
-                            <th>Movies<input name = "Movie" type = "checkbox"></th>
-                            <th>Our Score<input name = "Our_score" type = "checkbox"></th>
-                            <th>Rotten Tomatoes<input name = "Rotten" type = "checkbox"></th>
-                            <th>Imdb<input name = "imdb" type = "checkbox"></th>
+                            <th style = "text-align: center;">Year<input name = "Year" type = "checkbox"></th>
+                            <th style = "text-align: center;">Movies<input name = "Movie" type = "checkbox"></th>
+                            <th style = "text-align: center;">Our Score<input name = "Our_score" type = "checkbox"></th>
+                            <th style = "text-align: center;">Rotten Tomatoes<input name = "Rotten" type = "checkbox"></th>
+                            <th style = "text-align: center;">Imdb<input name = "imdb" type = "checkbox"></th>
                         </form>
                     </thead>
                     <tbody>
