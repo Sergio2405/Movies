@@ -9,6 +9,8 @@ from django.dispatch import receiver
 #python std
 import datetime
 
+#width 150 px , height 200px
+
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
     if created:
@@ -31,8 +33,8 @@ class Actor(models.Model):
     name = models.CharField(max_length=50,blank=True)
     review = models.TextField(default = "",blank=True)
     image = models.ImageField(upload_to='actor_image',blank=True,default="actor_image/ProfilePic.png",null=True)
-    reference_image = models.URLField(max_length=200, default = "")
-    reference_description = models.URLField(max_length=200, default = "")
+    reference_image = models.URLField(max_length=200, default = "", blank=True)
+    reference_description = models.URLField(max_length=200, default = "",blank=True)
  
     def __str__(self):
         return self.name
@@ -42,8 +44,8 @@ class Director(models.Model):
     name = models.CharField(max_length=50,blank=True)
     image = models.ImageField(upload_to="director_image",default="actor_image/ProfilePic.png",blank=True)
     review = models.TextField(default = "",blank=True)
-    reference_image = models.URLField(max_length=200, default = "")
-    reference_description = models.URLField(max_length=200, default = "")
+    reference_image = models.URLField(max_length=200, default = "",blank=True)
+    reference_description = models.URLField(max_length=200, default = "",blank=True)
 
     def __str__(self):
         return self.name
@@ -142,8 +144,8 @@ class Movie(models.Model):
     review_date = models.DateField(blank=True, default = datetime.date.today)
     
 
-    reference_image = models.URLField(max_length=200, default = "")
-    reference_description = models.URLField(max_length=200, default = "")
+    reference_image = models.URLField(max_length=200, default = "",blank=True)
+    reference_description = models.URLField(max_length=200, default = "",blank=True)
 
     director = models.ForeignKey(Director,on_delete=models.CASCADE,blank=True)
     rating = models.ForeignKey(Rating,on_delete=models.CASCADE,default=get_default_rating_result,blank=True)
