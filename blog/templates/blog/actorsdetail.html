@@ -87,8 +87,15 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'Actors' %}">
-                    <button type="button" class="btn btn-light position-relative">
+                    <button type="button" class="btn btn-primary position-relative">
                         Actors
+                    </button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#section_name">
+                    <button type="button" class="btn btn-secondary position-relative">
+                        {{ actor.name }}
                     </button>
                 </a>
             </li>
@@ -164,11 +171,7 @@
                 </div>
 
                 <div class = "images" style = "width: 70%;height: auto">
-                    {% if actor.iamge %}
-                        <img src="{{ actor.image.url }}" style="width: 100%;height: auto">
-                    {% else %}
-                        <img src="/media/actor_image/ProfilePic.png" style="width: 100%; height: auto"> 
-                    {% endif %}
+                    <img src="{{ actor.image.url }}" style="width: 100%;height: auto">
                     <figcaption style = "text-align: center;"> {{ actor.name }} </figcaption>
                 </div>
 

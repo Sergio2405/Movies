@@ -338,14 +338,14 @@ def actorsdetail(request,pk):
 
         movie_list.reverse()
 
-        return render(request,"blog/directorsdetail.html",context={
-                "director": actor,
+        return render(request,"blog/actorsdetail.html",context={
+                "actor": actor,
                 "movie_list" : movie_list,
                 "applied_filters" : applied_filters
             })
     else:
-        return render(request,"blog/directorsdetail.html",context={
-            "director": actor,
+        return render(request,"blog/actorsdetail.html",context={
+            "actor": actor,
             "movie_list" : movie_list,
         })
 

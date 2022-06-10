@@ -79,8 +79,15 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'Directors' %}">
-                    <button type="button" class="btn btn-light position-relative">
+                    <button type="button" class="btn btn-primary position-relative">
                         Directors
+                    </button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#section_name">
+                    <button type="button" class="btn btn-secondary position-relative">
+                        {{ director.name }}
                     </button>
                 </a>
             </li>
