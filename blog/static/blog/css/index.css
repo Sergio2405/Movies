@@ -3,7 +3,7 @@
     --page-background: white ; 
     --body--color: rgb(254, 254, 254);
     --nav-color: rgb(73, 73, 163);
-    --font-letter: "Times New Roman", Times, serif
+    /* --font-letter: "Times New Roman", Times, serif */
 }
 
 body{background-color:var(--body--color) ;}
@@ -49,9 +49,10 @@ body{background-color:var(--body--color) ;}
 #header
 {
     width: 100%;
-    height: 10%;
-    background-color: var(--nav-color);
+    height: 8%;
+    /* background-color: var(--nav-color); */
     margin-bottom: 2%;
+    margin-top: 1%;
 }
 
 #bottom
@@ -108,9 +109,8 @@ body{background-color:var(--body--color) ;}
 #section_name
 {
     text-align: center;
-    text-align: center;
-    font-size:x-large;
-    font-weight: 550;
+    font-size: 250%;
+    font-weight: 900;
     font-style: oblique;
 }
 

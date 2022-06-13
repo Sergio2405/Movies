@@ -1,12 +1,17 @@
 {% extends "blog/header.html" %}
 {% load static %}
 {% block styles %}
-    
+
     {{ block.super }}
+
+    <style>
+        #parent{width: 100%;}
+    </style>
     
 {% endblock %}
 
 {% block content %}
+
 <div id = "webpage">
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id = "header">
@@ -35,7 +40,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'Actors' %}">
-                    <button type="button" class="btn btn-primary position-relative">
+                    <button type="button" class="btn btn-light position-relative">
                         Actors
                     </button>
                 </a>
@@ -74,76 +79,50 @@
 
     <div id = "page">
 
-        <div id = "right_side" style = "width: 20%;">
+        <div id = "parent">
+
             <div class = "section_separator">
-                FILTER
+                REGISTER
             </div>
             <br>
-
-            <div>
-                <form method = "POST" action="">{% csrf_token %}
-
-                    <div class = "d-flex">
-                        <input class="form-control mr-2" name = "search" type="search" placeholder="Search a Actor" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                             </svg>
-                        </button>
-                    </div>
-                    <p></p>
-
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name = "A-Z" id="A-Z">
-                        <label class="form-check-label badge badge-info" for="A-Z">
-                            A-Z
-                        </label>
-                    </div>
-
-                    <p></p>
-                    <button class="btn btn-secondary" type = button>Clear All Filters</button>
-
-                    <p></p>
-                    <button class="btn btn-primary" >Apply Filter</button>
-                </form>
-            </div>
             
-        </div>
-        <div id = "parent" style = "width: 80%;">
-
-            <div class = "section_separator">
-                ACTORS
-            </div>
-            <br>
-
-            <div class = "row row-cols-1 row-cols-md-6">
-                {% for actor in actors_list %}
-                <div class="col col mb-2">
-                    <div class="card h-100">
-                        <a href = "{% url 'ActorsDetail' actor.id %}">
-                                <img src="{{ actor.image.url }}" style = "max-width: 100%;max-height: 100%;" >
-                        </a>
-                        <h6 class="card-title" style = "text-align: center;">
-                            {{ actor.name }}
-                        </h6>   
-                    </div>
-                </div>
-                {% endfor %}
+            <div>
+                <form method = "POST">{% csrf_token %}
+                    <table>
+                        <tr>
+                            <td>User</td>
+                            <td><input class="form-control" name = "user" type = "text"></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><input class="form-control" name = "email" type = "email"></td>
+                        </tr>
+                        <tr>
+                            <td>Password</td>
+                            <td><input class="form-control" name = "password" type ="password"></td>
+                        </tr>
+                        <tr>
+                            <td>Re-Password</td>
+                            <td><input class="form-control" name = "re_password" type ="password"></td>
+                        </tr>
+                        <tr>
+                            <td>Accept Terms & Conditions</td>
+                            <td><input name = "conditions" type ="checkbox"></td>
+                        </tr>
+                    </table>
+                    
+                    <br>
+                    <button class="btn btn-primary">Send</button>
+                </form>
             </div>
         </div>
     </div>
+
     <div id = "bottom" class = "bg-dark">
-    </div> 
-    
+    </div>  
 </div>
 {% endblock %}
 
 {% block scripts %}
-
 <script src = "{% static 'blog/js/jquery.js' %}"></script>
-
-{{ applied_filters|json_script:'applied_filters' }}
-{{ searched|json_script:'searched' }}
-
-<script type="text/javascript" src = "{% static 'blog/js/filter.js' %}"></script>
 {% endblock %}

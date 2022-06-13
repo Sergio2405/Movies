@@ -1,0 +1,100 @@
+{% extends "blog/header.html" %}
+{% load static %}
+{% block styles %}
+
+    {{ block.super }}
+<style>
+     #parent{width: 100%;}
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div id = "webpage">
+    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id = "header">
+        <div class="collapse navbar-collapse" id="navbarScroll">
+          <ul class="navbar-nav mr-auto my-2 my-lg-0 navbar-nav-scroll" style="max-height: 100px;">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Home' %}">
+                <button type="button" class="btn btn-light position-relative">
+                    Home
+                </button>
+            </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'Movies' %}">
+                <button type="button" class="btn btn-light position-relative">
+                    Movies
+                </button>
+            </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Directors' %}">
+                    <button type="button" class="btn btn-light position-relative">
+                        Directors
+                    </button>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Actors' %}">
+                    <button type="button" class="btn btn-light position-relative">
+                        Actors
+                    </button>
+                </a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarScrollingDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                <button type="button" class="btn btn-info position-relative">
+                    Account
+                </button>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                {% if user.username != "" %}
+                    <li><a class="dropdown-item" href="{% url 'Profile' %}">{{ user.username }}</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="{% url 'Logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a class="dropdown-item" href="{% url 'Register' %}">Register</a></li>
+                    <li><a class="dropdown-item" href="{% url 'Login' %}">Login</a></li>
+                {% endif %}
+              </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'Suggest' %}">
+                    <button type="button" class="btn btn-warning position-relative">
+                        Suggest
+                    </button>
+                </a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-2" type="search" placeholder="Disabled for now" aria-label="Search" disabled>
+            <button class="btn btn-outline-success" type="submit" disabled>Search</button>
+          </form>
+        </div>
+      </nav>
+
+    <div id = "page">
+        <div id = "parent">
+            <div class = "section_separator">
+                        Welcome {{ username }}!
+            </div>
+            <br>
+            
+            <div>
+            
+                <p>
+                     Now you can subscribe to all the kinds of letters and articles that are published. Also to 
+                     notifications to review posts.
+                </p>
+                <p>Link to letters suscription</p>
+            </div>
+        </div>
+    </div>
+
+    <div id = "bottom">
+    </div> 
+</div>
+
+{% endblock %}

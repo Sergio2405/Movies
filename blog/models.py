@@ -1,32 +1,51 @@
-from typing import List
-from unittest.util import unorderable_list_difference
+# models built in
+from django.contrib.auth.models import User
 from django.db import models
+
+#django utils
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+#python std
 import datetime
 
+#width 150 px , height 200px
 
-# Create your models here.
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        user_profile = Profile(user=instance)
+        user_profile.save()
+
+class Profile(models.Model):
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    genres = models.ManyToManyField("Genre", blank=True)
+    actors = models.ManyToManyField("Actor", blank=True)
+    directors = models.ManyToManyField("Director", blank=True)
+    movies = models.ManyToManyField("Movie", blank=True)
+
+    def __str__(self):
+        return self.user.username
 
 class Actor(models.Model):
 
     name = models.CharField(max_length=50,blank=True)
     review = models.TextField(default = "",blank=True)
-    image = models.ImageField(upload_to='actor_image',blank=True,default="",null=True)
-    reference_image = models.URLField(max_length=200, default = "")
-    reference_description = models.URLField(max_length=200, default = "")
-
-    def movies_order(self):
-        pass
-
+    image = models.ImageField(upload_to='actor_image',blank=True,default="actor_image/ProfilePic.png",null=True)
+    reference_image = models.URLField(max_length=200, default = "", blank=True)
+    reference_description = models.URLField(max_length=200, default = "",blank=True)
+ 
     def __str__(self):
         return self.name
 
 class Director(models.Model):
 
     name = models.CharField(max_length=50,blank=True)
-    image = models.ImageField(upload_to="director_image",blank=True)
+    image = models.ImageField(upload_to="director_image",default="actor_image/ProfilePic.png",blank=True)
     review = models.TextField(default = "",blank=True)
-    reference_image = models.URLField(max_length=200, default = "")
-    reference_description = models.URLField(max_length=200, default = "")
+    reference_image = models.URLField(max_length=200, default = "",blank=True)
+    reference_description = models.URLField(max_length=200, default = "",blank=True)
 
     def __str__(self):
         return self.name
@@ -34,7 +53,7 @@ class Director(models.Model):
 class Genre(models.Model):
     
     name = models.CharField(default="Non Genre",max_length=100,blank=True)
-    
+
     def __str__(self):
         return self.name
 
@@ -125,8 +144,8 @@ class Movie(models.Model):
     review_date = models.DateField(blank=True, default = datetime.date.today)
     
 
-    reference_image = models.URLField(max_length=200, default = "")
-    reference_description = models.URLField(max_length=200, default = "")
+    reference_image = models.URLField(max_length=200, default = "",blank=True)
+    reference_description = models.URLField(max_length=200, default = "",blank=True)
 
     director = models.ForeignKey(Director,on_delete=models.CASCADE,blank=True)
     rating = models.ForeignKey(Rating,on_delete=models.CASCADE,default=get_default_rating_result,blank=True)
